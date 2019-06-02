@@ -29,7 +29,7 @@ markdown: kramdown
 theme: minima
 remote_theme: fongandrew/hydeout
 baseurl: "/my_blog"
-url: "https://test_blog_d15.github.io"
+url: "https://shadlyd15.github.io"
 plugins:
   - jekyll-feed
 
