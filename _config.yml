@@ -1,6 +1,6 @@
 # Site settings
 title: Verbose
-SEOTitle: Verbose | Personal Blog
+SEOTitle: Things That Just Work !!!
 header-img: img/home-bg.jpg
 email: shadlyd15@gmail.com
 description: "Software Engineer，UX Designer | IoT Professional"
@@ -71,8 +71,8 @@ netease_comment: false
 # ba_track_id: [your track id]
 
 # Google Analytics
-ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
-ga_domain: huangxuan.me
+# ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
+# ga_domain: huangxuan.me
 
 
 
