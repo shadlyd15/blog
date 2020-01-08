@@ -1,10 +1,10 @@
 # Site settings
 title: Verbose
-SEOTitle: Things That Just Work !!!
+SEOTitle: Another Blog In The Web
 header-img: img/home-bg.jpg
 email: shadlyd15@gmail.com
-description: "Software Engineer，UX Designer | IoT Professional"
-keyword: "Design Pattern, Software Engineering, JavaScript, GraphQL, Embedded Systems, IoT, Linux, C, C++, Algorithm"
+description: "Software Engineer | Embedded Software Engineer"
+keyword: "Design Pattern, Software Engineering, Embedded Systems, IoT, Linux, C, C++, Algorithm, JavaScript"
 url: "https://shadlyd15.github.io"              # your host, for absolute URL
 baseurl: "/blog"                             # for example, '/blog' if your blog hosted on 'host/blog'
 
@@ -18,7 +18,8 @@ RSS: false
 github_username:    shadlyd15
 # twitter_username:   shadlyd15
 facebook_username:  shadlyd15
-linkedin_username:  shadly-salahuddin
+instagram_username:  shadlyd15
+linkedin_username:  shadlyd15
 
 
 
@@ -78,7 +79,7 @@ netease_comment: false
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "I am ​Shadly Salahuddin​ from Bangladesh, trying to learn new things each and every day."
+sidebar-about-description: "I am ​Shadly Salahuddin​, a software engineer from Bangladesh. Currently pursuing Master's Degree in Coumputer Simulation in Science in Bergische Universität Wuppertal, Germany."
 sidebar-avatar: /blog/img/shadly_sidebar.jpg
  #  # use absolute URL, seeing it's used in both `/` and `/about/`
 

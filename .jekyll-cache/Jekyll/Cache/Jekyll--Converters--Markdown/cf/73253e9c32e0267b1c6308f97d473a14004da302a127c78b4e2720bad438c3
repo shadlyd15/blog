@@ -1,0 +1,156 @@
+I"í#<h3 id="yet-another-unit-test-library">Yet Another Unit Test Library</h3>
+
+<p><strong>Tiny Test</strong> is a minimal unit test library for <strong>C/C++</strong>. It is designed especially for <strong>embedded systems</strong> keeping in mind the limitation and capabilities of the platform. This library also supports <strong>Arduino</strong> environment.</p>
+
+<ul>
+  <li>Low memory usage</li>
+  <li>Supports a wide range of compilers and processor architectures</li>
+  <li>Arduino compatible</li>
+  <li>Color debug output</li>
+  <li>Very easy to use</li>
+</ul>
+
+<h3 id="how-to-use">How to use</h3>
+<ul>
+  <li><strong>Add Test and Assert Result :</strong>
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>  <span class="n">ADD_TINY_TEST</span><span class="p">(</span><span class="n">test_0</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span><span class="o">%</span><span class="mi">50</span><span class="p">;</span>
+        <span class="n">ASSERT_TEST_RESULT</span><span class="p">(</span><span class="n">i</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li><strong>Run Test :</strong>
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>  <span class="n">RUN_TINY_TEST</span><span class="p">(</span><span class="n">test_0</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li><strong>Add Test Suit :</strong>
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>  <span class="n">ADD_TEST_SUITE</span><span class="p">(</span><span class="n">test_suit</span><span class="p">){</span>
+      <span class="n">RUN_TINY_TEST</span><span class="p">(</span><span class="n">test_0</span><span class="p">);</span>
+  <span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li><strong>Run Test Suit :</strong>
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>  <span class="n">RUN_TEST_SUITE</span><span class="p">(</span><span class="n">test_suit</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li><strong>Generate Test Report :</strong>
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>  <span class="n">TINY_TEST_REPORT</span><span class="p">();</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="arduino-example">Arduino Example</h3>
+<ul>
+  <li><strong>Example code for Arduino :</strong>
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+</pre></td><td class="rouge-code"><pre>  <span class="cp">#include "tinytest.h"
+</span>
+  <span class="n">ADD_TINY_TEST</span><span class="p">(</span><span class="n">test_0</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span><span class="o">%</span><span class="mi">50</span><span class="p">;</span>
+    <span class="n">ASSERT_TEST_RESULT</span><span class="p">(</span><span class="n">i</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">ADD_TINY_TEST</span><span class="p">(</span><span class="n">test_1</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span><span class="o">%</span><span class="mi">50</span><span class="p">;</span>
+    <span class="n">ASSERT_TEST_RESULT</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">2</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">ADD_TINY_TEST</span><span class="p">(</span><span class="n">test_2</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span><span class="o">%</span><span class="mi">50</span><span class="p">;</span>
+    <span class="n">ASSERT_TEST_RESULT</span><span class="p">(</span><span class="n">i</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">ADD_TEST_SUITE</span><span class="p">(</span><span class="n">test_suit</span><span class="p">){</span>
+    <span class="n">RUN_TINY_TEST</span><span class="p">(</span><span class="n">test_0</span><span class="p">);</span>
+    <span class="n">RUN_TINY_TEST</span><span class="p">(</span><span class="n">test_1</span><span class="p">);</span>
+    <span class="n">RUN_TINY_TEST</span><span class="p">(</span><span class="n">test_2</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">int</span> <span class="nf">popup</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">input</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">strncmp</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="s">"Y"</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="s">"Y"</span><span class="p">))){</span>
+      <span class="n">DEBUG_DIVIDER</span><span class="p">(</span><span class="s">"*"</span><span class="p">,</span> <span class="n">TEST_DIVIDER_LENGTH</span><span class="p">);</span>
+      <span class="n">DEBUG_OK</span><span class="p">(</span><span class="s">"Tiny Test Starting"</span><span class="p">);</span>  
+      <span class="n">RUN_TEST_SUITE</span><span class="p">(</span><span class="n">test_suit</span><span class="p">);</span>
+      <span class="n">TINY_TEST_REPORT</span><span class="p">();</span>
+      <span class="n">DEBUG_INPUT</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="s">"Press Enter To Exit"</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+      <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="nf">setup</span><span class="p">(){</span>
+    <span class="n">SET_CLOCK_SOURCE</span><span class="p">(</span><span class="o">&amp;</span><span class="n">millis</span><span class="p">);</span>
+    <span class="n">ARDUINO_ONLY</span><span class="p">(</span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">));</span>
+    <span class="n">ATTACH_DEBUG_STREAM</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Serial</span><span class="p">);</span>
+    <span class="n">DEBUG_DIVIDER</span><span class="p">(</span><span class="s">"*"</span><span class="p">,</span> <span class="n">TEST_DIVIDER_LENGTH</span><span class="p">);</span>
+    <span class="n">DEBUG_INPUT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">popup</span><span class="p">,</span> <span class="s">"Run Test? (Y/N)"</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">DEBUG_OK</span><span class="p">(</span><span class="s">"Going To Loop"</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="nf">loop</span><span class="p">(){</span>
+      <span class="c1">// Do whatever you want</span>
+  <span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="sample-output">Sample Output</h3>
+
+<div style="text-align:center"><img src="https://raw.githubusercontent.com/shadlyd15/tinytest/master/images/output.png" alt="Sample Output" /></div>
+:ET
