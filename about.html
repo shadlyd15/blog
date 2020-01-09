@@ -5,7 +5,11 @@ description: "Dream is Destiny"
 header-img: "img/about-bg.jpg"
 ---
 
-<div class="en post-container">
+<div class="post-container">
+    <blockquote>
+        Another brick in the wall.
+    </blockquote>
+
     <p>
         I am  Shadly Salahuddin, born and raised in the old city of Dhaka, Bangladesh. I have completed my 
         Bachelor’s Degree in Electrical and Electronic Engineering from Rajshahi University of Engineering 
@@ -30,9 +34,9 @@ header-img: "img/about-bg.jpg"
     <p>
         After working as an Embedded System Engineer for 3 years, I did quit my job to try and learn something new. 
         I started working as a Software Engineer in, PeepThePlace, a company in Bangladesh focused on surveillance 
-        systems. There I worked on the backend systems with technologies like Javascript, Node.js, AWS, GraphQL etc. 
+        systems. There I worked on their backend systems with technologies like Javascript, Node.js, AWS, GraphQL etc. 
         As I had prior experiences with Embedded Linux, I started developing OpenWrt based operating systems for our 
-        company's servilance system. I ended up my journey with this company, after 5 months of joinijng, just to 
+        company's servilance system. I ended up my journey with this company just after 5 months of joinijng to 
         take a leap of faith.
     </p>
 
@@ -42,83 +46,26 @@ header-img: "img/about-bg.jpg"
 
     <p>
         Globalization has broken the borders between countries and paved a way to pursue one’s passion even 
-        in a distant land. I realized that, to cope up with the exponential growth of civilization, it is 
-        imperative to engage in a more competitive and progressive learning. So Investing 100% of myself, I 
-        took the leap of faith. In October 2019, I started my new chapter in Germany as a Master's student in 
-        Bergische Universität Wuppertal.
+        in a distant land. Soon I realized thatn it is imperative to engage in a more competitive and progressive 
+        learning. So Investing 100% of myself, I took the leap of faith. In October 2019, I started a new chapter 
+        of my life in Germany as a Master's student in Bergische Universität Wuppertal.
     </p>
 
+    <br>
     <p style="text-align:right;">
-        -- January 9, 2020
+        Last updated on : January 9, 2020
     </p>
 
 </div>
-
-<!-- Handle Language Change -->
-<script type="text/javascript">
-    var $zh = document.querySelector(".zh");
-    var $en = document.querySelector(".en");
-    function onLanChange(index){
-        if(index == 0){
-            $zh.style.display = "block";
-            $en.style.display = "none";
-        }else{
-            $en.style.display = "block";
-            $zh.style.display = "none";
-        }
-    }
-    onLanChange(0);
-</script>
-
-
-
-{% if site.duoshuo_username %}
-<!-- 多说评论框 start -->
-<div class="comment">
-    <div class="ds-thread"
-    {% if site.duoshuo_username == "huxblog" %}
-        data-thread-id="1187623191091085319"
-    {% else %}
-        data-thread-key="{{site.duoshuo_username}}/about"
-    {% endif %}
-
-    data-title="{{page.title}}"
-    data-url="{{site.url}}/about/"></div>
-</div>
-<!-- 多说评论框 end -->
-
-<!-- Duoshuo hacking -->
-<input id="dsUser" type="hidden" value="{{site.duoshuo_username}}"  />
-
-<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-    // dynamic User hacking by Hux
-    var _user = document.getElementById('dsUser').value;
-    // duoshuo comment query.
-    var duoshuoQuery = {short_name: _user };
-    (function() {
-        var ds = document.createElement('script');
-        ds.type = 'text/javascript';ds.async = true;
-        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-        ds.charset = 'UTF-8';
-        (document.getElementsByTagName('head')[0]
-         || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-</script>
-<!-- 多说公共JS代码 end -->
-{% endif %}
 
 
 {% if site.disqus_username %}
-<!-- disqus 评论框 start -->
 <div class="comment">
     <div id="disqus_thread" class="disqus-thread">
 
     </div>
 </div>
-<!-- disqus 评论框 end -->
 
-<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "{{site.disqus_username}}";
@@ -131,5 +78,4 @@ header-img: "img/about-bg.jpg"
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
-<!-- disqus 公共JS代码 end -->
 {% endif %}
