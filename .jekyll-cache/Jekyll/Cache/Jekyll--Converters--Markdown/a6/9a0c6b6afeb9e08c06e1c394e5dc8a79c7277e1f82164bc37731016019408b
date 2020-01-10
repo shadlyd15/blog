@@ -1,0 +1,55 @@
+I"S&<p>প্রাথমিক ধাপ পার হওয়ার জন্য আমাদের আর অল্প কিছু জিনিস জানতে হবে। আর তা হল লেফট শিফট আর রাইট শিফট। এগুলো আবার কি রে বাবা !!! খুবই সহজ জিনিস। কোনো বিটকে ধাক্কা দিয়ে বামে কিংবা ডানে সরানোই হল যথাক্রমে লেফট শিফট আর রাইট শিফট। এদের যথাক্রমে « এবং » দ্বারা প্রকাশ করা হয়। ধরি ৮ বিটের একটি 0b ০০০০ ০০০১ । একে ৩ ঘর লেফট শিফট করবো। 0b ০০০০ ০০০১ « ৩ এরপর যা দাঁড়াবে তা হল 0b০০০০ ১০০০ অর্থাৎ ১ তিন ঘর সরে গেল। এই কনসেপ্ট আগামীতে আমাদের অনেক কাজে আসবে কোন স্পেসিফিক বিটকে অন(১) অথবা অফ(০) করতে।</p>
+
+<p>মনে করি, আমরা 0b০০০০ ১০০১ এই সংখ্যার পঞ্চম বিটটি অন করতে চাই। তাহলে আমাদের যা করতে হবে তা হল</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="n">variable</span>  <span class="o">=</span>  <span class="mb">0b00001001</span>  <span class="p">;</span>
+<span class="n">variable</span>  <span class="o">=</span>  <span class="n">variable</span>  <span class="o">|</span>  <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">5</span><span class="p">)</span>  <span class="p">;</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>এর ফলে variable এর মান যা দাঁড়াবে তা হল 0b 0010 1001। এটাকে শর্টকাটে এভাবেও লেখা যায়,</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="n">variable</span><span class="o">|</span>  <span class="o">=</span>  <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">5</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>যদি আমরা একসাথে দুটি বিট ৫ ও ১ কে অন করতে চাই তাহলে লিখতে হবে ,</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="n">variable</span><span class="o">|</span>  <span class="o">=</span>  <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">5</span><span class="p">)</span><span class="o">|</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">3</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>এর ফলে variable এর মান দাঁড়াবে 0b 0010 1011।</p>
+
+<p>অন করার ব্যাপার তো গেল, এবার যদি অফ করতে চাই তাহলে ?? তাহলে প্রায় একই কাজ করতে হবে। আর তা হল নটের সাথে অ্যান্ড অপারেশান। কি বোঝা গেল না ? দাঁড়াও বলছি। ধরি, আমরা 0b 0000 1001 এই সংখ্যার তৃতীয় বিটটি অফ করতে চাই। তাহলে যা করতে হবে তা হল</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="n">variable</span>  <span class="o">=</span>  <span class="mb">0b00001001</span>  <span class="p">;</span>
+<span class="n">variable</span>  <span class="o">=</span>  <span class="n">variable</span>  <span class="o">&amp;</span>  <span class="p">(</span>  <span class="o">~</span>  <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">3</span><span class="p">)</span>  <span class="p">)</span>  <span class="p">;</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>যাকে সহজ ভাষায় লেখা যায়</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="n">variable</span><span class="o">&amp;</span>  <span class="o">=</span>  <span class="o">~</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">3</span><span class="p">)</span>  <span class="p">;</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>যার ফলে variableএর মান দাঁড়াবে 0b 0000 0001।</p>
+
+<p>আবার একাধিক বিট অফ করতে গেলে একই রকম কাজ করতে হবে। যেমনঃ ০ এবং ৩ নাম্বার বিট অফ করতে চাইলে লিখতে হবে -</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="n">variable</span><span class="o">&amp;</span>  <span class="o">=</span>  <span class="o">~</span>  <span class="p">(</span>  <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">3</span><span class="p">)</span>  <span class="o">|</span>  <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">0</span><span class="p">)</span>  <span class="p">)</span>  <span class="p">;</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>যার ফলে variableএর মান দাঁড়াবে 0b 0000 0000।</p>
+
+<p>আর যদি আমরা কোন বিটকে Toggle করতে চাই অর্থাৎ যদি অন থাকে তাহলে অফ আর অফ থাকলে অন করতে চাই তাহলে যা করতে হবে তা হল XOR এর ব্যবহার।</p>
+
+<p>মনে করি, আমরা 0b০০০০ ১০০১ এই সংখ্যার তৃতীয় বিটটি Toggle করতে চাই। তাহলে আমাদের যা করতে হবে তা হল</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="n">variable</span>  <span class="o">=</span>  <span class="mb">0b00001001</span>  <span class="p">;</span>
+<span class="n">variable</span>  <span class="o">=</span>  <span class="n">variable</span>  <span class="o">^</span>  <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">3</span><span class="p">)</span>  <span class="p">;</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>এর ফলে variable এর মান যা দাঁড়াবে তা হল 0b 0010 1001। এটাকে শর্টকাটে এভাবেও লেখা যায়,</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="n">variable</span>  <span class="o">^</span>  <span class="o">=</span>  <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">3</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>এখন তোমাদের মনে প্রশ্ন আসতে পারে কেন এমনটি হয়। এই প্রশ্নের উত্তর বের করার দায়িত্ব তোমাদের উপর সঁপে দিলাম। কারণ শুধুমাত্র তারাই জীবনে ভালো কিছু করতে সক্ষম যারা কোন কিছু কারণ ছাড়া মেনে নিতে চায় না, যারা চিন্তা করতে ভালবাসে তারা। তাই আজকে এই পর্যন্তই পরবর্তীতে এই প্রশ্নের ব্যাখ্যা করা হবে। আর নিজে নিজে বুঝতে পারবে তার একটা চকলেট পাওনা রইলো তোমার চিন্তাশীলতার জন্য।</p>
+:ET

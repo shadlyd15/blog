@@ -1,0 +1,79 @@
+I"�/<p>Interrupt এর অর্থ হল মাঝপথে বাঁধা দেয়া। মাইক্রোকন্ট্রোলার এ কোন কোড চলার সময় যদি আমরা ঐ কোডের কাজ বাদ দিয়ে অন্যকোন কাজ করতে চাই তাহলে Interrupt ব্যবহার করতে হবে। ধরি, while loop এর ভেতরে একটি LED Blink করার জন্য কোড করা আছে এভাবে –</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="cp">#include &lt;avr/io.h&gt; // io.h Header File এর সংযুক্তি
+#include &lt;util/delay.h&gt; // delay.h Header File এর সংযুক্তি
+</span><span class="kt">int</span>  <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// main ফাংশনের শুরু{</span>
+	<span class="n">DDRC</span>  <span class="o">|=</span>  <span class="mi">1</span>  <span class="o">&lt;&lt;</span>  <span class="mi">5</span><span class="p">;</span>  <span class="c1">// পোর্ট সি এর ৫ নম্বর পিনকে আউটপুট হিসেবে নেয়া হল</span>
+	<span class="k">while</span>  <span class="p">(</span><span class="mi">1</span><span class="p">){</span>  <span class="c1">// Infinite Loop</span>
+		<span class="n">PORTC</span><span class="o">|=</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">5</span><span class="p">);</span>  <span class="c1">// পিন নম্বর ৫ কে High করা হল</span>
+		<span class="n">_delay_ms</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>  <span class="c1">//কোডেটাকে কিছু সময়ের জন্য থামানো হল</span>
+		<span class="n">PORTC</span><span class="o">&amp;=~</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">5</span><span class="p">);</span>  <span class="c1">// পিন নম্বর ৫ কে Low করা হল</span>
+		<span class="n">_delay_ms</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>  <span class="c1">//কোডেটাকে আবার কিছু সময়ের জন্য থামানো হল</span>
+	<span class="p">}</span>  <span class="c1">// Infinite Loop শেষ</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>যেহেতু C Program লাইন বাই লাইনে Execute হয় তাই এখানেও একই জিনিস হবে। এখন যদি ৪ নম্বর লাইন Execute হবার সময় মাইক্রোকন্ট্রোলার এ Interrupt Call করা হয় তাহলে সে ৫ নম্বর লাইনে না গিয়ে সরাসরি Interrupt এর জন্য নির্ধারিত কাজে চলে যাবে। এই নির্ধারিত কাজ শেষ হলে সে আবার ৫ নম্বর লাইন থেকে কাজ শুরু করবে। Interrupt এর জন্য নির্ধারিত কাজ main() ফাংশনের বাইরে থাকে এবং Interrupt এর ধরণ অনুযায়ী বিভিন্নভাবে execute হয়ে থাকে। মাইক্রোকন্ট্রোলার এর বিভিন্ন ধরণের Interrupt এর মধ্যে ADC Conversion Complete , Watchdog Timeout Interrupt, UART Rx Complete, 2-wire Serial Interface, Timer/Counter2 Compare Match , Timer/Counter Overflow, External Interrupt অন্যতম। এদের মধ্যে একমাত্র Hardware Interrupt হল External Interrupt। এই ধরণের Interrupt ব্যবহার করে বাটন চাপার মাধ্যমে কিংবা পিন লো করে মাইক্রোকন্ট্রোলার এ Interrupt এর নির্দেশ পাঠানো যায়। Interrupt এর জন্য নির্ধারিত ফাংশন হল ISR (Interrupt Service Routine)। এই ফাংশনের আর্গুমেন্টে বিভিন্ন ধরণের Interrupt এর জন্য নির্ধারিত ভেক্টর দিয়ে কাজ করতে হয়। মাইক্রোকন্ট্রোলার এর বিভিন্ন ধরণের Interrupt এর জন্য বিভিন্ন ধরণের ভেক্টর AVR-LibC তে নির্ধারণ করা আছে।</p>
+
+<p>আমরা এখন দেখব কিভাবে বাটন চেপে মাইক্রোকন্ট্রোলার এ Interrupt নির্দেশ পাঠাতে হয়।</p>
+
+<p>Interrupt নিয়ে কাজ করতে হলে আমদের প্রথমেই কিছু জিনিস ঠিকঠাক করে দিতে হবে। Interrupt সম্পর্কিত সকল ফাংশন Interrupt.h এ আছে। তাই Interrupt ব্যবহার করতে হলে অবশ্যই এই হেডার ফাইলটি যুক্ত করতে হবে। এখন আমাদের Global Interrupt Enable করতে হবে। এটি করতে হলে আমাদের Status Register (SREG) এর ৭ নম্বর বিটটি হাই করে দিতে হবে। এখন আমাদের MCU Control Register (MCUCR) এর Interrupt Sense Control বিট গুলোকে Configure করে আমদের চাহিদামত Interrupt সেট করে নিবো। Rising Edge বলতে বোঝায় লো থেকে হাই অবস্থায় যাওয়ার মধ্যবর্তী অবস্থাকে ঠিক একইভাবে Falling Edge বলতে বোঝায় হাই থেকে লো অবস্থায় যাওয়ার মধ্যবর্তী অবস্থাকে।</p>
+
+<p>[<img src="https://web.archive.org/web/20150404203855/http://d15tech.com/wp-content/uploads/2015/01/in0_table.png" alt="in0_table - D15 Technologies](https://web.archive.org/web/20150404203855im_/http://d15tech.com/wp-content/uploads/2015/01/in0_table.png)" /></p>
+
+<p>[<img src="https://web.archive.org/web/20150404203855/http://d15tech.com/wp-content/uploads/2015/01/in1_table.png" alt="in1_table - D15 Technologies](https://web.archive.org/web/20150404203855im_/http://d15tech.com/wp-content/uploads/2015/01/in1_table.png)" /></p>
+
+<p>এখন আমাদের কাজ হল মাইক্রোকন্ট্রোলার এর Interrupt এর পিনকে চালু করা। এটা করার জন্য আমাদের General Interrupt Control Register (GICR) এর কিছু পিনকে হাই করতে হবে। আমরা মাইক্রোকন্ট্রোলার এর যে পিনে Interrupt ইনপুট দিতে চাই সেই বিটকে হাই করে দিবো। INT0 কে চালু করতে চাইলে INT0, INT1 কে চালু করতে চাইলে INT1 এবং INT2 কে চালু করতে চাইলে INT2 বিটকে হাই করে দিতে হবে।<a href="https://web.archive.org/web/20150404203855/http://d15tech.com/wp-content/uploads/2015/01/gicr.png"><img src="https://web.archive.org/web/20150404203855im_/http://d15tech.com/wp-content/uploads/2015/01/gicr.png" alt="gicr - D15 Technologies" /></a></p>
+
+<p>এবার সময় হল Global Interrupt Enable করার। এটা করার জন্য আমাদের যা করতে হবে তা হল শুধুমাত্র sei() এই ফাংশনটা কল করা। এই ফাংশনটা Interrupt.h হেডার ফাইলে আছে। এই ফাংশনটা কল করলে Interrupt ফাংশন চালু হয়ে যাবে এবং সে Interrupt ইনপুট নিতে পারবে। অন্যথায় পারবে না। ঠিক একইভাবে Global Interrupt Disable করার জন্য আমাদের cli() এই ফাংশনটা ব্যবহার করতে হবে।</p>
+
+<p>এবার একটা কোড দেখা যাক।</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="rouge-code"><pre><span class="cp">#include &lt;avr/io.h&gt;
+#include &lt;avr/interrupt.h&gt;
+#include &lt;util/delay.h&gt;
+</span>
+<span class="kt">void</span>  <span class="nf">main</span><span class="p">(){</span>
+	<span class="n">DDRB</span>  <span class="o">=</span>  <span class="mh">0x00</span><span class="p">;</span>
+	<span class="n">PORTB</span>  <span class="o">=</span>  <span class="mh">0x00</span><span class="p">;</span>
+	<span class="n">MCUCR</span><span class="o">|=</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">ISC01</span><span class="p">);</span>  <span class="c1">//INT0 কে Falling Edge এ কনফিগার করা হল।</span>
+	<span class="n">GICR</span><span class="o">|=</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">INT0</span><span class="p">);</span>  <span class="c1">//INT0 কে Interrupt হিসাবে Initialize করা হল।</span>
+	<span class="n">sei</span><span class="p">();</span>  <span class="c1">// Global Interrupt Enable করা হল।</span>
+	<span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){;}</span>
+<span class="p">}</span>
+
+<span class="n">ISR</span><span class="p">(</span><span class="n">INT0_vect</span><span class="p">){</span>
+	<span class="n">PORTB</span>  <span class="o">^=</span>  <span class="mh">0xFF</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>ব্যাস হয়ে গেল বেসিক External Interrupt এর কাজ। এই কোড মাইক্রোকন্ট্রোলার এ দিলে while লুপের ভিতরে সারাজীবন থেকে পোর্ট বি এর সব পিন লো হয়ে থাকার কথা। কিন্তু INT0 এর যখন Falling Edge হবে তখন কোড while লুপ থেকে বের হয়ে সরাসরি ISR(INT0_vect) ফাংশনে চলে যাবে এবং মাইক্রোকন্ট্রোলার এর পোর্ট বি কে toggle করে দিবে। এখানে INT0_vect হল INT0 এর জন্য নির্ধারিত ভেক্টর।</p>
+
+<p><a href="https://web.archive.org/web/20150404203855/http://d15tech.com/wp-content/uploads/2015/01/interrput.jpg"><img src="https://web.archive.org/web/20150404203855im_/http://d15tech.com/wp-content/uploads/2015/01/interrput.jpg" alt="interrput  - D15 Technologies" /></a></p>
+
+<p>চিত্রের মত সংযোগ দিলে সবকিছু ঠিক থাকলে বাটন চাপার সাথে সাথে মাইক্রোকন্ট্রোলার এর পোর্ট বি কে toggle হয়ে যাবে।</p>
+:ET

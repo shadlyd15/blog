@@ -1,0 +1,112 @@
+I"{<p>যেহেতু সাধারণ LED এর কারেন্ট রেটিং 10mA এর মত তাই একে সরাসরি ৫ ভোল্টে দিলে এটি পুড়ে যাবে। তাই একে একটি Resistor এর সাথে সিরিজে সংযোগ করে তারপর সংযোগ দিতে হবে। এখন কথা হচ্ছে কত মানের Resistor দিবো? এটা বের করা খুবই সহজ। সাধারণত Red LED এর ভোল্টেজ ড্রপ 1.7 ভোল্ট এবং Green LED এর 2.2 ভোল্ট। এদের উভয়েরই কারেন্ট রেটিং ১০ মিলি অ্যাম্পিয়ার। এখন যদি এদের ৫ ভোল্টের সাথে লাগানো হয় তবে কার্যকরী ভোল্টেজ হল লালের ক্ষেত্রে 5 – 1.7 = 3.3 volt এবং সবুজের ক্ষেত্রে 5 – 2.2 = 2.8 volt। তাই এদেরকে এদের Rated Current এর মধ্যে চালাতে হলে যে ন্যূনতম মানের Resistor লাগবে তা হল লালের ক্ষেত্রে 3.3V/10 mA = 330 ohm এবং সবুজের ক্ষেত্রে 2.8V/10 mA = 280 ohm। তবে এই রেটিং এর চেয়ে একটু বড়ো মানের Resistor ব্যবহার করা নিরাপদ। সহজ ভাষায় বলতে গেলে -</p>
+
+<p>R = (VS – VL) / I<br />
+VS = সাপ্লাই ভোল্টেজ<br />
+VL = LED ভোল্টেজ<br />
+I = LED কারেন্ট</p>
+
+<p>রোধ R = (VS – VL) / I</p>
+
+<p><a href="https://web.archive.org/web/20150404225232/http://d15tech.com/wp-content/uploads/2015/01/ledres.gif"><img src="https://web.archive.org/web/20150404225232im_/http://d15tech.com/wp-content/uploads/2015/01/ledres.gif" alt="ledres" /></a></p>
+
+<p>নিচে বিভিন্ন ধরণের 5mm ব্যাসের গোল LED এর কিছু টেকনিক্যাল ডাটা দেয়া হল।</p>
+
+<table style="height: 268px;" border="1" width="710">
+<tbody>
+<tr>
+<td align="center"><b>Type</b></td>
+<td align="center"><b>Colour</b></td>
+<td align="center"><b>I<sub>F</sub><br />
+max.</b></td>
+<td align="center"><b>V<sub>F</sub><br />
+typ.</b></td>
+<td align="center"><b>V<sub>F</sub><br />
+max.</b></td>
+<td align="center"><b>V<sub>R</sub><br />
+max.</b></td>
+<td align="center"><b>Luminous<br />
+intensity</b></td>
+<td align="center"><b>Viewing<br />
+angle</b></td>
+<td align="center"><b>Wavelength</b></td>
+</tr>
+<tr>
+<td align="center">Standard</td>
+<td align="center"><b>Red</b></td>
+<td align="center"><b>30mA</b></td>
+<td align="center"><b>1.7V</b></td>
+<td align="center">2.1V</td>
+<td align="center">5V</td>
+<td align="center">5mcd @ 10mA</td>
+<td align="center">60°</td>
+<td align="center">660nm</td>
+</tr>
+<tr>
+<td align="center">Standard</td>
+<td align="center"><b>Bright red</b></td>
+<td align="center"><b>30mA</b></td>
+<td align="center"><b>2.0V</b></td>
+<td align="center">2.5V</td>
+<td align="center">5V</td>
+<td align="center">80mcd @ 10mA</td>
+<td align="center">60°</td>
+<td align="center">625nm</td>
+</tr>
+<tr>
+<td align="center">Standard</td>
+<td align="center"><b>Yellow</b></td>
+<td align="center"><b>30mA</b></td>
+<td align="center"><b>2.1V</b></td>
+<td align="center">2.5V</td>
+<td align="center">5V</td>
+<td align="center">32mcd @ 10mA</td>
+<td align="center">60°</td>
+<td align="center">590nm</td>
+</tr>
+<tr>
+<td align="center">Standard</td>
+<td align="center"><b>Green</b></td>
+<td align="center"><b>25mA</b></td>
+<td align="center"><b>2.2V</b></td>
+<td align="center">2.5V</td>
+<td align="center">5V</td>
+<td align="center">32mcd @ 10mA</td>
+<td align="center">60°</td>
+<td align="center">565nm</td>
+</tr>
+<tr>
+<td align="center">High intensity</td>
+<td align="center"><b>Blue</b></td>
+<td align="center"><b>30mA</b></td>
+<td align="center"><b>4.5V</b></td>
+<td align="center">5.5V</td>
+<td align="center">5V</td>
+<td align="center">60mcd @ 20mA</td>
+<td align="center">50°</td>
+<td align="center">430nm</td>
+</tr>
+<tr>
+<td align="center">Super bright</td>
+<td align="center"><b>Red</b></td>
+<td align="center"><b>30mA</b></td>
+<td align="center"><b>1.85V</b></td>
+<td align="center">2.5V</td>
+<td align="center">5V</td>
+<td align="center">500mcd @ 20mA</td>
+<td align="center">60°</td>
+<td align="center">660nm</td>
+</tr>
+<tr>
+<td align="center">Low current</td>
+<td align="center"><b>Red</b></td>
+<td align="center"><b>30mA</b></td>
+<td align="center"><b>1.7V</b></td>
+<td align="center">2.0V</td>
+<td align="center">5V</td>
+<td align="center">5mcd @ 2mA</td>
+<td align="center">60°</td>
+<td style="text-align: center;" align="center">625nm</td>
+</tr>
+</tbody>
+</table>
+:ET

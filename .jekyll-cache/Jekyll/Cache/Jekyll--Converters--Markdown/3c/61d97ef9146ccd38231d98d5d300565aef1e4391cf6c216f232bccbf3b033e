@@ -1,0 +1,31 @@
+I"�<p>বাটন ডিবাউন্স Beginner দের জন্য খুবই একটি কমন সমস্যা। তবে এভাবে বাটন দিয়ে কমান্ড দিলে দেখা যাবে একবার বাটন চাপলে কয়েকবার কমান্ড নিবে। এটা হয় ডিবাউন্সের কারণে। বাটন একবার চাপলেও মেকানিক্যাল ত্রুতিগত কারণে কিছু স্পাইক দেখা দেয়। আর এই কারণেই মাইক্রোকন্ট্রোলারে বাটন দিয়ে কমান্ড দিলে স্পাইকের কারণে মাইক্রোকন্ট্রোলার কয়েকটি কমান্ড একত্রে নিয়ে নেয়। তাই এই সমস্যা দূর করতে হয় স্পাইক দূর করতে হয় নাহয় একবার কমান্ড নেয়ার পর কিছুক্ষণ অপেক্ষা করতে হয়।</p>
+
+<p><a href="https://web.archive.org/web/20150405084726/http://d15tech.com/wp-content/uploads/2015/01/debounce.gif"><img src="https://web.archive.org/web/20150405084726im_/http://d15tech.com/wp-content/uploads/2015/01/debounce.gif" alt="Debounce" /></a></p>
+
+<p>স্পাইক দূর করতে হলে বাটনের সাথে সমান্তরালে একটি ক্যাপাসিটর লাগাতে হয়। এতে স্পাইক বা নয়েজ ক্যাপাসিটর দ্বারা ফিল্টার হয়ে যায়।</p>
+
+<p><a href="https://web.archive.org/web/20150405084726/http://d15tech.com/wp-content/uploads/2015/01/debounce_capacitor.png"><img src="https://web.archive.org/web/20150405084726im_/http://d15tech.com/wp-content/uploads/2015/01/debounce_capacitor.png" alt="debounce_capacitor" /></a></p>
+
+<p>আর যদি একবার কমান্ড নেয়ার পর কিছুক্ষণ অপেক্ষা করতে চাই তাহলে কমান্ডের পর কিছুক্ষণ Delay দিলেই হবে।</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="k">if</span><span class="p">(</span><span class="n">bit_is_clear</span><span class="p">(</span><span class="n">PINB</span><span class="p">,</span>  <span class="mi">3</span><span class="p">)){</span>
+	<span class="n">_delay_ms</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+	<span class="n">PORTB</span><span class="o">|</span>  <span class="o">=</span>  <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">4</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>তবে আমার মতে সবচেয়ে ভালো পদ্ধতি হল ডিবাউন্সের সময়টুকু একটি লুপের মধ্যে ফেলে দেয়া। এতে ঠিক যতটুকু সময় ডিবাউন্স হয় ঠিক ততটুকু সময় একটি খালি লুপ চলে। এতে কোডের Execution এর সময় কমে এবং প্রায় নির্ভুলভাবে ডিবাউন্স রোধ করা যায়। অতিরিক্ত কোন সময় অপেক্ষা করতে হয় না।</p>
+
+<p>কোডটি হবে এরকম</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="k">if</span><span class="p">(</span><span class="n">bit_is_clear</span><span class="p">(</span><span class="n">PINB</span><span class="p">,</span>  <span class="mi">3</span><span class="p">)){</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">bit_is_clear</span><span class="p">(</span><span class="n">PINB</span><span class="p">,</span>  <span class="mi">3</span><span class="p">));</span>
+	<span class="n">PORTB</span><span class="o">|</span>  <span class="o">=</span>  <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">4</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+:ET

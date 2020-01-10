@@ -1,0 +1,174 @@
+I"�;<p>অনেক সময় দেখা যায় যে একটি সম্পূর্ণ প্রোজেক্ট একটি ফাইলে নিয়ে কাজ করলে কোড অনেক বড় হয়ে যায়। ফলে কোড Maintenance এ দেখা দেয় নানান সমস্যা। এবার অনেক সময় দেখা যায় যে কোন আলাদা লাইব্রেরি যুক্ত করতে হয় অন্যকোন হার্ডওয়্যার ইন্টারফেস করার জন্য। তাই এবারের পরিবেশনা কিভাবে একটি প্রজেক্টকে একাধিক ফাইল ভাগ করা যায় এবং কিভাবে কোডের সাথে লাইব্রেরি যুক্ত করতে হয়। সাধারণত বিভিন্ন User Defined Function কে আলাদা আলাদা ফাইলে রাখা হয়ে থাকে এবং পরে ফাইলটাকে লিঙ্ক করে দেয়া হয়। User Defined Function হল main ফাংশনের বাইরে আলাদা করে নিজের মতো করে তৈরিকৃত ফাংশন। এই ফাংশনকে কাজের সময় নিজের ইচ্ছামত বারবার ব্যবহার করা যায়। সম্পূর্ণ জিনিসটাকে বারবার আর লেখার ঝামেলা পোহাতে হয় না। এখন একটা কোড দেখি।</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="rouge-code"><pre><span class="cp">#include &lt;avr/io.h&gt;
+#include &lt;util/delay.h&gt;
+</span>
+<span class="kt">void</span>  <span class="nf">main</span><span class="p">(){</span>
+	<span class="kt">int</span>  <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+	<span class="n">DDRB</span><span class="o">=</span>  <span class="mh">0xFF</span><span class="p">;</span>
+	<span class="n">PORTB</span><span class="o">=</span>  <span class="mi">0</span><span class="p">;</span>
+	<span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+		<span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">8</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+			<span class="n">PORTB</span>  <span class="o">=</span>  <span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="p">;</span>
+			<span class="n">_delay_ms</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+		<span class="p">}</span>
+		<span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">7</span><span class="p">;</span><span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">--</span><span class="p">){</span>
+			<span class="n">PORTB</span>  <span class="o">=</span>  <span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="p">;</span>
+			<span class="n">_delay_ms</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>এই কোডে যে কাজ হবে তা হল পোর্ট বি এর পিনগুলো একটার পর একটা High হবে এবং স্ক্রলের মত করে উঠানামা করবে। কিন্তু এই স্ক্রলটা যদি আমরা কয়েক জায়গায় ব্যবহার করতে চাই তাহলে কি আমরা বারবার একই for loop লিখেবো? না লিখলেও চলবে। এই জিনিসটাকে আমরা শুধুমাত্র একবারই লিখবো কিন্তু দুটি আলদা ফাংশনে। যাতে প্রয়োজনে এবার এটাকে ব্যবহার করা যায়। তাহলে কোডটা হবে এরকম। আমি এখানে ফাংশন দুটির নাম দিচ্ছি scroll_up এবং scroll_down। এবার কোডটার চেহারা হবে এরকম।</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td><td class="rouge-code"><pre><span class="cp">#include &lt;avr/io.h&gt;
+#include &lt;util/delay.h&gt;
+</span>
+<span class="kt">void</span>  <span class="nf">scroll_up</span><span class="p">(){</span>
+	<span class="kt">int</span>  <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">8</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="n">PORTB</span>  <span class="o">=</span>  <span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="p">;</span>
+		<span class="n">_delay_ms</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span>  <span class="nf">scroll_down</span><span class="p">(){</span>
+	<span class="kt">int</span>  <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">7</span><span class="p">;</span><span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">--</span><span class="p">){</span>
+		<span class="n">PORTB</span>  <span class="o">=</span>  <span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="p">;</span>
+		<span class="n">_delay_ms</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span>  <span class="nf">main</span><span class="p">(){</span>
+	<span class="n">DDRB</span>  <span class="o">=</span>  <span class="mh">0xFF</span><span class="p">;</span>
+	<span class="n">PORTB</span>  <span class="o">=</span>  <span class="mi">0</span><span class="p">;</span>
+	<span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+		<span class="n">scroll_up</span><span class="p">();</span>
+		<span class="n">scroll_down</span><span class="p">();</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>এখানে আমরা দেখলাম scroll_up এবং scroll_down নামের User Definedফাংশন দুটিকে আমরা কিভাবে ব্যবহার করতে পারি।</p>
+
+<p>এখন কথা হচ্ছে আলাদাভাবে ফাংশন লেখার কারণে আমাদের প্রোগ্রামটা বেশ বড়ো দেখাচ্ছে। তাই কোডটাকে একটু সাইজ করার জন্য আমরা এখন এদের বাইরে বের করে আলাদা ফাইলে রাখবো।</p>
+
+<p>প্রথমে Programmers’ Notepad এ গিয়ে দুইটি খালি ফাইল তৈরি করি। আমাদের প্রোজেক্টের main.c টা যে ফোল্ডারে আছে সেই ফোল্ডারে ফাইল দুটি সেভ করি। একটার নাম দেই scroll.h এবং আরেকটার নাম দেই scroll.c। প্রথমে scroll.c ফাইলটা ওপেন করে সেখানে আমরা প্রথমেই scroll.h ফাইলটা কে include করে দেই। এখানে অন্যান্য হেডার ফাইলের মতো করে #include লিখলে চলবে না। #include “scroll.h” লিখতে হবে। ” ” দ্বারা হেডার ফাইল Include করলে কম্পাইলার বুঝে নেয় যে ফাইলটা প্রোজেক্টের Directory তেই আছে। এখন scroll.c তে নিচের কোডটা লিখি।</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="rouge-code"><pre><span class="cp">#include "scroll.h"
+</span>
+<span class="kt">void</span>  <span class="nf">scroll_up</span><span class="p">(){</span>
+<span class="kt">int</span>  <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">8</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+<span class="n">PORTB</span>  <span class="o">=</span>  <span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="p">;</span>
+<span class="n">_delay_ms</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span>  <span class="nf">scroll_down</span><span class="p">(){</span>
+<span class="kt">int</span>  <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">7</span><span class="p">;</span><span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">--</span><span class="p">){</span>
+<span class="n">PORTB</span>  <span class="o">=</span>  <span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="p">;</span>
+<span class="n">_delay_ms</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>এবার scroll.h এর পালা। scroll.h ফাইলটি ওপেন করে এবার নিচের কোডটুকু লিখি।</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="cp">#include &lt;avr/io.h&gt;
+#include &lt;util/delay.h&gt;
+</span>
+<span class="kt">void</span>  <span class="nf">scroll_up</span><span class="p">();</span>
+<span class="kt">void</span>  <span class="nf">scroll_down</span><span class="p">();</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>যেহেতু scroll_up() এবং scroll_down() দুটি ফাংশনেই io.h এবং delay.h এর দরকার আছে তাই এদের এখানে যুক্ত করা হল এবং ফাংশন দুটির নাম লেখা হল।</p>
+
+<p>এবার মূল ফাইলে ( ধরি, main.c ) গিয়ে #include “scroll.h” লিখে দিয়ে আমাদের নিজস্ব হেডার ফাইলটি যুক্ত করে দেই।<br />
+কিন্তু এখানে কম্পাইলার তো আর এতো কিছু বোঝেনা। তাকে scroll.h এ খুঁজতে গিয়ে দেখবে scroll_up() এবং scroll_down() ফাংশন দুটির বর্ণনা যা আছে scroll.c এ। কিন্তু সে তো আর জানে যে এটাকে কোথায় পাবে। তাই তাকে এটা জানাতে হবে। প্রথমে আমরা আমদের makefile টা ওপেন করি। এটাতে নিচের মত একটা লাইন পাওয়া যাবে।</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>
+# List C source files here. (C dependencies are automatically generated.)
+
+SRC  =  $(TARGET).c
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>এখানে শুধু একটা স্পেস দিয়ে scroll.c ফাইল টা যোগ করে দিতে হবে। নতুন লাইনটা হবে এরকম।</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>SRC  =  $(TARGET).c  scroll.c
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>ব্যাস আমাদের কাজ শেষ। এখন make all দিলেই তৈরি হয়ে যাবে আমাদের কাঙ্ক্ষিত Hex File টি। এখন দেখা যাচ্ছে আমাদের মূল কোডটাকে একেবারে ফ্রেশ।</p>
+
+<p>ঠিক একইভাবে আমরা যদি কোন External Library যুক্ত করতে চাই তাহলেও একইভাবে শুধু Source File টা যোগ করে দিলেই কাজ হয়ে যাবে। ঠিক যেমন LCD এর লাইব্রেরিটি। এখানে lcd.c ফাইলটাকে যোগ করলেই কাজ হয়ে যাবে।</p>
+:ET

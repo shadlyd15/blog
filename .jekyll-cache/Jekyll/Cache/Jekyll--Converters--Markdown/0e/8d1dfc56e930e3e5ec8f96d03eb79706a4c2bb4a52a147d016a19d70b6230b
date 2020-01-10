@@ -1,0 +1,74 @@
+I"�.<p>এবার আমরা নিজেদের জন্য ADC লাইব্রেরি নিজেরাই তৈরি করবো। আমাদের নিজেদের লাইব্রেরি তৈরির উদ্দেশ্য হল আমাদের যাতে মাইক্রোকন্ট্রোলার এর আলাদা আলাদা কাজের জন্য একই জিনিস বারবার যেন লেখা না লাগে। একই জিনিস বারবার লেখাটা সত্যই খুব বিরক্তিকর। তো আর কথা না বাড়িয়ে কাজে নেমে যাই কি বল ?</p>
+
+<p>প্রথমে adc.c এবং adc.h নামের দুটি ফাইল তৈরি করি। আমরা দুটি ফাংশন তৈরি করব। একটাতে থাকবে শুধু ADC কে Prescaler ইনপুট দিয়ে Initialize করার জন্য। আরেকটা থাকবে মাইক্রোকন্ট্রোলার এর পিন নাম্বার দিয়ে ADC Value জানার জন্য।</p>
+
+<p>adc.c ফাইলে আমরা ReadADC ফাংশনটা তৈরি করে এভাবে।</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre>
+<span class="kt">uint16_t</span> <span class="nf">ReadADC</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="n">pin</span><span class="p">){</span>
+	<span class="n">ADMUX</span><span class="o">|=</span><span class="n">pin</span><span class="p">;</span>
+	<span class="n">ADCSRA</span><span class="o">|=</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">ADSC</span><span class="p">);</span>
+	<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">ADCSRA</span>  <span class="o">&amp;</span>  <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">ADIF</span><span class="p">)));</span>
+	<span class="n">_delay_ms</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
+	<span class="k">return</span><span class="p">(</span><span class="n">ADCW</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>এখানে ফাংশনটির আর্গুমেন্ট দেয়া হয়েছে মাইক্রোকন্ট্রোলার এর যে পিন দিয়ে ADC Input নিবো তার পিন নম্বর। এখন এই পিন নাম্বারের জন্য ADMUX এর বিটগুলো High করে দেই। কনভার্সন শুরু করি। তারপর কনভার্সন শেষ হওয়া পর্যন্ত অপেক্ষা করি। যেহেতু ADIF কনভার্সন শেষে নিজে নিজেই High হয় যায় তাই আমরা চেক করবো এটি এখনও Low আছে কিনা। Low থাকা অবস্থা পর্যন্ত আমরা এখানেই থামবো তাই এখানে একটি Infinite লুপ তৈরি করা হয়েছে। কনভার্সন শেষে নিজে থেকেই লুপ থেকে বের হয়ে আসবে। কিছুক্ষণ ওয়েট করি যাতে মাইক্রোকন্ট্রোলার এর CPU Overload না হয়ে যায়। সম্পূর্ণ ADC Value টি ADCW দিয়ে রিটার্ন করি।</p>
+
+<p>এখন আসি  <strong>SetupADC()</strong>  ফাংশনে। ফাংশনটিতে মাইক্রোকন্ট্রোলার এর ADC এর ভোল্টেজ রেফারেন্স সেট করি। তারপর বিভিন্ন Prescaler এর জন্য বিভিন্নভাবে ADCSRA সেট করে if কন্ডিশন দিয়ে আলাদা করে দেই। মাইক্রোকন্ট্রোলার এর ADC এনাবল করে দেই। ব্যাস তৈরি হয়ে গেলো আমাদের মাইক্রোকন্ট্রোলার এর জন্য গরম গরম ADC লাইব্রেরি।  <strong>SetupADC()</strong>  ফাংশনের আর্গুমেন্টে আমরা যে Prescaler চাই তা দিলেই সে অনুযায়ী Prescaler সেট হয়ে যাবে।</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td><td class="rouge-code"><pre><span class="kt">void</span>  <span class="nf">SetupADC</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="n">presclr</span><span class="p">){</span>
+	<span class="n">ADMUX</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">REFS0</span><span class="p">);</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">presclr</span><span class="o">==</span><span class="mi">128</span><span class="p">)</span>
+		<span class="n">ADCSRA</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">ADPS2</span><span class="p">)</span><span class="o">|</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">ADPS1</span><span class="p">)</span><span class="o">|</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">ADPS0</span><span class="p">);</span>
+	<span class="k">else</span>  <span class="k">if</span><span class="p">(</span><span class="n">presclr</span><span class="o">==</span><span class="mi">64</span><span class="p">)</span>
+		<span class="n">ADCSRA</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">ADPS2</span><span class="p">)</span><span class="o">|</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">ADPS1</span><span class="p">);</span>
+	<span class="k">else</span>  <span class="k">if</span><span class="p">(</span><span class="n">presclr</span><span class="o">==</span><span class="mi">32</span><span class="p">)</span>
+		<span class="n">ADCSRA</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">ADPS2</span><span class="p">)</span><span class="o">|</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">ADPS0</span><span class="p">);</span>
+	<span class="k">else</span>  <span class="k">if</span><span class="p">(</span><span class="n">presclr</span><span class="o">==</span><span class="mi">16</span><span class="p">)</span>
+		<span class="n">ADCSRA</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">ADPS2</span><span class="p">);</span>
+	<span class="k">else</span>  <span class="k">if</span><span class="p">(</span><span class="n">presclr</span><span class="o">==</span><span class="mi">8</span><span class="p">)</span>
+		<span class="n">ADCSRA</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">ADPS1</span><span class="p">)</span><span class="o">|</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">ADPS0</span><span class="p">);</span>
+	<span class="k">else</span>  <span class="k">if</span><span class="p">(</span><span class="n">presclr</span><span class="o">==</span><span class="mi">4</span><span class="p">)</span>
+		<span class="n">ADCSRA</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">ADPS1</span><span class="p">);</span>
+	<span class="k">else</span>  <span class="k">if</span><span class="p">(</span><span class="n">presclr</span><span class="o">==</span><span class="mi">2</span><span class="p">)</span>
+		<span class="n">ADCSRA</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">ADPS0</span><span class="p">);</span>
+	<span class="k">else</span>
+		<span class="n">ADCSRA</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">ADPS0</span><span class="p">);</span>
+	<span class="n">ADCSRA</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">ADEN</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>শুধু তো আর লাইব্রেরি তৈরি করলেই চলবে না, একে কাজেও লাগাতে হবে। এখন আমরা এই লাইব্রেরি ব্যবহার করে ADC রিডিং নিবো। এখন আমরা মাইক্রোকন্ট্রোলার এর AVCC পিনে 5V এবং AGND পিনকে গ্রাউন্ড করে দেই। এটা করলে মাইক্রোকন্ট্রোলার এর ভেতরের এনালগ কম্প্যারেটর চালু হয়ে যাবে। এখন আমারা কাজের ধরন অনুযায়ী ADC এর বিভিন্ন মোড ঠিক করে নিব। আমরা এখানে “AVCC with external capacitor at AREF pin” এই মোডে কাজ করব। এই মোডে ADC এর রেফারেন্স ভোল্টেজ হল AVCC অর্থাৎ 5V। এই মোডে ADC নিয়ে কাজ করতে হলে মাইক্রোকন্ট্রোলার এর AVCC এবং AREF পিনের মাঝে একটি ক্যাপাসিটর লাগাতে হবে।</p>
+
+<p><a href="https://web.archive.org/web/20150405105824/http://d15tech.com/wp-content/uploads/2015/01/adc-value1.jpg"><img src="https://web.archive.org/web/20150405105824im_/http://d15tech.com/wp-content/uploads/2015/01/adc-value1.jpg" alt="adc-value" /></a></p>
+
+<p>সাধারণত 0.1 mF (104) ক্যাপাসিটর লাগালেই কাজ হয়ে যায়। এখন আমরা যে ADC Channel সিলেক্ট করব সেই পিনে একটি পটেনশিওমিটারের মাঝখানের পিনটি লাগিয়ে দিব। পটেনশিওমিটারের বাকি পিনদুটির একটি VCC এবং অপরটি GND তে লাগিয়ে দিব। এখন ADC Value LCD তে দেখানোর জন্য কিছু কোড লিখে রান করবো। যদি সবকিছু ঠিক থাকে তবে পটেনশিওমিটারের নব ঘুরালে সেই অনুযায়ী ADC Value পরিবর্তন হবে এবং তা LCD তে দেখাবে।</p>
+:ET
