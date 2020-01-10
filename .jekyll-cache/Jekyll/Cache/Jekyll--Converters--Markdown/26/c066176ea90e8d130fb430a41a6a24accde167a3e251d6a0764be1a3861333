@@ -1,0 +1,14 @@
+I"<h1 id="prettydebug">PrettyDebug</h1>
+<p>A lightweight debug library written in <strong>C/C++</strong>. 
+It is designed especially for <strong>embedded systems</strong> keeping in mind the limitation and capabilities of the platform.</p>
+<ul>
+  <li>Low memory usage</li>
+  <li>Supports a wide range of compilers and processor architectures</li>
+  <li>Arduino compatible</li>
+  <li>ESP32 &amp; ESP8266 supported</li>
+  <li>Color debug output</li>
+  <li>Very easy to use</li>
+</ul>
+
+<h2 id="how-to-use">How to use</h2>
+:ET
