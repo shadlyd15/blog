@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Software Engineer | Embedded Software Engineer">
+    <meta name="keywords"  content="Design Pattern, Software Engineering, Embedded Systems, IoT, Linux, C, C++, Algorithm, JavaScript">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Another Blog In The Web">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="Another Blog In The Web">
+    
+    <meta property="og:image" content="http://localhost:4000/blog/img/shadly_sidebar.jpg">
+    <meta property="og:url" content="http://localhost:4000/">
+    <meta property="og:site_name" content="Another Blog In The Web">
+    
+    <title>Another Blog In The Web</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/blog/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/blog/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/blog/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/blog/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/blog/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/blog/">Verbose</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="https://shadlyd15.github.io/" target="_blank">Home</a>
+                    </li>
+<!--                     <li>
+                        <a href="https://github.com/shadlyd15" target="_blank">GitHub</a>
+                    </li>
+                    <li>
+                        <a href="https://linkedin.com/in/shadlyd15" target="_blank">LinkedIn</a>
+                    </li>
+                    <li>
+                        <a href="https://facebook.com/shadlyd15" target="_blank">Facebook</a>
+                    </li>
+                    <li>
+                        <a href="https://instagram.com/shadlyd15" target="_blank">Instagram</a>
+                    </li> -->
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/blog/about/">About</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/blog/archive/">Archive</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/blog/contact/">Contact</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/blog/projects/">Projects</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Page Header -->
+
+
+
+
+
+
+
+<header class="intro-header" style="background-image: url('/blog/img/home-bg.jpg')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        <div class="site-heading">
+        
+          <h1>Verbose</h1>
+          <span class="subheading">Another Blog In The Web</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<!-- Main Content -->
+<div class="container">
+	<div class="row">
+        
+
+<!-- USE SIDEBAR -->
+    <!-- PostList Container -->
+    		<div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                postlist-container
+            ">
+    			
+<div class="post-preview">
+    <a href="/blog/library/javascript/node.js/npm/2019/07/01/pretty_debug_js_library/">
+        <h2 class="post-title">
+            Pretty Debug JS
+        </h2>
+        
+        <h3 class="post-subtitle">
+            A minimal debug library written in JavaScript
+        </h3>
+        
+        <div class="post-content-preview">
+            
+                
+
+
+
+
+
+
+
+
+
+
+Intro
+A highly configurable &amp; lightweight debug library that prints debug messages beautifully. It works in Node.js and Web browser environments with very low memory footprint.
+
+Feat...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Shadly on July 1, 2019
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/blog/library/2019/02/14/Arduinative/">
+        <h2 class="post-title">
+            Arduinative
+        </h2>
+        
+        <h3 class="post-subtitle">
+            A native Arduino core to use your PC as an Arduino
+        </h3>
+        
+        <div class="post-content-preview">
+            
+                Use your PC as an Arduino Board
+Arduinative is an Arduino core to add PC Environment Support in Arduino IDE. This core enables you to build and run Arduino sketches in Native Environment from Ardui...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Shadly on February 14, 2019
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/blog/debug/library/c/c++/2018/05/12/pretty_debug_library/">
+        <h2 class="post-title">
+            Pretty Debug
+        </h2>
+        
+        <h3 class="post-subtitle">
+            A minimal debug library written in C
+        </h3>
+        
+        <div class="post-content-preview">
+            
+                PrettyDebug
+A lightweight debug library written in C/C++. 
+It is designed especially for embedded systems keeping in mind the limitation and capabilities of the platform.
+
+  Low memory usage
+  Supp...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Shadly on May 12, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/blog/library/2018/01/03/AirBootGSM/">
+        <h2 class="post-title">
+            AirBootGSM
+        </h2>
+        
+        <h3 class="post-subtitle">
+            An AVR & Arduino GSM OTA firmware upgrade Bootloader
+        </h3>
+        
+        <div class="post-content-preview">
+            
+                What is AirBootGSM?
+
+This is proof of concept AVR &amp; Arduino bootloader for upgrading firmware over the air using GSM modem. It is kind of fail-safe. If anything wrong happens and the chip does ...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Shadly on January 3, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/blog/library/c/c++/2015/05/25/tiny_test_library/">
+        <h2 class="post-title">
+            Tiny Test
+        </h2>
+        
+        <h3 class="post-subtitle">
+            A minimal unit test library written in C
+        </h3>
+        
+        <div class="post-content-preview">
+            
+                Yet Another Unit Test Library
+
+Tiny Test is a minimal unit test library for C/C++. It is designed especially for embedded systems keeping in mind the limitation and capabilities of the platform. Th...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Shadly on May 25, 2015
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/blog/tutorial/microcontroller/2014/01/07/Interrupt-%E0%A6%8F-%E0%A6%B9%E0%A6%BE%E0%A6%A4%E0%A7%87%E0%A6%96%E0%A7%9C%E0%A6%BF/">
+        <h2 class="post-title">
+            ট্রানজিস্টরের বিকল্প Darlington Driver IC ( ULN2003/ ULN2803 ) ইন্টারফেসিং
+        </h2>
+        
+        <h3 class="post-subtitle">
+            Bangla tutorial series on Microcontroller, retreived from my previous blog d15tech.com. Dated here according to the original published date.
+        </h3>
+        
+        <div class="post-content-preview">
+            
+                যখন আউটপুটের সংখ্যা ২ বা তার বেশি দরকার হবে তখন বারবার ট্রানজিস্টর ব্যবহার না করে ট্রানজিস্টরের বিকল্প Darlington Driver IC ( ULN2003/ ULN2803 ) ব্যবহার করা সহজ। ধরি, আমি দুটি ১২ ভোল্টের মোটর মাইক্...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Shadly on January 7, 2014
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/blog/tutorial/microcontroller/2014/01/07/%E0%A6%B8%E0%A7%87%E0%A6%A8-%E0%A6%B8%E0%A6%B0%E0%A7%87-%E0%A6%B9%E0%A6%BE%E0%A6%A4%E0%A7%87%E0%A6%96%E0%A7%9C%E0%A6%BF/">
+        <h2 class="post-title">
+            সেন্সরে হাতেখড়ি
+        </h2>
+        
+        <h3 class="post-subtitle">
+            Bangla tutorial series on Microcontroller, retreived from my previous blog d15tech.com. Dated here according to the original published date.
+        </h3>
+        
+        <div class="post-content-preview">
+            
+                যা কোনকিছু সেন্স করতে পারে তাই হল সেন্সর। পরিবেশ থেকে নানান জিনিস সেন্স করে বৈদ্যুতিক সিগনালে রূপান্তর করাই এর কাজ। এই তৈরিকৃত সিগনালকে মাইক্রোকন্ট্রোলার দিয়ে Read করে আমদের যন্ত্রকে করে তুলতে পারি...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Shadly on January 7, 2014
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/blog/tutorial/microcontroller/2014/01/07/%E0%A6%AE%E0%A6%BE%E0%A6%87%E0%A6%95-%E0%A6%B0%E0%A7%8B%E0%A6%95%E0%A6%A8-%E0%A6%9F-%E0%A6%B0%E0%A7%8B%E0%A6%B2%E0%A6%BE%E0%A6%B0%E0%A7%87%E0%A6%B0-%E0%A6%B8%E0%A6%BE%E0%A6%A5%E0%A7%87-Alphanumeric-LCD-%E0%A6%87%E0%A6%A8-%E0%A6%9F%E0%A6%BE%E0%A6%B0%E0%A6%AB%E0%A7%87%E0%A6%B8/">
+        <h2 class="post-title">
+            মাইক্রোকন্ট্রোলারের সাথে Alphanumeric LCD ইন্টারফেস
+        </h2>
+        
+        <h3 class="post-subtitle">
+            Bangla tutorial series on Microcontroller, retreived from my previous blog d15tech.com. Dated here according to the original published date.
+        </h3>
+        
+        <div class="post-content-preview">
+            
+                এতক্ষণ আমরা আমদের আউটপুট শুধু LED তেই সীমাবদ্ধ রেখেছি। কিন্তু আর না। এবার আমরা আমাদের আউটপুটকে সরাসরি লেখা আকারে দেখব। এর জন্য যে ডিভাইসটি দরকার হবে তা Alphanumeric LCD। যদিও এর নাম Alphanumeric LC...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Shadly on January 7, 2014
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/blog/tutorial/microcontroller/2014/01/07/%E0%A6%AE%E0%A6%BE%E0%A6%87%E0%A6%95-%E0%A6%B0%E0%A7%8B%E0%A6%95%E0%A6%A8-%E0%A6%9F-%E0%A6%B0%E0%A7%8B%E0%A6%B2%E0%A6%BE%E0%A6%B0%E0%A7%87%E0%A6%B0-%E0%A6%AC%E0%A7%87%E0%A6%B8%E0%A6%BF%E0%A6%95/">
+        <h2 class="post-title">
+            মাইক্রোকন্ট্রোলারের বেসিক
+        </h2>
+        
+        <h3 class="post-subtitle">
+            Bangla tutorial series on Microcontroller, retreived from my previous blog d15tech.com. Dated here according to the original published date.
+        </h3>
+        
+        <div class="post-content-preview">
+            
+                বেসিক Atmega8
+মাইক্রোকন্ট্রোলার প্রোগ্রামিংএ ঢুকার আগে মাইক্রোকন্ট্রোলার সম্পর্কে কিছু বেসিক জিনিস জেনে নেয়া দরকার। প্রথমেই আমরা দেখে নেই মাইক্রোকন্ট্রোলার জিনিসটা দেখতে কেমন।
+
+আমরা খুবই কমন একটি ম...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Shadly on January 7, 2014
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/blog/tutorial/microcontroller/2014/01/07/%E0%A6%AE%E0%A6%BE%E0%A6%87%E0%A6%95-%E0%A6%B0%E0%A7%8B%E0%A6%95%E0%A6%A8-%E0%A6%9F-%E0%A6%B0%E0%A7%8B%E0%A6%B2%E0%A6%BE%E0%A6%B0%E0%A7%87%E0%A6%B0-%E0%A6%9C%E0%A6%A8-%E0%A6%AF-%E0%A6%AA%E0%A6%BE%E0%A6%93%E0%A7%9F%E0%A6%BE%E0%A6%B0-%E0%A6%B8%E0%A6%BE%E0%A6%AA-%E0%A6%B2%E0%A6%BE%E0%A6%87-%E0%A6%A4%E0%A7%88%E0%A6%B0%E0%A6%BF/">
+        <h2 class="post-title">
+            মাইক্রোকন্ট্রোলারের জন্য পাওয়ার সাপ্লাই তৈরি
+        </h2>
+        
+        <h3 class="post-subtitle">
+            Bangla tutorial series on Microcontroller, retreived from my previous blog d15tech.com. Dated here according to the original published date.
+        </h3>
+        
+        <div class="post-content-preview">
+            
+                যেহেতু আমাদের মাইক্রোকন্ট্রোলার ৫ ভোল্টের বেশি নিতে পারে না আবার ৫ ভোল্টের কিছু নিচে হলে আবার ঠিকমত কাজ করে না তাই মাইক্রোকন্ট্রোলারের জন্য চাই একটি সুষ্ঠ ৫ ভোল্টের পাওয়ার সাপ্লাই যা কিনা সবসময় Con...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Shadly on January 7, 2014
+    </p>
+</div>
+<hr>
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+    
+    <li class="next">
+        <a href="/blog/page2">Older Posts &rarr;</a>
+    </li>
+    
+</ul>
+
+
+    		</div>
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-3 col-lg-offset-0
+                col-md-3 col-md-offset-0
+                col-sm-12
+                col-xs-12
+                sidebar-container
+            ">
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+    <h5><a href="/blog/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        </a>
+        
+        
+                <a data-sort="0005" 
+                    href="/blog/archive/?tag=Microcontroller"
+                    title="Microcontroller"
+                    rel="22">Microcontroller</a>
+        
+                <a data-sort="0004" 
+                    href="/blog/archive/?tag=AVR"
+                    title="AVR"
+                    rel="23">AVR</a>
+        
+                <a data-sort="0005" 
+                    href="/blog/archive/?tag=%E0%A6%AC%E0%A6%BE%E0%A6%82%E0%A6%B2%E0%A6%BE"
+                    title="বাংলা"
+                    rel="22">বাংলা</a>
+        
+                <a data-sort="0005" 
+                    href="/blog/archive/?tag=%E0%A6%AE%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%8D%E0%A6%B0%E0%A7%8B%E0%A6%95%E0%A6%A8%E0%A7%8D%E0%A6%9F%E0%A7%8D%E0%A6%B0%E0%A7%8B%E0%A6%B2%E0%A6%BE%E0%A6%B0"
+                    title="মাইক্রোকন্ট্রোলার"
+                    rel="22">মাইক্রোকন্ট্রোলার</a>
+        
+                <a data-sort="0005" 
+                    href="/blog/archive/?tag=Atmega8"
+                    title="Atmega8"
+                    rel="22">Atmega8</a>
+        
+                <a data-sort="0005" 
+                    href="/blog/archive/?tag=Bangla"
+                    title="Bangla"
+                    rel="22">Bangla</a>
+        
+                <a data-sort="0022" 
+                    href="/blog/archive/?tag=Library"
+                    title="Library"
+                    rel="5">Library</a>
+        
+                <a data-sort="0023" 
+                    href="/blog/archive/?tag=Arduino"
+                    title="Arduino"
+                    rel="4">Arduino</a>
+        
+                <a data-sort="0025" 
+                    href="/blog/archive/?tag=C"
+                    title="C"
+                    rel="2">C</a>
+        
+                <a data-sort="0025" 
+                    href="/blog/archive/?tag=C%2B%2B"
+                    title="C++"
+                    rel="2">C++</a>
+        
+                <a data-sort="0025" 
+                    href="/blog/archive/?tag=Debug"
+                    title="Debug"
+                    rel="2">Debug</a>
+        
+                <a data-sort="0025" 
+                    href="/blog/archive/?tag=Embedded+Systems"
+                    title="Embedded Systems"
+                    rel="2">Embedded Systems
+    </div>
+</section>
+
+
+                <!-- Short About -->
+                <section class="visible-md visible-lg">
+  <hr>
+  <h5><a href="/blog/about/">ABOUT ME</a></h5>
+  <div class="short-about">
+    
+    <img src="/blog/img/shadly_sidebar.jpg" />
+    
+    
+    <p>I am ​Shadly Salahuddin​, a software engineer from Bangladesh. Currently pursuing Master's Degree in Coumputer Simulation in Science in Bergische Universität Wuppertal, Germany.</p>
+    
+    <!-- SNS Link -->
+    
+
+
+<ul class="list-inline">
+
+
+<!--    -->
+  
+
+  
+  <li>
+    <a target="_blank" href="https://github.com/shadlyd15">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a target="_blank" href="https://www.linkedin.com/in/shadlyd15">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a target="_blank" href="https://www.facebook.com/shadlyd15">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+
+  
+  <li>
+      <a target="_blank" href="https://www.instagram.com/shadlyd15">
+          <span class="fa-stack fa-lg">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa  fa-instagram fa-stack-1x fa-inverse"></i>
+          </span>
+      </a>
+  </li>
+  
+
+</ul>
+  </div>
+</section>
+
+                <!-- Friends Blog -->
+                
+    		</div>
+        
+	</div>
+</div>
+
+
+
+        <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+<!--    -->
+  
+
+  
+  <li>
+    <a target="_blank" href="https://github.com/shadlyd15">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a target="_blank" href="https://www.linkedin.com/in/shadlyd15">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a target="_blank" href="https://www.facebook.com/shadlyd15">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+
+  
+  <li>
+      <a target="_blank" href="https://www.instagram.com/shadlyd15">
+          <span class="fa-stack fa-lg">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa  fa-instagram fa-stack-1x fa-inverse"></i>
+          </span>
+      </a>
+  </li>
+  
+
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright &copy; Verbose 2020
+                    <!-- <br> -->
+<!--                     Powered by <a href="http://huangxuan.me">Hux Blog</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true" >
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/blog/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/blog/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/blog/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script src="/blog/js/snackbar.js "></script>
+<script src="/blog/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+
+
+<!-- Multi-Lingual -->
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

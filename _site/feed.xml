@@ -1,0 +1,1242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Verbose</title>
+    <description>Software Engineer | Embedded Software Engineer</description>
+    <link>http://localhost:4000/blog/</link>
+    <atom:link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Sat, 11 Jan 2020 08:34:52 +0100</pubDate>
+    <lastBuildDate>Sat, 11 Jan 2020 08:34:52 +0100</lastBuildDate>
+    <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>Pretty Debug JS</title>
+        <description>&lt;!-- &lt;div&gt;&lt;img src =&quot;img/pretty-logo.svg&quot; style='width:25%;' border=&quot;0&quot; alt =&quot;Sample Output&quot;/&gt;&lt;/div&gt; --&gt;
+
+&lt;p&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;https://shadlyd15.github.io/PrettyDebugJS/img/pretty-logo.svg&quot; alt=&quot;logo&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.npmjs.com/package/pretty-debug&quot;&gt;&lt;img src=&quot;https://nodei.co/npm/pretty-debug.png?downloads=true&amp;amp;downloadRank=true&amp;amp;stars=true&quot; alt=&quot;npm package&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;https://forthebadge.com/images/badges/made-with-javascript.svg&quot; alt=&quot;forthebadge&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;https://forthebadge.com/images/badges/powered-by-responsibility.svg&quot; alt=&quot;forthebadge&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;#Intro&quot;&gt;&lt;img src=&quot;https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png&quot; alt=&quot;-----------------------------------------------------&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;intro&quot;&gt;Intro&lt;/h2&gt;
+&lt;p&gt;A &lt;strong&gt;highly configurable &amp;amp; lightweight debug library&lt;/strong&gt; that prints debug messages beautifully. It works in Node.js and Web browser environments with very low memory footprint.&lt;/p&gt;
+
+&lt;h2 id=&quot;features&quot;&gt;Features&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Beautifully colored and formatted output texts&lt;/li&gt;
+  &lt;li&gt;Pretty prints current file name, function and line number&lt;/li&gt;
+  &lt;li&gt;Pretty prints date, time with timezone and formatting&lt;/li&gt;
+  &lt;li&gt;Attach multiple streams and pipe the debug outputs&lt;/li&gt;
+  &lt;li&gt;Compatible with Node.js stream objects&lt;/li&gt;
+  &lt;li&gt;Node process and System process memory monitor&lt;/li&gt;
+  &lt;li&gt;Schedule health check&lt;/li&gt;
+  &lt;li&gt;Alarm on crossing memory usage thresholds&lt;/li&gt;
+  &lt;li&gt;System memory high watermark&lt;/li&gt;
+  &lt;li&gt;Highly configurable&lt;/li&gt;
+  &lt;li&gt;Very low memory footprint&lt;/li&gt;
+  &lt;li&gt;No third party library dependency&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;screenshot&quot;&gt;Screenshot&lt;/h2&gt;
+
+&lt;div&gt;&lt;img src=&quot;https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/gh-pages/img/screenshot.png&quot; style=&quot;width:100%;&quot; border=&quot;0&quot; alt=&quot;Sample Output&quot; /&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;install&quot;&gt;Install&lt;/h2&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;npm &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;pretty-debug
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;usage&quot;&gt;Usage&lt;/h2&gt;
+
+&lt;p&gt;Pretty Debug exposes a debug object. Just attach any stream you want to the module to pipe debug messages. process.stdout is the default steam which prints output to console. Any other streams like TCP socket or request to an HTTP server can be attached on runtime to pipe the debug output.&lt;/p&gt;
+
+&lt;h2 id=&quot;api-documentation&quot;&gt;API Documentation&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html&quot;&gt;pretty-debug&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.color&quot;&gt;.color&lt;/a&gt; : &lt;code&gt;Object.&amp;lt;string&amp;gt;&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.setOptions&quot;&gt;.setOptions(userOptions)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.generatePolicy&quot;&gt;.generatePolicy(lowerLimit, upperLimit)&lt;/a&gt; ⇒ &lt;code&gt;Object.&amp;lt;policy&amp;gt;&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.attachStream&quot;&gt;.attachStream(stream)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.detachStream&quot;&gt;.detachStream(stream)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.log&quot;&gt;.log(…var_args)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.info&quot;&gt;.info(…var_args)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.alert&quot;&gt;.alert(…var_args)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.warn&quot;&gt;.warn(…var_args)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.error&quot;&gt;.error(…var_args)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.critical&quot;&gt;.critical(…var_args)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.nodeMemoryMonitor&quot;&gt;.nodeMemoryMonitor(stream, callback)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.sysMemoryMonitor&quot;&gt;.sysMemoryMonitor(alarmPolicy, callback)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.memoryWatermark&quot;&gt;.memoryWatermark()&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.scheduleHealthCheck&quot;&gt;.scheduleHealthCheck(inputFunc, timeInMinutes)&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For detail information, please see &lt;a href=&quot;https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html&quot;&gt;API Documentation.&lt;/a&gt;&lt;/p&gt;
+
+&lt;!-- 
+### Show/Hide Section
+
+### Change Section Color
+Let's say we want to change the color of **Timestamp** to Green and hide the File Name section. 
+ --&gt;
+
+&lt;h2 id=&quot;basic-usage&quot;&gt;Basic usage&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Create debug instance :&lt;/strong&gt;
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;pretty-debug&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Set options :&lt;/strong&gt;
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;  &lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setOptions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt; 
+          &lt;span class=&quot;na&quot;&gt;enable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;		&lt;span class=&quot;c1&quot;&gt;// Turning on debug print&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;enableColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;	&lt;span class=&quot;c1&quot;&gt;// Enabling color output&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;enableGC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;		&lt;span class=&quot;c1&quot;&gt;// Enabling autometic gerbage collection&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;debugLevel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 		&lt;span class=&quot;c1&quot;&gt;// Setting debug level 6 (Upto INFO)&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;  
+  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Attach stream :&lt;/strong&gt;
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;  &lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;attachStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; 	&lt;span class=&quot;c1&quot;&gt;// Attaching new stream to serve debug messages&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Detach stream :&lt;/strong&gt;
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;  &lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;detachStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; 	&lt;span class=&quot;c1&quot;&gt;// Detaching stream&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Print in different debug levels :&lt;/strong&gt;
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;  &lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;The quick brown fox jumps over the lazy dog&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;The quick brown fox jumps over the lazy dog&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;The quick brown fox jumps over the lazy dog&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;warn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;The quick brown fox jumps over the lazy dog&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;The quick brown fox jumps over the lazy dog&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;critical&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;The quick brown fox jumps over the lazy dog&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Show highest RAM usage :&lt;/strong&gt;
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;  &lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;memoryWatermark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;	&lt;span class=&quot;c1&quot;&gt;// Shows highest RAM usage in MB.&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Show memory used by OS :&lt;/strong&gt;
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;  &lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sysMemoryMonitor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;	&lt;span class=&quot;c1&quot;&gt;// Shows memory information of operating system&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Show memory used by Node.js :&lt;/strong&gt;
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;  &lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;nodeMemoryMonitor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(();&lt;/span&gt;	&lt;span class=&quot;c1&quot;&gt;// Shows memory information of Node.js system&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Set alarm policy for RAM usage :&lt;/strong&gt;
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;  &lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;nodeMemoryMonitor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;heapTotal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;upperLimit&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Trigger alarm when heap usage is greater than 5 MB&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;critical&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Memory Usage Alarm : Total heap usage is above 5 MB&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;// Do other things like send email!&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;example&quot;&gt;Example&lt;/h2&gt;
+&lt;p&gt;In this example a debug instance is created. For multiple stream demonstration, a TCP server is created. TCP socket is attached to the debug module. So when a client connects to that TCP server, color debug output will be shown on the client console. Health check scheduler is also demonstrated in this example.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;net&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;net&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;pretty-debug&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;PORT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6969&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;HOST&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;0.0.0.0&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setOptions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+	&lt;span class=&quot;na&quot;&gt;nodeMemoryMonitor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:{&lt;/span&gt;
+		&lt;span class=&quot;na&quot;&gt;fields&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;na&quot;&gt;rss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+			&lt;span class=&quot;na&quot;&gt;external&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;
+		&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Hello Pretty World&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;scheduleHealthCheck&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+	&lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;memoryWatermark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+	&lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sysMemoryMonitor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+	&lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;nodeMemoryMonitor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+			&lt;span class=&quot;na&quot;&gt;heapTotal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;upperLimit&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+		&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+			&lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;critical&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Memory Usage Alarm : Total heap usage is above 5 MB&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+			&lt;span class=&quot;c1&quot;&gt;// Do other things like send email!&lt;/span&gt;
+		&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;02&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;net&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createServer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+	&lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;attachStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;nx&quot;&gt;sock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;detachStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt; 
+&lt;span class=&quot;p&quot;&gt;}).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;listen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;PORT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;HOST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;generateRandomLog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+	&lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;The quick brown fox jumps over the lazy dog&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;The quick brown fox jumps over the lazy dog&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;The quick brown fox jumps over the lazy dog&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;warn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;The quick brown fox jumps over the lazy dog&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;The quick brown fox jumps over the lazy dog&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;critical&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;The quick brown fox jumps over the lazy dog&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;setInterval&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+	&lt;span class=&quot;nx&quot;&gt;generateRandomLog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;678&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;run-example&quot;&gt;Run Example&lt;/h2&gt;
+&lt;p&gt;To run the example above, simply put this command and press Enter!&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;node Examples/example.js
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;sample-output&quot;&gt;Sample Output&lt;/h2&gt;
+&lt;div&gt;&lt;img src=&quot;https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/gh-pages/img/screenshot.png&quot; style=&quot;width:100%;&quot; border=&quot;0&quot; alt=&quot;Sample Output&quot; /&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;tutorials&quot;&gt;Tutorials&lt;/h2&gt;
+&lt;p&gt;All the tutorials and examples can be found in the link below :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://shadlyd15.github.io/PrettyDebugJS/tutorial-0.%20How%20To%20Use.html&quot;&gt;How To Use&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://shadlyd15.github.io/PrettyDebugJS/tutorial-1.%20Basics.html&quot;&gt;Basics&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://shadlyd15.github.io/PrettyDebugJS/tutorial-2.%20Memory%20Monitor.html&quot;&gt;Memory Monitor&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://shadlyd15.github.io/PrettyDebugJS/tutorial-3.%20Shedule%20Healthcheck.html&quot;&gt;Shedule Healthcheck&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://shadlyd15.github.io/PrettyDebugJS/tutorial-4.%20Set%20Alarm.html&quot;&gt;Set Alarm&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://shadlyd15.github.io/PrettyDebugJS/tutorial-5.%20Set%20Options.html&quot;&gt;Set Options&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://shadlyd15.github.io/PrettyDebugJS/tutorial-6.%20Attach%20Multiple%20Stream.html&quot;&gt;Attach Multiple Stream&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://shadlyd15.github.io/PrettyDebugJS/tutorial-8.%20Send%20Email%20On%20Alarm.html&quot;&gt;Send Email On Alarm&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://shadlyd15.github.io/PrettyDebugJS/tutorial-7.%20Summary.html&quot;&gt;Summary&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;customization&quot;&gt;Customization&lt;/h2&gt;
+&lt;p&gt;As it was mentioned earlier, this library is highly configurable.
+For more details, please see &lt;a href=&quot;https://shadlyd15.github.io/PrettyDebugJS/module-defaultOptions.html&quot;&gt;Default Options.&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;contributing&quot;&gt;Contributing&lt;/h2&gt;
+&lt;p&gt;If you are interested in requesting a feature, fixing issues and contributing directly to the code base, please do not hesitate.&lt;/p&gt;
+
+&lt;h2 id=&quot;license&quot;&gt;License&lt;/h2&gt;
+&lt;p&gt;Licensed under the &lt;a href=&quot;LICENSE&quot;&gt;MIT&lt;/a&gt; License.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 01 Jul 2019 00:00:00 +0200</pubDate>
+        <link>http://localhost:4000/blog/library/javascript/node.js/npm/2019/07/01/pretty_debug_js_library/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/library/javascript/node.js/npm/2019/07/01/pretty_debug_js_library/</guid>
+        
+        <category>Debug</category>
+        
+        <category>Library</category>
+        
+        <category>JavaScript</category>
+        
+        <category>Node.js</category>
+        
+        <category>NPM</category>
+        
+        
+        <category>Library</category>
+        
+        <category>JavaScript</category>
+        
+        <category>Node.js</category>
+        
+        <category>NPM</category>
+        
+      </item>
+    
+      <item>
+        <title>Arduinative</title>
+        <description>&lt;h2 id=&quot;use-your-pc-as-an-arduino-board&quot;&gt;Use your PC as an Arduino Board&lt;/h2&gt;
+&lt;p&gt;Arduinative is an Arduino core to add PC Environment Support in Arduino IDE. This core enables you to build and run Arduino sketches in Native Environment from Arduino IDE. This core was built to compile and run unit tests for arduino in PC environment.&lt;/p&gt;
+
+&lt;h2 id=&quot;features&quot;&gt;Features&lt;/h2&gt;
+
+&lt;ul class=&quot;task-list&quot;&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; checked=&quot;checked&quot; /&gt;Compile &amp;amp; Run Arduino Sketches in PC&lt;/li&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; checked=&quot;checked&quot; /&gt;Supports millis()&lt;/li&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; checked=&quot;checked&quot; /&gt;Supports TinyGSM library&lt;/li&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; checked=&quot;checked&quot; /&gt;Use FTDI as Arduino Serial Interface&lt;/li&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;Implement LibMPSSE-I2C to use FTDI as I2C device&lt;/li&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;Use flow control to use DTR/RTS as GPIO&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;dependencies&quot;&gt;Dependencies&lt;/h2&gt;
+&lt;p&gt;C++ Boost library is required to use FTDI as Serial. Use the following command to install Boost library.&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get update
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;libboost-all-dev
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;install-arduinative&quot;&gt;Install Arduinative&lt;/h2&gt;
+&lt;p&gt;Download the repository from &lt;a href=&quot;https://github.com/shadlyd15/Arduinative/archive/master.zip&quot;&gt; here &lt;/a&gt; or clone using the command below&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;git clone https://github.com/shadlyd15/Arduinative.git
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Now, just simply create a folder named “hardware” in your arduino sketchbook folder. Copy the Arduino directory here.&lt;/p&gt;
+
+&lt;p&gt;Now select Arduinative from &lt;strong&gt;Tools &amp;gt; Board &amp;gt; Arduinative&lt;/strong&gt;
+Select FTDI serial port if you want to use Serial.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 14 Feb 2019 00:00:00 +0100</pubDate>
+        <link>http://localhost:4000/blog/library/2019/02/14/Arduinative/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/library/2019/02/14/Arduinative/</guid>
+        
+        <category>Core</category>
+        
+        <category>Library</category>
+        
+        <category>Arduino</category>
+        
+        <category>Native</category>
+        
+        <category>Board</category>
+        
+        
+        <category>Library</category>
+        
+      </item>
+    
+      <item>
+        <title>Pretty Debug</title>
+        <description>&lt;h1 id=&quot;prettydebug&quot;&gt;PrettyDebug&lt;/h1&gt;
+&lt;p&gt;A lightweight debug library written in &lt;strong&gt;C/C++&lt;/strong&gt;. 
+It is designed especially for &lt;strong&gt;embedded systems&lt;/strong&gt; keeping in mind the limitation and capabilities of the platform.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Low memory usage&lt;/li&gt;
+  &lt;li&gt;Supports a wide range of compilers and processor architectures&lt;/li&gt;
+  &lt;li&gt;Arduino compatible&lt;/li&gt;
+  &lt;li&gt;ESP32 &amp;amp; ESP8266 supported&lt;/li&gt;
+  &lt;li&gt;Color debug output&lt;/li&gt;
+  &lt;li&gt;Very easy to use&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;how-to-use&quot;&gt;How to use&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Attach Debug Stream :&lt;/strong&gt;
+    &lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;ATTACH_DEBUG_STREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Print Green OK Message :&lt;/strong&gt;
+    &lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;DEBUG_OK&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;An Example OK Message From %s, &quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PrettyDebug&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;);&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Print Red ERROR Message :&lt;/strong&gt;
+    &lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;DEBUG_ERROR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;An Example ERROR Message From %s, &quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PrettyDebug&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;);&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Print Red ERROR Message :&lt;/strong&gt;
+    &lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;DEBUG_ERROR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;An Example ERROR Message From %s, &quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PrettyDebug&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;);&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Print Cyan ALERT Message :&lt;/strong&gt;
+    &lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;DEBUG_ALERT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;An Example ALERT Message From %s, &quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PrettyDebug&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;);&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Print Yellow WARNING Message :&lt;/strong&gt;
+    &lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;DEBUG_WARNING&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;An Example WARNING Message From %s, &quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PrettyDebug&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;);&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Print Variable with Variable Name :&lt;/strong&gt;
+    &lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;DEBUG_VARIABLE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;%d&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sample_Value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Print Array with Name :&lt;/strong&gt;
+    &lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;DEBUG_ARRAY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Sample_Array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;%02X&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Print Current Location in Code :&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;  &lt;span class=&quot;n&quot;&gt;DEBUG_TRACE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;arduino-example&quot;&gt;Arduino Example&lt;/h2&gt;
+
+&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;  &lt;span class=&quot;cp&quot;&gt;#include &quot;PrettyDebug.h&quot;
+&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sample_Variable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;123&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sample_Array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+  &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;115200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;ATTACH_DEBUG_STREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+      &lt;span class=&quot;n&quot;&gt;DEBUG_OK&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Pretty Debug Example Sketch&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;DEBUG_TRACE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+      &lt;span class=&quot;n&quot;&gt;DEBUG_OK&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;An Example OK Message From %s, &quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PrettyDebug&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;);&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;      DEBUG_ERROR(&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;An&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Example&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ERROR&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Message&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;From&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;PrettyDebug&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;DEBUG_ERROR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;An Example ERROR Message From %s, &quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PrettyDebug&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;);&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;      DEBUG_ALERT(&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;An&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Example&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ALERT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Message&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;From&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;PrettyDebug&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;DEBUG_WARNING&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;An Example WARNING Message From %s, &quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PrettyDebug&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;);&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;      DEBUG_VALUE(Sample_Value, &quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;);&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;      DEBUG_ARRAY(Sample_Array, 16, &quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;02&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;);&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;  }&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;  void loop(){&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;  }&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;sample-output&quot;&gt;Sample Output&lt;/h2&gt;
+
+&lt;div style=&quot;text-align:center&quot;&gt;&lt;img src=&quot;https://raw.githubusercontent.com/shadlyd15/prettydebug/master/images/output.png&quot; alt=&quot;Sample Output&quot; /&gt;&lt;/div&gt;
+
+</description>
+        <pubDate>Sat, 12 May 2018 00:00:00 +0200</pubDate>
+        <link>http://localhost:4000/blog/debug/library/c/c++/2018/05/12/pretty_debug_library/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/debug/library/c/c++/2018/05/12/pretty_debug_library/</guid>
+        
+        <category>Debug</category>
+        
+        <category>Library</category>
+        
+        <category>Embedded Systems</category>
+        
+        <category>C</category>
+        
+        <category>C++</category>
+        
+        <category>Arduino</category>
+        
+        
+        <category>Debug</category>
+        
+        <category>Library</category>
+        
+        <category>C</category>
+        
+        <category>C++</category>
+        
+      </item>
+    
+      <item>
+        <title>AirBootGSM</title>
+        <description>&lt;h2 id=&quot;what-is-airbootgsm&quot;&gt;What is AirBootGSM?&lt;/h2&gt;
+
+&lt;p&gt;This is proof of concept AVR &amp;amp; Arduino bootloader for upgrading firmware over the air using GSM modem. It is kind of fail-safe. If anything wrong happens and the chip does not boot after the firmware upgrade, the bootloader automatically retries to download and reinstall new firmware. AirBootGSM is based on highly optimized &lt;a href=&quot;https://github.com/Optiboot/optiboot&quot;&gt;Optiboot Bootloader.&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;setup-toolchain-to-compile-&quot;&gt;Setup Toolchain to Compile :&lt;/h2&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get update
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;binutils gcc-avr avr-libc uisp avrdude flex byacc bison
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;compile-&quot;&gt;Compile :&lt;/h2&gt;
+&lt;p&gt;Run build.sh&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;./build.sh
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Or select your traget mcu and run the following commands.&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Select Your Target MCU&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;TARGET_SPEED&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;8MHz&quot;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# TARGET_SPEED=&quot;16MHZ&quot;&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;TARGET_MCU&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;atmega16&quot;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# TARGET_MCU=&quot;atmega168&quot;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# TARGET_MCU=&quot;atmega328p&quot;  #TESTED&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# TARGET_MCU=&quot;atmega1284p&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;TARGET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$TARGET_MCU&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;_&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$TARGET_SPEED&lt;/span&gt;
+
+make clean
+make &lt;span class=&quot;nv&quot;&gt;$TARGET&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;to-pragram-&quot;&gt;To Pragram :&lt;/h2&gt;
+&lt;p&gt;Run build.sh&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;./build.sh
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Or select your programmer and run the following commands.&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;PROGRAMMER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;usbasp&quot;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# PROGRAMMER=&quot;arduino&quot;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# PROGRAMMER=&quot;avrisp&quot;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# PROGRAMMER=&quot;avrispmkII&quot;&lt;/span&gt;
+avrdude &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$PROGRAMMER&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$TARGET_MCU&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-U&lt;/span&gt; flash:w:&lt;span class=&quot;s2&quot;&gt;&quot;AirBootGSM&quot;&lt;/span&gt;_&lt;span class=&quot;nv&quot;&gt;$TARGET&lt;/span&gt;.hex
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;how-to-use&quot;&gt;How To Use&lt;/h2&gt;
+&lt;p&gt;To use the OTA firmware upgrade capabilities from application layer, you can use the provided Arduino library. The library contains a simple example to demonstrate OTA firmware upgrade from application layer. It triggers OTA firmware upgrade if it gets input string “OTA” the from Serial.&lt;/p&gt;
+
+&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;cp&quot;&gt;#include &quot;AirBootGSMLib.h&quot;
+&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;start_ota&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;eeprom_write_byte&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;OTA_INIT_SIG_ADDR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;wdt_enable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WDTO_15MS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;stop_ota&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eeprom_read_byte&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;OTA_INIT_SIG_ADDR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eeprom_read_byte&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;OTA_STAUS_ADDR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OTA_COMPLETED&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Firmware Upgraded&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Firmware Upgrade Failed&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;eeprom_write_byte&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;OTA_INIT_SIG_ADDR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0xFF&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// the setup function runs once when you press reset or power the board&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;pinMode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LED_BUILTIN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OUTPUT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;115200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\r\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;-- Application Starts --&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;stop_ota&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;memset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;buff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x00&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// the loop function runs over and over again forever&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;loop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+ &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Loop Starts&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+ &lt;span class=&quot;n&quot;&gt;digitalWrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LED_BUILTIN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HIGH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+ &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;                       &lt;span class=&quot;c1&quot;&gt;// wait for a second&lt;/span&gt;
+ &lt;span class=&quot;n&quot;&gt;digitalWrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LED_BUILTIN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LOW&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+ &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;                       &lt;span class=&quot;c1&quot;&gt;// wait for a second&lt;/span&gt;
+ &lt;span class=&quot;n&quot;&gt;digitalWrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LED_BUILTIN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HIGH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+ &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;                       &lt;span class=&quot;c1&quot;&gt;// wait for a second&lt;/span&gt;
+ &lt;span class=&quot;n&quot;&gt;digitalWrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LED_BUILTIN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LOW&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+ &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;                       &lt;span class=&quot;c1&quot;&gt;// wait for a second&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;available&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()){&lt;/span&gt;
+      &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;buff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strstr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;buff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;OTA&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)){&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Starting OTA .....&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\r\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;start_ota&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;limitations-&quot;&gt;Limitations :&lt;/h2&gt;
+&lt;p&gt;Currently it only supports Neoway GSM modems that support Transparet TCP mode. To keep compiled binary as small as possible to fit with a few KBs, readability of the code is greatly hampared. Still any other modems can easily be adopted.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 03 Jan 2018 00:00:00 +0100</pubDate>
+        <link>http://localhost:4000/blog/library/2018/01/03/AirBootGSM/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/library/2018/01/03/AirBootGSM/</guid>
+        
+        <category>Bootloader</category>
+        
+        <category>Library</category>
+        
+        <category>AVR</category>
+        
+        <category>Arduino</category>
+        
+        <category>GSM</category>
+        
+        <category>Neoway</category>
+        
+        <category>OTA</category>
+        
+        
+        <category>Library</category>
+        
+      </item>
+    
+      <item>
+        <title>Tiny Test</title>
+        <description>&lt;h3 id=&quot;yet-another-unit-test-library&quot;&gt;Yet Another Unit Test Library&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Tiny Test&lt;/strong&gt; is a minimal unit test library for &lt;strong&gt;C/C++&lt;/strong&gt;. It is designed especially for &lt;strong&gt;embedded systems&lt;/strong&gt; keeping in mind the limitation and capabilities of the platform. This library also supports &lt;strong&gt;Arduino&lt;/strong&gt; environment.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Low memory usage&lt;/li&gt;
+  &lt;li&gt;Supports a wide range of compilers and processor architectures&lt;/li&gt;
+  &lt;li&gt;Arduino compatible&lt;/li&gt;
+  &lt;li&gt;Color debug output&lt;/li&gt;
+  &lt;li&gt;Very easy to use&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;how-to-use&quot;&gt;How to use&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Add Test and Assert Result :&lt;/strong&gt;
+    &lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;  &lt;span class=&quot;n&quot;&gt;ADD_TINY_TEST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test_0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;ASSERT_TEST_RESULT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Run Test :&lt;/strong&gt;
+    &lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;  &lt;span class=&quot;n&quot;&gt;RUN_TINY_TEST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test_0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Add Test Suit :&lt;/strong&gt;
+    &lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;  &lt;span class=&quot;n&quot;&gt;ADD_TEST_SUITE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test_suit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;RUN_TINY_TEST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test_0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Run Test Suit :&lt;/strong&gt;
+    &lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;  &lt;span class=&quot;n&quot;&gt;RUN_TEST_SUITE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test_suit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Generate Test Report :&lt;/strong&gt;
+    &lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;  &lt;span class=&quot;n&quot;&gt;TINY_TEST_REPORT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;arduino-example&quot;&gt;Arduino Example&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Example code for Arduino :&lt;/strong&gt;
+    &lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;  &lt;span class=&quot;cp&quot;&gt;#include &quot;tinytest.h&quot;
+&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;ADD_TINY_TEST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test_0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ASSERT_TEST_RESULT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;ADD_TINY_TEST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test_1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ASSERT_TEST_RESULT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;ADD_TINY_TEST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test_2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ASSERT_TEST_RESULT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;ADD_TEST_SUITE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test_suit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;RUN_TINY_TEST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test_0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;RUN_TINY_TEST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test_1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;RUN_TINY_TEST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test_2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;popup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strncmp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Y&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strlen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Y&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))){&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;DEBUG_DIVIDER&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TEST_DIVIDER_LENGTH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;DEBUG_OK&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Tiny Test Starting&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;  
+      &lt;span class=&quot;n&quot;&gt;RUN_TEST_SUITE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test_suit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;TINY_TEST_REPORT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;DEBUG_INPUT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Press Enter To Exit&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;SET_CLOCK_SOURCE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;millis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ARDUINO_ONLY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;115200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ATTACH_DEBUG_STREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;DEBUG_DIVIDER&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TEST_DIVIDER_LENGTH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;DEBUG_INPUT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;popup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Run Test? (Y/N)&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;DEBUG_OK&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Going To Loop&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;loop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;// Do whatever you want&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;sample-output&quot;&gt;Sample Output&lt;/h3&gt;
+
+&lt;div style=&quot;text-align:center&quot;&gt;&lt;img src=&quot;https://raw.githubusercontent.com/shadlyd15/tinytest/master/images/output.png&quot; alt=&quot;Sample Output&quot; /&gt;&lt;/div&gt;
+</description>
+        <pubDate>Mon, 25 May 2015 00:00:00 +0200</pubDate>
+        <link>http://localhost:4000/blog/library/c/c++/2015/05/25/tiny_test_library/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/library/c/c++/2015/05/25/tiny_test_library/</guid>
+        
+        <category>Unit Test</category>
+        
+        <category>Library</category>
+        
+        <category>Embedded Systems</category>
+        
+        <category>C</category>
+        
+        <category>C++</category>
+        
+        <category>Arduino</category>
+        
+        
+        <category>Library</category>
+        
+        <category>C</category>
+        
+        <category>C++</category>
+        
+      </item>
+    
+      <item>
+        <title>ট্রানজিস্টরের বিকল্প Darlington Driver IC ( ULN2003/ ULN2803 ) ইন্টারফেসিং</title>
+        <description>&lt;p&gt;যখন আউটপুটের সংখ্যা ২ বা তার বেশি দরকার হবে তখন বারবার ট্রানজিস্টর ব্যবহার না করে ট্রানজিস্টরের বিকল্প Darlington Driver IC ( ULN2003/ ULN2803 ) ব্যবহার করা সহজ। ধরি, আমি দুটি ১২ ভোল্টের মোটর মাইক্রোকন্ট্রোলার দিয়ে চালাতে চাই। তাহলে আমাদের নিচের মত করে সংযোগ দিলেই হবে।&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://web.archive.org/web/20150404182419/http://d15tech.com/wp-content/uploads/2015/01/uln2003.png&quot;&gt;&lt;img src=&quot;https://web.archive.org/web/20150404182419im_/http://d15tech.com/wp-content/uploads/2015/01/uln2003.png&quot; alt=&quot;ULN2003 Interfacing&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;ULN2003 Interfacing&lt;/p&gt;
+
+&lt;p&gt;অপেক্ষাকৃত বেশি কারেন্ট প্রবাহ দরকার হলে একে নিচের মত করে সংযোগ দেয়া যেতে পারে। Darlington Driver IC ( ULN2003/ ULN2803 ) এর ভেতরেই Back EMF প্রোটেকশনের জন্য ডায়োড দেয়া আছে। তাই এতে আলাদাভাবে বাইরে ডায়োড লাগাতে হয় না। ULN2003 এবং ULN2803 এর গঠনগত পার্থক্য হল ULN2003 এ ৭টি এবং ULN2803 এ ৮টি ইনপুট নেয়া যায়।&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://web.archive.org/web/20150404182419/http://d15tech.com/wp-content/uploads/2015/01/uln2803.png&quot;&gt;&lt;img src=&quot;https://web.archive.org/web/20150404182419im_/http://d15tech.com/wp-content/uploads/2015/01/uln2803.png&quot; alt=&quot;ULN2803 Interfacing&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;ULN2803 Interfacing&lt;/p&gt;
+
+&lt;p&gt;তাছাড়া এদের বাকিসব কার্যাবলী একই রকমের। এই IC দিয়ে মোটর ছাড়া আরও অন্যান্য ভারী জিনিস যেমন রিলে কিংবা সলিনয়েড সুইচ ও ইন্টারফেস করা সম্ভব।&lt;/p&gt;
+</description>
+        <pubDate>Tue, 07 Jan 2014 00:00:00 +0100</pubDate>
+        <link>http://localhost:4000/blog/tutorial/microcontroller/2014/01/07/Interrupt-%E0%A6%8F-%E0%A6%B9%E0%A6%BE%E0%A6%A4%E0%A7%87%E0%A6%96%E0%A7%9C%E0%A6%BF/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/tutorial/microcontroller/2014/01/07/Interrupt-%E0%A6%8F-%E0%A6%B9%E0%A6%BE%E0%A6%A4%E0%A7%87%E0%A6%96%E0%A7%9C%E0%A6%BF/</guid>
+        
+        <category>Microcontroller</category>
+        
+        <category>মাইক্রোকন্ট্রোলার</category>
+        
+        <category>Atmega8</category>
+        
+        <category>Bangla</category>
+        
+        <category>AVR</category>
+        
+        <category>বাংলা</category>
+        
+        
+        <category>Tutorial</category>
+        
+        <category>Microcontroller</category>
+        
+      </item>
+    
+      <item>
+        <title>সেন্সরে হাতেখড়ি</title>
+        <description>&lt;p&gt;যা কোনকিছু সেন্স করতে পারে তাই হল সেন্সর। পরিবেশ থেকে নানান জিনিস সেন্স করে বৈদ্যুতিক সিগনালে রূপান্তর করাই এর কাজ। এই তৈরিকৃত সিগনালকে মাইক্রোকন্ট্রোলার দিয়ে Read করে আমদের যন্ত্রকে করে তুলতে পারি বিশেষ সংবেদনশীল। এই সংবেদনশীলতা কাজে লাগিয়ে তৈরি করা সম্ভব নানান ধরণের আধুনিক রোবট। তাহলে এসো এক ঝলকে দেখে নেয়া যাক বিভিন্ন ধরণের সেন্সর ও তার কাজ।&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;টেম্পারেচার সেন্সর&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;নামেই বোঝা যাচ্ছে এই সেন্সরের কাজ কি। হ্যাঁ, এই সেন্সর তাপমাত্রা মাপতে পারে। এদেশের বাজারে বিদ্যমান টেম্পারেচার সেন্সরগুলোর মধ্যে LM35 এবং Thermistor সবচেয়ে কমন। এগুলো দামে সস্তা এবং মোটামুটি ভালোই কাজে দেয়। এই দুটি সেন্সরের মধ্যে LM35 সেন্সরটি অপেক্ষাকৃত বেশি গ্রহণযোগ্য কারণ এটি Thermistor এর চেয়ে বেশি Accurate রেজাল্ট দেয়।&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://web.archive.org/web/20150404195112/http://d15tech.com/wp-content/uploads/2015/01/inrush-current-limiting-power-thermistor-lg.jpg&quot;&gt;&lt;img src=&quot;https://web.archive.org/web/20150404195112im_/http://d15tech.com/wp-content/uploads/2015/01/inrush-current-limiting-power-thermistor-lg.jpg&quot; alt=&quot;Thermistor&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Thermistor&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://web.archive.org/web/20150404195112/http://d15tech.com/wp-content/uploads/2015/01/LM35-Temperature-Sensor-Pinout1.png&quot;&gt;&lt;img src=&quot;https://web.archive.org/web/20150404195112im_/http://d15tech.com/wp-content/uploads/2015/01/LM35-Temperature-Sensor-Pinout1.png&quot; alt=&quot;LM35 - Temperature Sensor Pinout.png&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;LM35 – Temperature Sensor Pinout.png&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;লাইট সেন্সর&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;এই সেন্সর লাইটের তীব্রতা অনুযায়ী এর আউটপুট পরিবর্তন করে লাইটের তীব্রতা জানান দেয়। বিভিন্ন ধরণের লাইট সেন্সরের মধ্যে LDR সবচেয়ে পরিচিত। LDR এর অর্থ হল Light Dependent Resistor। এই ধরণের রেসিস্টারের রেসিস্টেন্স আলোর তীব্রতার উপর নির্ভর করে।&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://web.archive.org/web/20150404195112/http://d15tech.com/wp-content/uploads/2015/01/light_dependent_resistor_ldr.jpg&quot;&gt;&lt;img src=&quot;https://web.archive.org/web/20150404195112im_/http://d15tech.com/wp-content/uploads/2015/01/light_dependent_resistor_ldr.jpg&quot; alt=&quot;Light Dependent Resistor&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Light Dependent Resistor&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;হিউমিডিটি সেন্সর&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;এই সেন্সরের কাজ হল আদ্রতার পরিমাণ নির্ণয় করা। আদ্রতার পরিবর্তনের সাথে সাথে এর রেসিস্টেন্সের মান পরিবর্তন হয়। বাতাস কিংবা মাটির আদ্রতা এই ধরণের সেন্সর দিয়ে সহজেই মাপা যায়। তবে কাজ ভেদে সেন্সরের আকার আকৃতির ভিন্নতা রয়েছে। বাজারে টেম্পারেচার ও হিউমিডিটি সেন্সর একত্রে মডিউল আকারে পাওয়া যায়। নিচের জিনিসটি এরকমই একটি মডিউল।&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://web.archive.org/web/20150404195112/http://d15tech.com/wp-content/uploads/2015/01/dfrobot-dht11-temperature-and-humidity-sensor-a.jpg&quot;&gt;&lt;img src=&quot;https://web.archive.org/web/20150404195112im_/http://d15tech.com/wp-content/uploads/2015/01/dfrobot-dht11-temperature-and-humidity-sensor-a.jpg&quot; alt=&quot;Temperature and Humidity Sensor Module&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Temperature and Humidity Sensor Module&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;IR Sensor&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;এই সেন্সর অবলোহিত বা ইনফ্রারেড রশ্মির পরিমাণ নির্ণয় করতে পারে। বাজারে সাধারণত দুই রকমের IR Sensor পাওয়া যায়। একটা কালো বর্ণের আরেকটা সাদা বর্ণের। কালো বর্ণের IR Sensor এর রোধে সাধারণ আলোর প্রভাব পরে না। এর কালো শরীরে দৃশ্যমান আলো শোষিত হয়ে যায়। তবে সাদা সেন্সরে সাধারণ আলোর প্রভাব যথেষ্ট পরিমাণ বেশি। আর তাই সাদা সেন্সর অবশ্যই এড়িয়ে চলা উচিত।&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://web.archive.org/web/20150404195112/http://d15tech.com/wp-content/uploads/2015/01/KGrHqIOKpkE26L3RhNqBNvTlP2wVg_35.jpg&quot;&gt;&lt;img src=&quot;https://web.archive.org/web/20150404195112im_/http://d15tech.com/wp-content/uploads/2015/01/KGrHqIOKpkE26L3RhNqBNvTlP2wVg_35.jpg&quot; alt=&quot;IR Sensor&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;IR Sensor&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Sonar Sensor&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;এটি শব্দোত্তর শব্দ তরঙ্গ সেন্স করার জন্য তৈরি সেন্সর। এই ধরণের সেন্সর দিয়ে শব্দোত্তর শব্দ তরঙ্গের প্রতিফলনের সূত্র ব্যবহার করে কোন বস্তুর দূরত্ব বের করা যায়। সাধারণত শব্দোত্তর শব্দ তরঙ্গের উৎস এবং গ্রাহক Module আকারে একত্রে কিনতে পাওয়া যায়। নিচের জিনিসটি এরকমই একটি মডিউল।&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://web.archive.org/web/20150404195112/http://d15tech.com/wp-content/uploads/2015/01/parallax-ping-ultrasonic-sensor-large.jpg&quot;&gt;&lt;img src=&quot;https://web.archive.org/web/20150404195112im_/http://d15tech.com/wp-content/uploads/2015/01/parallax-ping-ultrasonic-sensor-large.jpg&quot; alt=&quot;Sonar Sensor Module&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Sonar Sensor Module&lt;/p&gt;
+</description>
+        <pubDate>Tue, 07 Jan 2014 00:00:00 +0100</pubDate>
+        <link>http://localhost:4000/blog/tutorial/microcontroller/2014/01/07/%E0%A6%B8%E0%A7%87%E0%A6%A8-%E0%A6%B8%E0%A6%B0%E0%A7%87-%E0%A6%B9%E0%A6%BE%E0%A6%A4%E0%A7%87%E0%A6%96%E0%A7%9C%E0%A6%BF/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/tutorial/microcontroller/2014/01/07/%E0%A6%B8%E0%A7%87%E0%A6%A8-%E0%A6%B8%E0%A6%B0%E0%A7%87-%E0%A6%B9%E0%A6%BE%E0%A6%A4%E0%A7%87%E0%A6%96%E0%A7%9C%E0%A6%BF/</guid>
+        
+        <category>Microcontroller</category>
+        
+        <category>মাইক্রোকন্ট্রোলার</category>
+        
+        <category>Atmega8</category>
+        
+        <category>Bangla</category>
+        
+        <category>AVR</category>
+        
+        <category>বাংলা</category>
+        
+        
+        <category>Tutorial</category>
+        
+        <category>Microcontroller</category>
+        
+      </item>
+    
+      <item>
+        <title>মাইক্রোকন্ট্রোলারের সাথে Alphanumeric LCD ইন্টারফেস</title>
+        <description>&lt;p&gt;এতক্ষণ আমরা আমদের আউটপুট শুধু LED তেই সীমাবদ্ধ রেখেছি। কিন্তু আর না। এবার আমরা আমাদের আউটপুটকে সরাসরি লেখা আকারে দেখব। এর জন্য যে ডিভাইসটি দরকার হবে তা Alphanumeric LCD। যদিও এর নাম Alphanumeric LCD তা সত্ত্বেও এই ডিসপ্লেতে Alphabetএবং Number ছাড়াও অন্যান্য সিম্বলও দেখানো সম্ভব। ইচ্ছা করলে Custom Character ও বানিয়ে নেয়া সম্ভব। খুবই কাজের জিনিস এই Alphanumeric LCD। বাজারে প্রচলিত Alphanumeric LCD গুলোর মধ্যে সবচেয়ে বেশি ব্যবহৃত হয় 16×2 এলসিডি ডিসপ্লে। 16×2 অর্থ হচ্ছে এতে দুইটি লাইন আছে এবং প্প্রত্যেক লাইনে ১৬টি করে character রয়েছে। এছাড়াও বাজারে 24×4, 24×2, 8×2,16×1 ইত্যাদি ধরণের LCD পাওয়া যায়। তবে প্রায় সবগুলো LCD তেই পিন সংখ্যা 16। এর ১৬ টি পিনের মধ্যে ৮ টি Data Line পিন, ৪ টি Control Line পিন, ২ টি Power Line পিন, ২ টি Backlit LED পিন এবং বাকি ১টি হল Contrast পিন। নিচে Alphanumeric LCD এর পিন বিন্যাস ও পিনের কাজগুলো দেয়া হল।&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://web.archive.org/web/20150405043123/http://d15tech.com/wp-content/uploads/2015/01/lcd.jpg&quot;&gt;&lt;img src=&quot;https://web.archive.org/web/20150405043123im_/http://d15tech.com/wp-content/uploads/2015/01/lcd.jpg&quot; alt=&quot;LCD Pinout&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;LCD Pinout&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;কনট্রাস্ট পিন&lt;/strong&gt;&lt;br /&gt;
+LCD এর তিন পিনটি হল কনট্রাস্ট পিন। এই পিনে ০ থেকে ৫ ভোল্টের এর মধ্যে ভোল্টেজ পরিবর্তন করে LCD এর কনট্রাস্ট পরিবর্তন করা যায়।&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;রেজিস্টার সিলেক্ট পিন&lt;/strong&gt;&lt;br /&gt;
+LCD তেও মাইক্রোকন্ট্রোলারের মত Register আছে। রেজিস্টার সিলেক্ট পিনটি High এবং Low করে Register Select করতে হয়। এই পিনটি যখন Low থাকবে তখন LCDটি command মোডে থাকবে অর্থাৎ এটি বিভিন্ন কমান্ড নেয়ার জন্য প্রস্তুত হবে। আর এই পিনটিকে যদি high থাকে LCD টি Character Display Mode থাকবে।&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Read/Write পিন&lt;/strong&gt;&lt;br /&gt;
+LCD টির 5 নাম্বার পিনটি হচ্ছে Read/Write পিন। এই পিনটি যখন Low থাকবে তখন LCDটি command বা Character Write করার জন্য প্রস্তুত হবে। আর এই পিনটিকে যদি high থাকে LCD টি থেকে read করা যাবে।&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Enable পিন&lt;/strong&gt;&lt;br /&gt;
+এই পিনটি ডাটা লাইন Write মোডে থাকবে না Read মোডে থাকবে তা নির্ধারণ করে।এই পিনটি যখন Low থাকবে তখন LCD এর ডাটা লাইনগুলো ডাটা Write করার জন্য প্রস্তুত হবে। আর এই পিনটিকে যদি high থাকে LCD টির ডাটা লাইন থেকে ডাটা read করা যাবে।&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;ডাটা লাইন&lt;/strong&gt;&lt;br /&gt;
+D0-D7 এই আটটি পিন হচ্ছে LCD এর ডাটা লাইন। এই ডাটা লাইনের ৪ টি কিংবা ৮ টি ব্যবহার করে LCDতে Character Displayকরানো যায়। যখন ৪ টি ডাটা লাইনে ডাটা পাঠানো হয় ক্ষেত্রে D4 থেকে D7 এই চারটি পিন ব্যবহার করা হয়। বিভিন্ন Character কে ডিসপ্লে করার জন্য ডাটা লাইনের বিন্যাস নিচে দেয়া হল।&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://web.archive.org/web/20150405043123/http://d15tech.com/wp-content/uploads/2015/01/Chacter-Chart.png&quot;&gt;&lt;img src=&quot;https://web.archive.org/web/20150405043123im_/http://d15tech.com/wp-content/uploads/2015/01/Chacter-Chart.png&quot; alt=&quot;Character Chart&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Character Chart&lt;/p&gt;
+
+&lt;p&gt;তবে এতো সবকিছু Manually না করে সরাসরি LCD এর লাইব্রেরি ব্যবহার করা যায়। ইন্টারনেটে অসংখ্য LCD Library আছে। এর মধ্যে  &lt;a href=&quot;https://web.archive.org/web/20150405043123/http://extremeelectronics.co.in/avrtutorials/code/lcdlibv20.zip&quot;&gt;Extreme Electronics এর লাইব্রেরিটি&lt;/a&gt;  বিশেষভাবে উল্লেখ্য। তুমি চাইলে নিজেও নিজের লাইব্রেরি তৈরি করে নিতে পারো। তবে এতো ঝামেলায় না গিয়ে এখানে আমি Extreme Electronics এর লাইব্রেরিটির বিভিন্ন ফাংশন সম্পর্কে আলোচনা করছি।&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;LCDInit(LS_BLINK|LS_ULINE)&lt;/strong&gt;&lt;br /&gt;
+এখানে আর্গুমেন্ট LS_BLINK ব্যবহার করলে পাওয়া যাবে blinking cursor. LS_ULINE ব্যবহার করলে পাওয়া যাবে underlined cursor।&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;LCDWriteString(“Welcome”)&lt;/strong&gt;&lt;br /&gt;
+এই ফাংশন ব্যবহার করে LCD তে কোন String প্রদর্শন করা যাবে।&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;LCDWriteInt(int val,unsigned int field length)&lt;/strong&gt;&lt;br /&gt;
+এই ফাংশন ব্যবহার করে ডিসপ্লেতে Integer দেখানো সম্ভব। এই ফাংশন ব্যবহার করলে ডিসপ্লেতে val এর মান প্রদর্শন করবে field length সংখ্যক ঘর পর্যন্ত।&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;LCDGotoXY(uint8_t x,uint8_t y)&lt;/strong&gt;&lt;br /&gt;
+ডিসপ্লের যেকোনো জায়গায় জাম্প করার জন্য এই ফাংশনটি ব্যবহার করা হয়।&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;LCDClear()&lt;/strong&gt;&lt;br /&gt;
+ডিসপ্লের সব লেখা মুছে ফেলতে এই ফাংশন ব্যবহার করা হয়।&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;LCDWriteStringXY(x,y,msg)&lt;/strong&gt;&lt;br /&gt;
+ডিসপ্লের কোন নির্দিষ্ট স্থানে স্ট্রিং প্রদর্শন করার জন্য এই ফাংশন ।&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;LCDWriteIntXY(x,y,num,field_length)&lt;/strong&gt;&lt;br /&gt;
+ডিসপ্লের কোন নির্দিষ্ট স্থানে Integer প্রদর্শন করার জন্য এই ফাংশন ।&lt;/p&gt;
+
+&lt;p&gt;শুধু ফাংশন জানলেই হবে না কিভাবে এই লাইব্রেরিটাকে আমাদের LCD এর জন্য কনফিগার করবো তাও জানতে হবে। এবার তাহলে তাই দেখা যাক। lcd.h fileটি খুললে আমরা এরকম একটা জিনিস দেখতে পাবো। এখানে সব বিস্তারিত বলে দেয়াই আছে কোন পিন কোথায় কানেক্ট করতে হবে।&lt;/p&gt;
+&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;cm&quot;&gt;/**********************************************************************************************/&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//LCD CONNECTIONS&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/**********************************************************************************************/&lt;/span&gt;
+
+&lt;span class=&quot;cp&quot;&gt;#define LCD_DATA B //Port PB2-PB5 are connected to D4-D7
+#define LCD_DATA_POS 2
+#define LCD_E D // যে পোর্টে Enable পিনটি থাকবে সেই পোর্টের নাম। এখানে D
+#define LCD_E_POS PD5 // যে পিনে Enable পিনটি থাকবে সেই পিনের নাম। এখানে PD5
+#define LCD_RS D // যে পোর্টে RS পিনটি থাকবে সেই পোর্টের নাম। এখানে D
+#define LCD_RS_POS PD7 // যে পিনে RS পিনটি থাকবে সেই পিনের নাম। এখানে PD7
+#define LCD_RW D // যে পোর্টে RW পিনটি থাকবে সেই পোর্টের নাম। এখানে D
+#define LCD_RW_POS PD6 // যে পিনে RW পিনটি থাকবে সেই পিনের নাম। এখানে PD6
+&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/************************************************************************************************&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;আর এরকম জায়গায় শুধু তোমার LCD এর ধরণের লাইনটা আনকমেন্ট করে দিলেই হবে।&lt;/p&gt;
+
+&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;//#define LCD_TYPE_202 //For 20 Chars by 2 lines&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//#define LCD_TYPE_204 //For 20 Chars by 4 lines&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//#define LCD_TYPE_162 //For 16 Chars by 2 lines&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//#define LCD_TYPE_164 //For 16 Chars by 4 lines&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Tue, 07 Jan 2014 00:00:00 +0100</pubDate>
+        <link>http://localhost:4000/blog/tutorial/microcontroller/2014/01/07/%E0%A6%AE%E0%A6%BE%E0%A6%87%E0%A6%95-%E0%A6%B0%E0%A7%8B%E0%A6%95%E0%A6%A8-%E0%A6%9F-%E0%A6%B0%E0%A7%8B%E0%A6%B2%E0%A6%BE%E0%A6%B0%E0%A7%87%E0%A6%B0-%E0%A6%B8%E0%A6%BE%E0%A6%A5%E0%A7%87-Alphanumeric-LCD-%E0%A6%87%E0%A6%A8-%E0%A6%9F%E0%A6%BE%E0%A6%B0%E0%A6%AB%E0%A7%87%E0%A6%B8/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/tutorial/microcontroller/2014/01/07/%E0%A6%AE%E0%A6%BE%E0%A6%87%E0%A6%95-%E0%A6%B0%E0%A7%8B%E0%A6%95%E0%A6%A8-%E0%A6%9F-%E0%A6%B0%E0%A7%8B%E0%A6%B2%E0%A6%BE%E0%A6%B0%E0%A7%87%E0%A6%B0-%E0%A6%B8%E0%A6%BE%E0%A6%A5%E0%A7%87-Alphanumeric-LCD-%E0%A6%87%E0%A6%A8-%E0%A6%9F%E0%A6%BE%E0%A6%B0%E0%A6%AB%E0%A7%87%E0%A6%B8/</guid>
+        
+        <category>Microcontroller</category>
+        
+        <category>মাইক্রোকন্ট্রোলার</category>
+        
+        <category>Atmega8</category>
+        
+        <category>Bangla</category>
+        
+        <category>AVR</category>
+        
+        <category>বাংলা</category>
+        
+        
+        <category>Tutorial</category>
+        
+        <category>Microcontroller</category>
+        
+      </item>
+    
+      <item>
+        <title>মাইক্রোকন্ট্রোলারের বেসিক</title>
+        <description>&lt;h1 id=&quot;বেসিক-atmega8&quot;&gt;বেসিক Atmega8&lt;/h1&gt;
+&lt;p&gt;মাইক্রোকন্ট্রোলার প্রোগ্রামিংএ ঢুকার আগে মাইক্রোকন্ট্রোলার সম্পর্কে কিছু বেসিক জিনিস জেনে নেয়া দরকার। প্রথমেই আমরা দেখে নেই মাইক্রোকন্ট্রোলার জিনিসটা দেখতে কেমন।&lt;/p&gt;
+
+&lt;p&gt;আমরা খুবই কমন একটি মাইক্রোকন্ট্রোলার, Atmega8 দেখব। এটি বাজারে প্রচলিত মাইক্রোকন্ট্রোলারগুলোর মধ্যে সবচেয়ে বেশি ফিচার সম্ব্রিদ্ধ মাইক্রোকন্ট্রোলার। এতে আছে মোট ২৮ টি পিন। এতে আছে ৩ টি পোর্ট, ২৩ টি প্রোগ্রামেবল IO ( Input / Output ) লাইন, দুটি ৮ বিট এবং ১ টি ১৬ বিট টাইমার , ৬ চ্যানেল ADC (Analog to Digital Converter) এবং USART, SPI সহ আরও অনেক ফিচার যেগুলো সম্পর্কে পরবর্তীতে আলোচনা করা হবে।&lt;/p&gt;
+
+&lt;p&gt;Atmega8 এর ২৩ টি প্রোগ্রামেবল IO পিন তিনটি পোর্টে ভাগ করা আছে। পোর্টগুলো যথাক্রমে PORTB, PORTC, PORTD। এর মধ্যে পোর্ট বি ও ডি তে আছে ৮ টি এবং পোর্ট সি তে আছে ৭ টি পিন। পোর্ট সি এর ৭ম পিনটি হল রিসেট বার পিন যা নরমালি IO পিন হিসেবে ব্যবহার করা যায় না। তবে একেও বিশেষ পদ্ধতিতে IO পিন হিসেবে কাজ করানো যায় তবে এক্ষেত্রে মাইক্রোকন্ট্রোলারটিকে পরবর্তীতে অার প্রোগ্রাম করা যায় না।&lt;/p&gt;
+
+&lt;p&gt;এছাড়া ও Atmega8 এ আছে আরও কিছু বিশেষ পিন। এসব পিনের কাজকর্ম এক নজরে দেখে নেয়া যাক।&lt;/p&gt;
+
+&lt;h1 id=&quot;atmega8-pinout&quot;&gt;Atmega8 Pinout&lt;/h1&gt;
+&lt;div style=&quot;text-align:center&quot;&gt;&lt;img src=&quot;https://web.archive.org/web/20150807201234if_/http://d15tech.com/wp-content/uploads/2015/01/atmega8.png&quot; alt=&quot;AAtmega8 Pinout&quot; /&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;vcc-পিন&quot;&gt;VCC পিন&lt;/h1&gt;
+&lt;p&gt;৭ নম্বর পিনটি হল VCC পিন। মাইক্রোকন্ট্রোলারকে চালু করার জন্য এই পিনকে অ্যাক্টিভ অর্থাৎ এতে ৫ ভোল্ট ডিসি সাপ্লাই দিতে হবে।&lt;/p&gt;
+
+&lt;h1 id=&quot;gnd-পিন&quot;&gt;GND পিন&lt;/h1&gt;
+&lt;p&gt;৮ নম্বর পিনটি হলো Ground পিন। একে DC Supply এর Ground ( -ve বলা ভুল, কারণ Ground এবং Negative আলাদা জিনিস ) লাগাতে হবে।&lt;/p&gt;
+
+&lt;h1 id=&quot;reset&quot;&gt;Reset&lt;/h1&gt;
+&lt;p&gt;১ নম্বর পিন হল রিসেট বার পিন।বার অর্থ Active Low। অর্থাৎ এই পিনে ভোল্টেজ দিলে তা Inactive হবে এবং Ground করলে Active হয়ে যাবে এবং মাইক্রোকন্ট্রোলার রিসেট হয়ে যাবে অর্থাৎ প্রোগ্রাম আবার প্রথম থেকে শুরু হবে।&lt;/p&gt;
+
+&lt;h1 id=&quot;aref&quot;&gt;AREF&lt;/h1&gt;
+&lt;p&gt;এটি Analog Reference Voltage পিন যা ADC নিয়ে কাজ করার সময় কাজে লাগবে।&lt;/p&gt;
+
+&lt;h1 id=&quot;avcc&quot;&gt;AVCC&lt;/h1&gt;
+&lt;p&gt;এটি Analog VCC। এটি মাইক্রোকন্ট্রোলারের ভেতরের এনালগ সার্কিটকে একটিভ করতে ব্যবহার করতে হয়।এটিও ADC নিয়ে কাজ করার সময় কাজে লাগবে।&lt;/p&gt;
+
+&lt;h1 id=&quot;আরও-কিছু-পিন&quot;&gt;আরও কিছু পিন&lt;/h1&gt;
+&lt;p&gt;এছাড়াও আরও কিছু পিন সম্পর্কে জানতে হবে যা পরবর্তীতে কাজে লাগবে। যেমনঃ MISO (Master In Slave Out), MOSI (Master Out Slave In), SCK (SPI Bus Master clock Input), SS (SPI Bus Master Slave Select)।&lt;/p&gt;
+
+&lt;h1 id=&quot;পোর্টগুলোর-পোস্টমর্টেম&quot;&gt;পোর্টগুলোর পোস্টমর্টেম&lt;/h1&gt;
+&lt;p&gt;এখন আমরা দেখব পোর্টগুলোর পোস্টমর্টেম। মাইক্রোকন্ট্রোলারের প্রত্যেকটি পোর্ট তিনটি করে রেজিস্টার নিয়ে গঠিত। রেজিস্টারগুলো হচ্ছে DDR, PORT এবং PIN। সহজ ভাষায় রেজিস্টার হল মাইক্রোকন্ট্রোলারের ভেতরের কিছু ভেরিয়েবল। এই ভেরিয়েবলগুলোতে থাকে মাইক্রোকন্ট্রোলারের গঠনগত তথ্যাবলী।&lt;/p&gt;
+
+&lt;h1 id=&quot;ddr&quot;&gt;DDR&lt;/h1&gt;
+&lt;p&gt;DDR এর অর্থ হল Data Direction Register। অর্থাৎ ডাটার ডিরেকশন নির্ধারণ করা হয় এই রেজিস্টার দিয়ে। পোর্ট দিয়ে ডাটা ইনপুট দেয়া হবে নাকি অাউটপুট নেয়া হবে তা নির্ধারণ করা হয় এই রেজিস্টার দিয়ে। যেহেতু মাইক্রোকন্ট্রোলার ০ আর ১ ছাড়া আর কিছুই বুঝে না তাই পোর্ট দিয়ে ডাটা ইনপুট দেয়া হবে নাকি অাউটপুট নেয়া হবে এটাও ০ অথবা ১ দিয়েই তাকে বুঝাতে হবে। এই রেজিস্টার ০ করে রাখা হলে পোর্টটি ইনপুট আর ১ করে রাখা হলে মাইক্রোকন্ট্রোলার পোর্টটিকে আউটপুট হিসেবে প্রস্তুত করবে। ধরি, আমরা Port B কে ইনপুট দিতে আর Port C থেকে আউটপুট নিতে চাই। তাহলে যা করতে হবে তা হল DDRB = 0, DDRC = 1; এভাবে ডিফাইন করে দিতে হবে। আমরা চাইলে Port গুলোর সব পিনকে একসাথে ডিফাইন না করে পিনগুলোকে আলাদা আলাদাভাবেও ইনপুট বা আউটপুট হিসেবে ডিফাইন করতে পারি। ধরি, আমি Port B এর ০,১,৫ ও ৬ এই পিনগুলোকে ইনপুট আর ২,৩,৪,৭ এই পিনগুলোকে আউটপুট হিসেবে নিতে চাই। তাহলে যা করতে হবে তা হল PORTB = 0b10011100; এভাবে ডিফাইন করতে হবে।&lt;/p&gt;
+
+&lt;h1 id=&quot;port-এবং-pin&quot;&gt;PORT এবং PIN&lt;/h1&gt;
+&lt;p&gt;Port রেজিস্টার হল আউটপুট দেখার জানালা। আর PIN রেজিস্টার হল ইনপুট দেয়ার দরজা। আমরা তো ইনপুট বা আউটপুট ডিফাইন করে দিলাম কিন্তু আউটপুট দেখবই বা কোথা থেকে আর ইনপুট দিবই বা কোথায়? আউটপুট দেখার জন্য যে ব্যবস্থা তা হল PORT রেজিস্টার আর ইনপুট দেয়ার যে ব্যবস্থা তা আছে PIN রেজিস্টারে। এটাকেও যথারীতি ০ আর ১ দিয়ে ডিফাইন করতে হবে।&lt;/p&gt;
+</description>
+        <pubDate>Tue, 07 Jan 2014 00:00:00 +0100</pubDate>
+        <link>http://localhost:4000/blog/tutorial/microcontroller/2014/01/07/%E0%A6%AE%E0%A6%BE%E0%A6%87%E0%A6%95-%E0%A6%B0%E0%A7%8B%E0%A6%95%E0%A6%A8-%E0%A6%9F-%E0%A6%B0%E0%A7%8B%E0%A6%B2%E0%A6%BE%E0%A6%B0%E0%A7%87%E0%A6%B0-%E0%A6%AC%E0%A7%87%E0%A6%B8%E0%A6%BF%E0%A6%95/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/tutorial/microcontroller/2014/01/07/%E0%A6%AE%E0%A6%BE%E0%A6%87%E0%A6%95-%E0%A6%B0%E0%A7%8B%E0%A6%95%E0%A6%A8-%E0%A6%9F-%E0%A6%B0%E0%A7%8B%E0%A6%B2%E0%A6%BE%E0%A6%B0%E0%A7%87%E0%A6%B0-%E0%A6%AC%E0%A7%87%E0%A6%B8%E0%A6%BF%E0%A6%95/</guid>
+        
+        <category>Microcontroller</category>
+        
+        <category>মাইক্রোকন্ট্রোলার</category>
+        
+        <category>Atmega8</category>
+        
+        <category>Bangla</category>
+        
+        <category>AVR</category>
+        
+        <category>বাংলা</category>
+        
+        
+        <category>Tutorial</category>
+        
+        <category>Microcontroller</category>
+        
+      </item>
+    
+      <item>
+        <title>মাইক্রোকন্ট্রোলারের জন্য পাওয়ার সাপ্লাই তৈরি</title>
+        <description>&lt;p&gt;যেহেতু আমাদের মাইক্রোকন্ট্রোলার ৫ ভোল্টের বেশি নিতে পারে না আবার ৫ ভোল্টের কিছু নিচে হলে আবার ঠিকমত কাজ করে না তাই মাইক্রোকন্ট্রোলারের জন্য চাই একটি সুষ্ঠ ৫ ভোল্টের পাওয়ার সাপ্লাই যা কিনা সবসময় Constant ৫ ভোল্ট পাওয়ার সাপ্লাই দিবে। আমরা নিজেরাই যদি এরকম একটি তৈরি করে নিতে পারি তবে মন্দ হয় না, কি বল? Constant ৫ ভোল্টের পাওয়ার সাপ্লাই তৈরির জন্য প্রথমে আমাদের যা লাগবে তা হল একটি 7805 Voltage Regulator IC। এটি এর ইনপুটে আসা ভোল্টেজকে কেটে ৫ ভোল্টে নিয়ে আসে। তবে অবশ্যই ইনপুটে ৫ ভোল্টের চেয়ে বেশি হতে হবে। ৮-১৫ ভোল্টের মধ্যে হলে ভালো হয়। তোমরা চাইলে নিচের মতো করে পাওয়ার সাপ্লাইটি ডিজাইন করে নিতে পারো। ইনপুট power যেকোনো মোবাইলের পুরাতন চার্জার বা অন্য কোন Adapter থেকে নেয়া যেতে পারে।&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://web.archive.org/web/20150405023657/http://d15tech.com/wp-content/uploads/2015/01/Power-Supply.jpg&quot;&gt;&lt;img src=&quot;https://web.archive.org/web/20150405023657im_/http://d15tech.com/wp-content/uploads/2015/01/Power-Supply.jpg&quot; alt=&quot;Power Supply&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;5V Regulated&lt;br /&gt;
+Power Supply&lt;/p&gt;
+
+&lt;p&gt;এখন মাথায় প্রশ্ন আসাটা স্বাভাবিক যে কেটে ফেলা পাওয়ারগুলো কোথায় গেলো। এতে কি শক্তির বিনাশ হয়ে শক্তির নিত্যতা সূত্র Violateহল না? না এতে শক্তির নিত্যতা সূত্র Violate হয়নি। কারণ এখানে শক্তির কোন বিনাশ হয়নি। কেটে ফেলা পাওয়ারটুকু তাপশক্তিতে রপান্তরিত হয়েছে মাত্র। অনেক সময় অতিরিক্ত তাপ হওয়ার কারণে 7805 IC টি পুড়ে যেতে পারে বা Thermal Shut-down হতে পারে। তাই 7805 IC টির সুরক্ষার জন্য IC টির গায়ে একটি হিটসিঙ্ক (Heat Sink) লাগিয়ে দিতে হবে।&lt;/p&gt;
+</description>
+        <pubDate>Tue, 07 Jan 2014 00:00:00 +0100</pubDate>
+        <link>http://localhost:4000/blog/tutorial/microcontroller/2014/01/07/%E0%A6%AE%E0%A6%BE%E0%A6%87%E0%A6%95-%E0%A6%B0%E0%A7%8B%E0%A6%95%E0%A6%A8-%E0%A6%9F-%E0%A6%B0%E0%A7%8B%E0%A6%B2%E0%A6%BE%E0%A6%B0%E0%A7%87%E0%A6%B0-%E0%A6%9C%E0%A6%A8-%E0%A6%AF-%E0%A6%AA%E0%A6%BE%E0%A6%93%E0%A7%9F%E0%A6%BE%E0%A6%B0-%E0%A6%B8%E0%A6%BE%E0%A6%AA-%E0%A6%B2%E0%A6%BE%E0%A6%87-%E0%A6%A4%E0%A7%88%E0%A6%B0%E0%A6%BF/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/tutorial/microcontroller/2014/01/07/%E0%A6%AE%E0%A6%BE%E0%A6%87%E0%A6%95-%E0%A6%B0%E0%A7%8B%E0%A6%95%E0%A6%A8-%E0%A6%9F-%E0%A6%B0%E0%A7%8B%E0%A6%B2%E0%A6%BE%E0%A6%B0%E0%A7%87%E0%A6%B0-%E0%A6%9C%E0%A6%A8-%E0%A6%AF-%E0%A6%AA%E0%A6%BE%E0%A6%93%E0%A7%9F%E0%A6%BE%E0%A6%B0-%E0%A6%B8%E0%A6%BE%E0%A6%AA-%E0%A6%B2%E0%A6%BE%E0%A6%87-%E0%A6%A4%E0%A7%88%E0%A6%B0%E0%A6%BF/</guid>
+        
+        <category>Microcontroller</category>
+        
+        <category>মাইক্রোকন্ট্রোলার</category>
+        
+        <category>Atmega8</category>
+        
+        <category>Bangla</category>
+        
+        <category>AVR</category>
+        
+        <category>বাংলা</category>
+        
+        
+        <category>Tutorial</category>
+        
+        <category>Microcontroller</category>
+        
+      </item>
+    
+  </channel>
+</rss>

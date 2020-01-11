@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Software Engineer | Embedded Software Engineer">
+    <meta name="keywords"  content="Design Pattern, Software Engineering, Embedded Systems, IoT, Linux, C, C++, Algorithm, JavaScript">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Pretty Debug JS - Another Blog In The Web">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="
+">
+    
+    <meta property="article:published_time" content="2019-07-01T00:00:00Z">
+    
+    
+    <meta property="article:author" content="Shadly">
+    
+    
+    <meta property="article:tag" content="Debug">
+    
+    <meta property="article:tag" content="Library">
+    
+    <meta property="article:tag" content="JavaScript">
+    
+    <meta property="article:tag" content="Node.js">
+    
+    <meta property="article:tag" content="NPM">
+    
+    
+    <meta property="og:image" content="http://localhost:4000/blog/img/shadly_sidebar.jpg">
+    <meta property="og:url" content="http://localhost:4000/library/javascript/node.js/npm/2019/07/01/pretty_debug_js_library/">
+    <meta property="og:site_name" content="Another Blog In The Web">
+    
+    <title>Pretty Debug JS - Another Blog In The Web</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/blog/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/blog/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/blog/library/javascript/node.js/npm/2019/07/01/pretty_debug_js_library/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/blog/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/blog/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/blog/">Verbose</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="https://shadlyd15.github.io/" target="_blank">Home</a>
+                    </li>
+<!--                     <li>
+                        <a href="https://github.com/shadlyd15" target="_blank">GitHub</a>
+                    </li>
+                    <li>
+                        <a href="https://linkedin.com/in/shadlyd15" target="_blank">LinkedIn</a>
+                    </li>
+                    <li>
+                        <a href="https://facebook.com/shadlyd15" target="_blank">Facebook</a>
+                    </li>
+                    <li>
+                        <a href="https://instagram.com/shadlyd15" target="_blank">Instagram</a>
+                    </li> -->
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/blog/about/">About</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/blog/archive/">Archive</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/blog/contact/">Contact</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/blog/projects/">Projects</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/blog/img/post-bg-js-module.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/blog/img/post-bg-js-module.jpg');
+        background: ;
+    }
+
+    
+</style>
+
+<header class="intro-header" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/blog/archive/?tag=Debug" title="Debug">Debug</a>
+                        
+                        <a class="tag" href="/blog/archive/?tag=Library" title="Library">Library</a>
+                        
+                        <a class="tag" href="/blog/archive/?tag=JavaScript" title="JavaScript">JavaScript</a>
+                        
+                        <a class="tag" href="/blog/archive/?tag=Node.js" title="Node.js">Node.js</a>
+                        
+                        <a class="tag" href="/blog/archive/?tag=NPM" title="NPM">NPM</a>
+                        
+                    </div>
+                    <h1>Pretty Debug JS</h1>
+                    
+                    <h2 class="subheading">A minimal debug library written in JavaScript</h2>
+                    <span class="meta">Posted by Shadly on July 1, 2019</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<!-- <div><img src ="img/pretty-logo.svg" style='width:25%;' border="0" alt ="Sample Output"/></div> -->
+
+<p><a href="#"><img src="https://shadlyd15.github.io/PrettyDebugJS/img/pretty-logo.svg" alt="logo" /></a></p>
+
+<p><a href="https://www.npmjs.com/package/pretty-debug"><img src="https://nodei.co/npm/pretty-debug.png?downloads=true&amp;downloadRank=true&amp;stars=true" alt="npm package" /></a></p>
+
+<p><a href="#"><img src="https://forthebadge.com/images/badges/made-with-javascript.svg" alt="forthebadge" /></a>
+<a href="#"><img src="https://forthebadge.com/images/badges/powered-by-responsibility.svg" alt="forthebadge" /></a></p>
+
+<p><a href="#Intro"><img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png" alt="-----------------------------------------------------" /></a></p>
+
+<h2 id="intro">Intro</h2>
+<p>A <strong>highly configurable &amp; lightweight debug library</strong> that prints debug messages beautifully. It works in Node.js and Web browser environments with very low memory footprint.</p>
+
+<h2 id="features">Features</h2>
+<ul>
+  <li>Beautifully colored and formatted output texts</li>
+  <li>Pretty prints current file name, function and line number</li>
+  <li>Pretty prints date, time with timezone and formatting</li>
+  <li>Attach multiple streams and pipe the debug outputs</li>
+  <li>Compatible with Node.js stream objects</li>
+  <li>Node process and System process memory monitor</li>
+  <li>Schedule health check</li>
+  <li>Alarm on crossing memory usage thresholds</li>
+  <li>System memory high watermark</li>
+  <li>Highly configurable</li>
+  <li>Very low memory footprint</li>
+  <li>No third party library dependency</li>
+</ul>
+
+<h2 id="screenshot">Screenshot</h2>
+
+<div><img src="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/gh-pages/img/screenshot.png" style="width:100%;" border="0" alt="Sample Output" /></div>
+
+<h2 id="install">Install</h2>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>npm <span class="nb">install </span>pretty-debug
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="usage">Usage</h2>
+
+<p>Pretty Debug exposes a debug object. Just attach any stream you want to the module to pipe debug messages. process.stdout is the default steam which prints output to console. Any other streams like TCP socket or request to an HTTP server can be attached on runtime to pipe the debug output.</p>
+
+<h2 id="api-documentation">API Documentation</h2>
+
+<ul>
+  <li><a href="https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html">pretty-debug</a>
+    <ul>
+      <li><a href="https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.color">.color</a> : <code>Object.&lt;string&gt;</code></li>
+      <li><a href="https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.setOptions">.setOptions(userOptions)</a></li>
+      <li><a href="https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.generatePolicy">.generatePolicy(lowerLimit, upperLimit)</a> ⇒ <code>Object.&lt;policy&gt;</code></li>
+      <li><a href="https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.attachStream">.attachStream(stream)</a></li>
+      <li><a href="https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.detachStream">.detachStream(stream)</a></li>
+      <li><a href="https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.log">.log(…var_args)</a></li>
+      <li><a href="https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.info">.info(…var_args)</a></li>
+      <li><a href="https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.alert">.alert(…var_args)</a></li>
+      <li><a href="https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.warn">.warn(…var_args)</a></li>
+      <li><a href="https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.error">.error(…var_args)</a></li>
+      <li><a href="https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.critical">.critical(…var_args)</a></li>
+      <li><a href="https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.nodeMemoryMonitor">.nodeMemoryMonitor(stream, callback)</a></li>
+      <li><a href="https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.sysMemoryMonitor">.sysMemoryMonitor(alarmPolicy, callback)</a></li>
+      <li><a href="https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.memoryWatermark">.memoryWatermark()</a></li>
+      <li><a href="https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.scheduleHealthCheck">.scheduleHealthCheck(inputFunc, timeInMinutes)</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>For detail information, please see <a href="https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html">API Documentation.</a></p>
+
+<!-- 
+### Show/Hide Section
+
+### Change Section Color
+Let's say we want to change the color of **Timestamp** to Green and hide the File Name section. 
+ -->
+
+<h2 id="basic-usage">Basic usage</h2>
+
+<ul>
+  <li><strong>Create debug instance :</strong>
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>  <span class="kd">const</span> <span class="nx">debug</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">pretty-debug</span><span class="dl">'</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li><strong>Set options :</strong>
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre>  <span class="nx">debug</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">({</span> 
+          <span class="na">enable</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>		<span class="c1">// Turning on debug print</span>
+          <span class="na">enableColor</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>	<span class="c1">// Enabling color output</span>
+          <span class="na">enableGC</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>		<span class="c1">// Enabling autometic gerbage collection</span>
+          <span class="na">debugLevel</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> 		<span class="c1">// Setting debug level 6 (Upto INFO)</span>
+      <span class="p">}</span>  
+  <span class="p">});</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li><strong>Attach stream :</strong>
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>  <span class="nx">debug</span><span class="p">.</span><span class="nx">attachStream</span><span class="p">(</span><span class="nx">sock</span><span class="p">);</span> 	<span class="c1">// Attaching new stream to serve debug messages</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li><strong>Detach stream :</strong>
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>  <span class="nx">debug</span><span class="p">.</span><span class="nx">detachStream</span><span class="p">(</span><span class="nx">sock</span><span class="p">);</span> 	<span class="c1">// Detaching stream</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li><strong>Print in different debug levels :</strong>
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre>  <span class="nx">debug</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">The quick brown fox jumps over the lazy dog</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nx">debug</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="dl">'</span><span class="s1">The quick brown fox jumps over the lazy dog</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nx">debug</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">The quick brown fox jumps over the lazy dog</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nx">debug</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="dl">'</span><span class="s1">The quick brown fox jumps over the lazy dog</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nx">debug</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">The quick brown fox jumps over the lazy dog</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nx">debug</span><span class="p">.</span><span class="nx">critical</span><span class="p">(</span><span class="dl">'</span><span class="s1">The quick brown fox jumps over the lazy dog</span><span class="dl">'</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li><strong>Show highest RAM usage :</strong>
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>  <span class="nx">debug</span><span class="p">.</span><span class="nx">memoryWatermark</span><span class="p">();</span>	<span class="c1">// Shows highest RAM usage in MB.</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li><strong>Show memory used by OS :</strong>
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>  <span class="nx">debug</span><span class="p">.</span><span class="nx">sysMemoryMonitor</span><span class="p">();</span>	<span class="c1">// Shows memory information of operating system</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li><strong>Show memory used by Node.js :</strong>
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>  <span class="nx">debug</span><span class="p">.</span><span class="nx">nodeMemoryMonitor</span><span class="p">(();</span>	<span class="c1">// Shows memory information of Node.js system</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li><strong>Set alarm policy for RAM usage :</strong>
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre>  <span class="nx">debug</span><span class="p">.</span><span class="nx">nodeMemoryMonitor</span><span class="p">({</span>
+      <span class="na">heapTotal</span><span class="p">:</span> <span class="p">{</span> <span class="na">upperLimit</span> <span class="p">:</span> <span class="mi">5</span> <span class="p">}</span> <span class="c1">// Trigger alarm when heap usage is greater than 5 MB</span>
+  <span class="p">},</span> <span class="kd">function</span><span class="p">(){</span>
+      <span class="nx">debug</span><span class="p">.</span><span class="nx">critical</span><span class="p">(</span><span class="dl">'</span><span class="s1">Memory Usage Alarm : Total heap usage is above 5 MB</span><span class="dl">'</span><span class="p">);</span>
+      <span class="c1">// Do other things like send email!</span>
+  <span class="p">});</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="example">Example</h2>
+<p>In this example a debug instance is created. For multiple stream demonstration, a TCP server is created. TCP socket is attached to the debug module. So when a client connects to that TCP server, color debug output will be shown on the client console. Health check scheduler is also demonstrated in this example.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">net</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">net</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">debug</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">pretty-debug</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">PORT</span> <span class="o">=</span> <span class="mi">6969</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">HOST</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">0.0.0.0</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="nx">debug</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">({</span>
+	<span class="na">nodeMemoryMonitor</span><span class="p">:{</span>
+		<span class="na">fields</span><span class="p">:</span> <span class="p">{</span>
+			<span class="na">rss</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+			<span class="na">external</span><span class="p">:</span> <span class="kc">false</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">debug</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello Pretty World</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="nx">debug</span><span class="p">.</span><span class="nx">scheduleHealthCheck</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+	<span class="nx">debug</span><span class="p">.</span><span class="nx">memoryWatermark</span><span class="p">();</span>
+	<span class="nx">debug</span><span class="p">.</span><span class="nx">sysMemoryMonitor</span><span class="p">();</span>
+	<span class="nx">debug</span><span class="p">.</span><span class="nx">nodeMemoryMonitor</span><span class="p">({</span>
+			<span class="na">heapTotal</span><span class="p">:</span> <span class="p">{</span> <span class="na">upperLimit</span> <span class="p">:</span> <span class="mi">5</span> <span class="p">}</span>
+		<span class="p">},</span> <span class="kd">function</span><span class="p">(){</span>
+			<span class="nx">debug</span><span class="p">.</span><span class="nx">critical</span><span class="p">(</span><span class="dl">'</span><span class="s1">Memory Usage Alarm : Total heap usage is above 5 MB</span><span class="dl">'</span><span class="p">);</span>
+			<span class="c1">// Do other things like send email!</span>
+		<span class="p">});</span>
+<span class="p">},</span> <span class="p">.</span><span class="mi">02</span><span class="p">);</span>
+
+<span class="nx">net</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">sock</span><span class="p">){</span>
+	<span class="nx">debug</span><span class="p">.</span><span class="nx">attachStream</span><span class="p">(</span><span class="nx">sock</span><span class="p">);</span>
+	<span class="nx">sock</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">end</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">debug</span><span class="p">.</span><span class="nx">detachStream</span><span class="p">(</span><span class="nx">sock</span><span class="p">);</span>
+	<span class="p">});</span> 
+<span class="p">}).</span><span class="nx">listen</span><span class="p">(</span><span class="nx">PORT</span><span class="p">,</span> <span class="nx">HOST</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">generateRandomLog</span><span class="p">(){</span>
+	<span class="nx">debug</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">The quick brown fox jumps over the lazy dog</span><span class="dl">'</span><span class="p">);</span>
+	<span class="nx">debug</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="dl">'</span><span class="s1">The quick brown fox jumps over the lazy dog</span><span class="dl">'</span><span class="p">);</span>
+	<span class="nx">debug</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">The quick brown fox jumps over the lazy dog</span><span class="dl">'</span><span class="p">);</span>
+	<span class="nx">debug</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="dl">'</span><span class="s1">The quick brown fox jumps over the lazy dog</span><span class="dl">'</span><span class="p">);</span>
+	<span class="nx">debug</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">The quick brown fox jumps over the lazy dog</span><span class="dl">'</span><span class="p">);</span>
+	<span class="nx">debug</span><span class="p">.</span><span class="nx">critical</span><span class="p">(</span><span class="dl">'</span><span class="s1">The quick brown fox jumps over the lazy dog</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+	<span class="nx">generateRandomLog</span><span class="p">();</span>
+<span class="p">},</span> <span class="mi">678</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="run-example">Run Example</h2>
+<p>To run the example above, simply put this command and press Enter!</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>node Examples/example.js
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="sample-output">Sample Output</h2>
+<div><img src="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/gh-pages/img/screenshot.png" style="width:100%;" border="0" alt="Sample Output" /></div>
+
+<h2 id="tutorials">Tutorials</h2>
+<p>All the tutorials and examples can be found in the link below :</p>
+<ul>
+  <li><a href="https://shadlyd15.github.io/PrettyDebugJS/tutorial-0.%20How%20To%20Use.html">How To Use</a></li>
+  <li><a href="https://shadlyd15.github.io/PrettyDebugJS/tutorial-1.%20Basics.html">Basics</a></li>
+  <li><a href="https://shadlyd15.github.io/PrettyDebugJS/tutorial-2.%20Memory%20Monitor.html">Memory Monitor</a></li>
+  <li><a href="https://shadlyd15.github.io/PrettyDebugJS/tutorial-3.%20Shedule%20Healthcheck.html">Shedule Healthcheck</a></li>
+  <li><a href="https://shadlyd15.github.io/PrettyDebugJS/tutorial-4.%20Set%20Alarm.html">Set Alarm</a></li>
+  <li><a href="https://shadlyd15.github.io/PrettyDebugJS/tutorial-5.%20Set%20Options.html">Set Options</a></li>
+  <li><a href="https://shadlyd15.github.io/PrettyDebugJS/tutorial-6.%20Attach%20Multiple%20Stream.html">Attach Multiple Stream</a></li>
+  <li><a href="https://shadlyd15.github.io/PrettyDebugJS/tutorial-8.%20Send%20Email%20On%20Alarm.html">Send Email On Alarm</a></li>
+  <li><a href="https://shadlyd15.github.io/PrettyDebugJS/tutorial-7.%20Summary.html">Summary</a></li>
+</ul>
+
+<h2 id="customization">Customization</h2>
+<p>As it was mentioned earlier, this library is highly configurable.
+For more details, please see <a href="https://shadlyd15.github.io/PrettyDebugJS/module-defaultOptions.html">Default Options.</a></p>
+
+<h2 id="contributing">Contributing</h2>
+<p>If you are interested in requesting a feature, fixing issues and contributing directly to the code base, please do not hesitate.</p>
+
+<h2 id="license">License</h2>
+<p>Licensed under the <a href="LICENSE">MIT</a> License.</p>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/blog/library/2019/02/14/Arduinative/" data-toggle="tooltip" data-placement="top" title="Arduinative">
+                        Previous<br>
+                        <span>Arduinative</span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/blog/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        </a>
+        
+        
+                <a data-sort="0005" 
+                    href="/blog/archive/?tag=Microcontroller"
+                    title="Microcontroller"
+                    rel="22">Microcontroller</a>
+        
+                <a data-sort="0004" 
+                    href="/blog/archive/?tag=AVR"
+                    title="AVR"
+                    rel="23">AVR</a>
+        
+                <a data-sort="0005" 
+                    href="/blog/archive/?tag=%E0%A6%AC%E0%A6%BE%E0%A6%82%E0%A6%B2%E0%A6%BE"
+                    title="বাংলা"
+                    rel="22">বাংলা</a>
+        
+                <a data-sort="0005" 
+                    href="/blog/archive/?tag=%E0%A6%AE%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%8D%E0%A6%B0%E0%A7%8B%E0%A6%95%E0%A6%A8%E0%A7%8D%E0%A6%9F%E0%A7%8D%E0%A6%B0%E0%A7%8B%E0%A6%B2%E0%A6%BE%E0%A6%B0"
+                    title="মাইক্রোকন্ট্রোলার"
+                    rel="22">মাইক্রোকন্ট্রোলার</a>
+        
+                <a data-sort="0005" 
+                    href="/blog/archive/?tag=Atmega8"
+                    title="Atmega8"
+                    rel="22">Atmega8</a>
+        
+                <a data-sort="0005" 
+                    href="/blog/archive/?tag=Bangla"
+                    title="Bangla"
+                    rel="22">Bangla</a>
+        
+                <a data-sort="0022" 
+                    href="/blog/archive/?tag=Library"
+                    title="Library"
+                    rel="5">Library</a>
+        
+                <a data-sort="0023" 
+                    href="/blog/archive/?tag=Arduino"
+                    title="Arduino"
+                    rel="4">Arduino</a>
+        
+                <a data-sort="0025" 
+                    href="/blog/archive/?tag=C"
+                    title="C"
+                    rel="2">C</a>
+        
+                <a data-sort="0025" 
+                    href="/blog/archive/?tag=C%2B%2B"
+                    title="C++"
+                    rel="2">C++</a>
+        
+                <a data-sort="0025" 
+                    href="/blog/archive/?tag=Debug"
+                    title="Debug"
+                    rel="2">Debug</a>
+        
+                <a data-sort="0025" 
+                    href="/blog/archive/?tag=Embedded+Systems"
+                    title="Embedded Systems"
+                    rel="2">Embedded Systems
+    </div>
+</section>
+
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "shadlyd15";
+    var disqus_identifier = "/library/javascript/node.js/npm/2019/07/01/pretty_debug_js_library";
+    var disqus_url = "http://localhost:4000/library/javascript/node.js/npm/2019/07/01/pretty_debug_js_library/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+        <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+<!--    -->
+  
+
+  
+  <li>
+    <a target="_blank" href="https://github.com/shadlyd15">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a target="_blank" href="https://www.linkedin.com/in/shadlyd15">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a target="_blank" href="https://www.facebook.com/shadlyd15">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+
+  
+  <li>
+      <a target="_blank" href="https://www.instagram.com/shadlyd15">
+          <span class="fa-stack fa-lg">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa  fa-instagram fa-stack-1x fa-inverse"></i>
+          </span>
+      </a>
+  </li>
+  
+
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright &copy; Verbose 2020
+                    <!-- <br> -->
+<!--                     Powered by <a href="http://huangxuan.me">Hux Blog</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true" >
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/blog/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/blog/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/blog/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script src="/blog/js/snackbar.js "></script>
+<script src="/blog/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/blog/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

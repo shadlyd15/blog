@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Software Engineer | Embedded Software Engineer">
+    <meta name="keywords"  content="Design Pattern, Software Engineering, Embedded Systems, IoT, Linux, C, C++, Algorithm, JavaScript">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="AVR-LibC কি? গুরুত্বপূর্ণ হেডার ফাইলএবং ফাংশন পরিচিতি - Another Blog In The Web">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="সি প্রোগ্রামিং ল্যাংগুয়েজ এর সাথে আমরা মোটামুটি সবাই পরিচিত। সি প্রোগ্রামিং দিয়ে অনেক জটিল কাজ করা সম্ভব। ঠিক ধরেছ, এটা দিয়ে মাইক্রোকন্ট্রোলার প্রোগ্রামিং ও করা সম্ভব। কিন্তু দুঃখের কথা হচ্ছে যে সি...">
+    
+    <meta property="article:published_time" content="2014-01-07T00:00:00Z">
+    
+    
+    <meta property="article:author" content="Shadly">
+    
+    
+    <meta property="article:tag" content="Microcontroller">
+    
+    <meta property="article:tag" content="মাইক্রোকন্ট্রোলার">
+    
+    <meta property="article:tag" content="Atmega8">
+    
+    <meta property="article:tag" content="Bangla">
+    
+    <meta property="article:tag" content="AVR">
+    
+    <meta property="article:tag" content="বাংলা">
+    
+    
+    <meta property="og:image" content="http://localhost:4000/blog/img/shadly_sidebar.jpg">
+    <meta property="og:url" content="http://localhost:4000/tutorial/microcontroller/2014/01/07/AVR-LibC/">
+    <meta property="og:site_name" content="Another Blog In The Web">
+    
+    <title>AVR-LibC কি? গুরুত্বপূর্ণ হেডার ফাইলএবং ফাংশন পরিচিতি - Another Blog In The Web</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/blog/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/blog/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/blog/tutorial/microcontroller/2014/01/07/AVR-LibC/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/blog/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/blog/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/blog/">Verbose</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="https://shadlyd15.github.io/" target="_blank">Home</a>
+                    </li>
+<!--                     <li>
+                        <a href="https://github.com/shadlyd15" target="_blank">GitHub</a>
+                    </li>
+                    <li>
+                        <a href="https://linkedin.com/in/shadlyd15" target="_blank">LinkedIn</a>
+                    </li>
+                    <li>
+                        <a href="https://facebook.com/shadlyd15" target="_blank">Facebook</a>
+                    </li>
+                    <li>
+                        <a href="https://instagram.com/shadlyd15" target="_blank">Instagram</a>
+                    </li> -->
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/blog/about/">About</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/blog/archive/">Archive</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/blog/contact/">Contact</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/blog/projects/">Projects</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/blog/img/post-bg-js-module.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/blog/img/post-bg-js-module.jpg');
+        background: ;
+    }
+
+    
+</style>
+
+<header class="intro-header" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/blog/archive/?tag=Microcontroller" title="Microcontroller">Microcontroller</a>
+                        
+                        <a class="tag" href="/blog/archive/?tag=%E0%A6%AE%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%8D%E0%A6%B0%E0%A7%8B%E0%A6%95%E0%A6%A8%E0%A7%8D%E0%A6%9F%E0%A7%8D%E0%A6%B0%E0%A7%8B%E0%A6%B2%E0%A6%BE%E0%A6%B0" title="মাইক্রোকন্ট্রোলার">মাইক্রোকন্ট্রোলার</a>
+                        
+                        <a class="tag" href="/blog/archive/?tag=Atmega8" title="Atmega8">Atmega8</a>
+                        
+                        <a class="tag" href="/blog/archive/?tag=Bangla" title="Bangla">Bangla</a>
+                        
+                        <a class="tag" href="/blog/archive/?tag=AVR" title="AVR">AVR</a>
+                        
+                        <a class="tag" href="/blog/archive/?tag=%E0%A6%AC%E0%A6%BE%E0%A6%82%E0%A6%B2%E0%A6%BE" title="বাংলা">বাংলা</a>
+                        
+                    </div>
+                    <h1>AVR-LibC কি? গুরুত্বপূর্ণ হেডার ফাইলএবং ফাংশন পরিচিতি</h1>
+                    
+                    <h2 class="subheading">Bangla tutorial series on Microcontroller, retreived from my previous blog d15tech.com. Dated here according to the original published date.</h2>
+                    <span class="meta">Posted by Shadly on January 7, 2014</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<p>সি প্রোগ্রামিং ল্যাংগুয়েজ এর সাথে আমরা মোটামুটি সবাই পরিচিত। সি প্রোগ্রামিং দিয়ে অনেক জটিল কাজ করা সম্ভব। ঠিক ধরেছ, এটা দিয়ে মাইক্রোকন্ট্রোলার প্রোগ্রামিং ও করা সম্ভব। কিন্তু দুঃখের কথা হচ্ছে যে সি প্রোগ্রামিং এ মাইক্রোকন্ট্রোলার প্রোগ্রাম করার জন্য কোন নিজস্ব লাইব্রেরি নেই। তাই বুদ্ধি করে গুরুজনেরা মাইক্রোকন্ট্রোলার প্রোগ্রামিংএর জন্য একটি লাইব্রেরি তৈরি করেছেন যা হল AVR-LibC। সহজ কথায় AVR মাইক্রোকন্ট্রোলার প্রোগ্রাম করার জন্য যে সি লাইব্রেরি তার নাম হল AVR-LibC।</p>
+
+<p>সাধারণ সি প্রোগ্রামিং এর মতোই মাইক্রোকন্ট্রোলারকে প্রোগ্রাম করতে বেশ কিছু হেডার ফাইল দরকার হয় যা AVR-LibC তে আছে। মাইক্রোকন্ট্রোলার প্রোগ্রাম করার জন্য যেসব হেডার ফাইল ও ফাংশন সচরাচর দরকার হয় সেসব সম্পর্কে আমরা এখন জানবো।</p>
+
+<p><strong>io.h</strong></p>
+
+<p>মাইক্রোকন্ট্রোলার প্রোগ্রাম করার জন্য সবচেয়ে দরকারি যে হেডার ফাইল তা হল io.h হেডার ফাইলটি। এতে আছে “AVR device-specific IO definitions”। অর্থাৎ কোন AVR মাইক্রোকন্ট্রোলারে কোন ইনপুট-আউটপুট পিন কিভাবে আছে, কোন রেজিস্টারে, কোন এড্রেসে কি আছে সব কিছুই এই হেডার ফাইলে দেয়া আছে। অর্থাৎ সকলAVR মাইক্রোকন্ট্রোলারের খুঁটিনাটি এই হেডার ফাইলে সংরক্ষিত আছে যা সে প্রয়োজন অনুযায়ী কাজে লাগাতে পারে। এই হেডার ফাইলকে কোডে সংযুক্ত করতে লিখতে হবে,</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="cp">#include &lt;avr/io.h&gt;
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+<p><strong>delay.h</strong></p>
+
+<p>মাইক্রোকন্ট্রোলার প্রোগ্রাম করার জন্য আরও একটি জরুরি হেডার ফাইল হল delay.h । এই হেডার ফাইলে আছে কিছু গুরুত্বপূর্ণ ফাংশন যেমনঃ _delay_ms(), _delay_us(), _delay_loop_2() ইত্যাদি জরুরি কিছু ফাংশন যেগুলো মূলত delay তৈরি করতে কাজে লাগে। একে কোডে সংযুক্ত করতে হলে লিখতে হবে,</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="cp">#include &lt;util/delay.h&gt;
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+<p>delay ফাংশনগুলোর প্রধান কাজ হল কোন কোডকে নির্দিষ্ট সময় পর্যন্ত থামিয়ে রাখা।</p>
+
+<p><strong>interrupt.h</strong></p>
+
+<p>চলমান কোন কোডে হঠাৎ বাঁধা দেয়া হচ্ছে interrupt। মনে করি, আমাদের মাইক্রোকন্ট্রোলারটি একটি LED কে এক সেকেন্ড পর পর জ্বালা-নিভা করছে। হঠাৎ একটি বাটন চাপা হল যা কিনা মাইক্রোকন্ট্রোলারের কোন Interrupt পিনের সাথে লাগানো আছে। এখন বাটন চাপার সাথে সাথে মাইক্রোকন্ট্রোলারটি তার আগের কাজ বাদ দিয়ে এখন একটি অন্য কাজ করবে যা তাকে আগেই Interrupt কোডে বলা আছে। এটিই হল Interrupt এবং Interrupt এর জন্য লেখা আলাদা ফাংশনকে Interrupt routine বলে। Interrupt routine সাধারণত কোডের main() ফাংশনের বাইরে থাকে। Interrupt এর বিভিন্ন কাজের জন্য যে হেডার ফাইল তা হল interrupt.h। এর উল্লেখযোগ্য ফাংশন হল sei() এবং cli() যা যথাক্রমে Interrupt কে Enable ও Disable করে। বিভিন্ন ধরণের Interrupt এর মধ্যে ADC Interrupt, Timer Interrupt এবং Hardware Interrupt উল্লেখ্য।একে কোডে সংযুক্ত করতে হলে লিখতে হবে,</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="cp">#include&lt;avr/interrupt.h&gt;
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+<p>এছাড়াও AVR-LibC তে আছে আরও গুরুত্বপূর্ণ কিছু হেডার ফাইল। যেমনঃ wdt.h, eeprom.h , math.h , twi.h ইত্যাদি। AVR-LibC এর সকল হেডার ফাইলের নাম ও শর্ট ডেসক্রিপশন নিচে দেয়া হলঃ</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+</pre></td><td class="rouge-code"><pre><span class="o">&lt;</span><span class="n">alloca</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">Allocate</span> <span class="n">space</span> <span class="n">in</span> <span class="n">the</span> <span class="n">stack</span>
+<span class="o">&lt;</span><span class="n">assert</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">Diagnostics</span>
+<span class="o">&lt;</span><span class="n">ctype</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">Character</span> <span class="n">Operations</span>
+<span class="o">&lt;</span><span class="n">errno</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">System</span> <span class="n">Errors</span>
+<span class="o">&lt;</span><span class="n">inttypes</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">Integer</span> <span class="n">Type</span> <span class="n">conversions</span>
+<span class="o">&lt;</span><span class="n">math</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">Mathematics</span>
+<span class="o">&lt;</span><span class="n">setjmp</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">Non</span><span class="o">-</span><span class="n">local</span> <span class="k">goto</span>
+<span class="o">&lt;</span><span class="n">stdint</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">Standard</span> <span class="n">Integer</span> <span class="n">Types</span>
+<span class="o">&lt;</span><span class="n">stdio</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">Standard</span> <span class="n">IO</span> <span class="n">facilities</span>
+<span class="o">&lt;</span><span class="n">stdlib</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">General</span> <span class="n">utilities</span>
+<span class="o">&lt;</span><span class="n">string</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">Strings</span>
+<span class="o">&lt;</span><span class="n">avr</span><span class="o">/</span><span class="n">boot</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">Bootloader</span> <span class="n">Support</span> <span class="n">Utilities</span>
+<span class="o">&lt;</span><span class="n">avr</span><span class="o">/</span><span class="n">eeprom</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">EEPROM</span> <span class="n">handling</span>
+<span class="o">&lt;</span><span class="n">avr</span><span class="o">/</span><span class="n">fuse</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">Fuse</span> <span class="n">Support</span>
+<span class="o">&lt;</span><span class="n">avr</span><span class="o">/</span><span class="n">interrupt</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">Interrupts</span>
+<span class="o">&lt;</span><span class="n">avr</span><span class="o">/</span><span class="n">io</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">AVR</span> <span class="n">device</span><span class="o">-</span><span class="n">specific</span> <span class="n">IO</span> <span class="n">definitions</span>
+<span class="o">&lt;</span><span class="n">avr</span><span class="o">/</span><span class="n">lock</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">Lockbit</span> <span class="n">Support</span>
+<span class="o">&lt;</span><span class="n">avr</span><span class="o">/</span><span class="n">pgmspace</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">Program</span> <span class="n">Space</span> <span class="n">Utilities</span>
+<span class="o">&lt;</span><span class="n">avr</span><span class="o">/</span><span class="n">power</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">Power</span> <span class="n">Reduction</span> <span class="n">Management</span>
+<span class="o">&lt;</span><span class="n">avr</span><span class="o">/</span><span class="n">sfr_defs</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">Special</span> <span class="n">function</span> <span class="n">registers</span>
+<span class="o">&lt;</span><span class="n">avr</span><span class="o">/</span><span class="n">signature</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">Signature</span> <span class="n">Support</span>
+<span class="o">&lt;</span><span class="n">avr</span><span class="o">/</span><span class="n">sleep</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">Power</span> <span class="n">Management</span> <span class="n">and</span> <span class="n">Sleep</span> <span class="n">Modes</span>
+<span class="o">&lt;</span><span class="n">avr</span><span class="o">/</span><span class="n">version</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">avr</span><span class="o">-</span><span class="n">libc</span> <span class="n">version</span> <span class="n">macros</span>
+<span class="o">&lt;</span><span class="n">avr</span><span class="o">/</span><span class="n">wdt</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">Watchdog</span> <span class="n">timer</span> <span class="n">handling</span>
+<span class="o">&lt;</span><span class="n">util</span><span class="o">/</span><span class="n">atomic</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span> <span class="n">Atomically</span> <span class="n">and</span> <span class="n">Non</span><span class="o">-</span><span class="n">Atomically</span> <span class="n">Executed</span> <span class="n">Code</span> <span class="n">Blocks</span>
+<span class="o">&lt;</span><span class="n">util</span><span class="o">/</span><span class="n">crc16</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">CRC</span> <span class="n">Computations</span>
+<span class="o">&lt;</span><span class="n">util</span><span class="o">/</span><span class="n">delay</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">Convenience</span> <span class="n">functions</span> <span class="k">for</span> <span class="n">busy</span><span class="o">-</span><span class="n">wait</span> <span class="n">delay</span> <span class="n">loops</span>
+<span class="o">&lt;</span><span class="n">util</span><span class="o">/</span><span class="n">delay_basic</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">Basic</span> <span class="n">busy</span><span class="o">-</span><span class="n">wait</span> <span class="n">delay</span> <span class="n">loops</span>
+<span class="o">&lt;</span><span class="n">util</span><span class="o">/</span><span class="n">parity</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">Parity</span> <span class="n">bit</span> <span class="n">generation</span>
+<span class="o">&lt;</span><span class="n">util</span><span class="o">/</span><span class="n">setbaud</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">Helper</span> <span class="n">macros</span> <span class="k">for</span> <span class="n">baud</span> <span class="n">rate</span> <span class="n">calculations</span>
+<span class="o">&lt;</span><span class="n">util</span><span class="o">/</span><span class="n">twi</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">TWI</span> <span class="n">bit</span> <span class="n">mask</span> <span class="n">definitions</span>
+<span class="o">&lt;</span><span class="n">compat</span><span class="o">/</span><span class="n">deprecated</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">Deprecated</span> <span class="n">items</span>
+<span class="o">&lt;</span><span class="n">compat</span><span class="o">/</span><span class="n">ina90</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;:</span> <span class="n">Compatibility</span> <span class="n">with</span> <span class="n">IAR</span> <span class="n">EWB</span> <span class="mf">3.</span><span class="n">x</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>হেডার ফাইলের সংখ্যা দেখে ভয় পাবার কিছুই নেই। এদের হাতেগোনা কিছু হেডার ফাইল ছাড়া বাকিগুলো আমরা কখনো ধরেও দেখবনা। Trust me.</p>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/blog/tutorial/microcontroller/2014/01/07/ADC,-%E0%A6%A1%E0%A6%BF%E0%A6%9C%E0%A6%BF%E0%A6%9F%E0%A6%BE%E0%A6%B2-%E0%A6%A6%E0%A7%81%E0%A6%A8%E0%A6%BF%E0%A7%9F%E0%A6%BE%E0%A7%9F-%E0%A6%8F%E0%A6%A8%E0%A6%BE%E0%A6%B2%E0%A6%97-%E0%A6%A6%E0%A7%81%E0%A6%A8%E0%A6%BF%E0%A7%9F%E0%A6%BE%E0%A6%B0-%E0%A6%AC%E0%A6%BE%E0%A6%B0-%E0%A6%A4%E0%A6%BE%E0%A6%AC%E0%A6%BE%E0%A6%B9%E0%A6%95/" data-toggle="tooltip" data-placement="top" title="ADC : ডিজিটাল দুনিয়ায় এনালগ দুনিয়ার বার্তাবাহক">
+                        Previous<br>
+                        <span>ADC : ডিজিটাল দুনিয়ায় এনালগ দুনিয়ার বার্তাবাহক</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/blog/tutorial/microcontroller/2014/01/07/Darlington-Driver/" data-toggle="tooltip" data-placement="top" title="সেন্সরে হাতেখড়ি">
+                        Next<br>
+                        <span>সেন্সরে হাতেখড়ি</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/blog/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        </a>
+        
+        
+                <a data-sort="0005" 
+                    href="/blog/archive/?tag=Microcontroller"
+                    title="Microcontroller"
+                    rel="22">Microcontroller</a>
+        
+                <a data-sort="0004" 
+                    href="/blog/archive/?tag=AVR"
+                    title="AVR"
+                    rel="23">AVR</a>
+        
+                <a data-sort="0005" 
+                    href="/blog/archive/?tag=%E0%A6%AC%E0%A6%BE%E0%A6%82%E0%A6%B2%E0%A6%BE"
+                    title="বাংলা"
+                    rel="22">বাংলা</a>
+        
+                <a data-sort="0005" 
+                    href="/blog/archive/?tag=%E0%A6%AE%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%8D%E0%A6%B0%E0%A7%8B%E0%A6%95%E0%A6%A8%E0%A7%8D%E0%A6%9F%E0%A7%8D%E0%A6%B0%E0%A7%8B%E0%A6%B2%E0%A6%BE%E0%A6%B0"
+                    title="মাইক্রোকন্ট্রোলার"
+                    rel="22">মাইক্রোকন্ট্রোলার</a>
+        
+                <a data-sort="0005" 
+                    href="/blog/archive/?tag=Atmega8"
+                    title="Atmega8"
+                    rel="22">Atmega8</a>
+        
+                <a data-sort="0005" 
+                    href="/blog/archive/?tag=Bangla"
+                    title="Bangla"
+                    rel="22">Bangla</a>
+        
+                <a data-sort="0022" 
+                    href="/blog/archive/?tag=Library"
+                    title="Library"
+                    rel="5">Library</a>
+        
+                <a data-sort="0023" 
+                    href="/blog/archive/?tag=Arduino"
+                    title="Arduino"
+                    rel="4">Arduino</a>
+        
+                <a data-sort="0025" 
+                    href="/blog/archive/?tag=C"
+                    title="C"
+                    rel="2">C</a>
+        
+                <a data-sort="0025" 
+                    href="/blog/archive/?tag=C%2B%2B"
+                    title="C++"
+                    rel="2">C++</a>
+        
+                <a data-sort="0025" 
+                    href="/blog/archive/?tag=Debug"
+                    title="Debug"
+                    rel="2">Debug</a>
+        
+                <a data-sort="0025" 
+                    href="/blog/archive/?tag=Embedded+Systems"
+                    title="Embedded Systems"
+                    rel="2">Embedded Systems
+    </div>
+</section>
+
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "shadlyd15";
+    var disqus_identifier = "/tutorial/microcontroller/2014/01/07/AVR-LibC";
+    var disqus_url = "http://localhost:4000/tutorial/microcontroller/2014/01/07/AVR-LibC/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+        <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+<!--    -->
+  
+
+  
+  <li>
+    <a target="_blank" href="https://github.com/shadlyd15">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a target="_blank" href="https://www.linkedin.com/in/shadlyd15">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a target="_blank" href="https://www.facebook.com/shadlyd15">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+
+  
+  <li>
+      <a target="_blank" href="https://www.instagram.com/shadlyd15">
+          <span class="fa-stack fa-lg">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa  fa-instagram fa-stack-1x fa-inverse"></i>
+          </span>
+      </a>
+  </li>
+  
+
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright &copy; Verbose 2020
+                    <!-- <br> -->
+<!--                     Powered by <a href="http://huangxuan.me">Hux Blog</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true" >
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/blog/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/blog/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/blog/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script src="/blog/js/snackbar.js "></script>
+<script src="/blog/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+
+
+<!-- Multi-Lingual -->
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

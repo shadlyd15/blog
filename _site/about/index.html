@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Software Engineer | Embedded Software Engineer">
+    <meta name="keywords"  content="Design Pattern, Software Engineering, Embedded Systems, IoT, Linux, C, C++, Algorithm, JavaScript">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="About - Another Blog In The Web">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="Dream is Destiny">
+    
+    <meta property="og:image" content="http://localhost:4000/blog/img/shadly_sidebar.jpg">
+    <meta property="og:url" content="http://localhost:4000/about/">
+    <meta property="og:site_name" content="Another Blog In The Web">
+    
+    <title>About - Another Blog In The Web</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/blog/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/blog/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/blog/about/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/blog/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/blog/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/blog/">Verbose</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="https://shadlyd15.github.io/" target="_blank">Home</a>
+                    </li>
+<!--                     <li>
+                        <a href="https://github.com/shadlyd15" target="_blank">GitHub</a>
+                    </li>
+                    <li>
+                        <a href="https://linkedin.com/in/shadlyd15" target="_blank">LinkedIn</a>
+                    </li>
+                    <li>
+                        <a href="https://facebook.com/shadlyd15" target="_blank">Facebook</a>
+                    </li>
+                    <li>
+                        <a href="https://instagram.com/shadlyd15" target="_blank">Instagram</a>
+                    </li> -->
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/blog/about/">About</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/blog/archive/">Archive</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/blog/contact/">Contact</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/blog/projects/">Projects</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Page Header -->
+
+
+
+
+
+
+
+<header class="intro-header" style="background-image: url('/blog/img/about-bg.jpg')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        <div class="site-heading">
+        
+          <h1>About</h1>
+          <span class="subheading">Dream is Destiny</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<!-- Main Content -->
+<div class="container">
+	<div class="row">
+        
+
+<!-- USE SIDEBAR -->
+    <!-- PostList Container -->
+    		<div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                postlist-container
+            ">
+    			<div class="post-container">
+    <blockquote>
+        Another brick in the wall.
+    </blockquote>
+
+    <p>
+        I am  Shadly Salahuddin, born and raised in the old city of Dhaka, Bangladesh. I have completed my 
+        Bachelor’s Degree in Electrical and Electronic Engineering from Rajshahi University of Engineering 
+        & Technology (RUET), Bangladesh. Recognizing my passion for computer science, I enrolled myself into 
+        Bergische Universität Wuppertal for a Master's Degree in Coumputer Simulation in Science. Currently I 
+        am living in Wuppertal, North Rhine-Westphalia, Germany.
+    </p>
+
+    <blockquote>
+        Software Engineer or Embedded Software Engineer or may be something else in between.
+    </blockquote>
+
+    <p>
+        In March 2016, after completing my bachelor’s degree, I started my career as an Embedded System 
+        Engineer in AplombTech BD Limited (A concern of Sinepulse GmbH, Germany). My job responsibility was 
+        to design and develop firmware and software services for IoT and Industry 4.0 devices. During
+        my tenure here, I have also developed some Linux based operating systems using openwrt and 
+        buildroot for different embedded linux projects. It is a great pride of mine that my designed 
+        and developed IoT devices are deployed and running successfully in different corners of Bangladesh.
+    </p>
+
+    <p>
+        After working as an Embedded System Engineer for 3 years, I did quit my job to try and learn something new. 
+        I started working as a Software Engineer in, PeepThePlace, a company in Bangladesh focused on surveillance 
+        systems. There I worked on their backend systems with technologies like Javascript, Node.js, AWS, GraphQL etc. 
+        As I had prior experiences with Embedded Linux, I started developing OpenWrt based operating systems for our 
+        company's servilance system. I ended up my journey with this company just after 5 months of joinijng to 
+        take a leap of faith.
+    </p>
+
+    <blockquote>
+        Because Dreams Never Die.
+    </blockquote>
+
+    <p>
+        Globalization has broken the borders between countries and paved a way to pursue one’s passion even 
+        in a distant land. Soon I realized thatn it is imperative to engage in a more competitive and progressive 
+        learning. So Investing 100% of myself, I took the leap of faith. In October 2019, I started a new chapter 
+        of my life in Germany as a Master's student in Bergische Universität Wuppertal.
+    </p>
+
+    <br>
+    <p style="text-align:right;">
+        Last updated on : January 9, 2020
+    </p>
+
+</div>
+
+
+
+<div class="comment">
+    <div id="disqus_thread" class="disqus-thread">
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "shadlyd15";
+    var disqus_identifier = "shadlyd15//about/";
+    var disqus_url = "http://localhost:4000/about/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+
+    		</div>
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-3 col-lg-offset-0
+                col-md-3 col-md-offset-0
+                col-sm-12
+                col-xs-12
+                sidebar-container
+            ">
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+    <h5><a href="/blog/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        </a>
+        
+        
+                <a data-sort="0005" 
+                    href="/blog/archive/?tag=Microcontroller"
+                    title="Microcontroller"
+                    rel="22">Microcontroller</a>
+        
+                <a data-sort="0004" 
+                    href="/blog/archive/?tag=AVR"
+                    title="AVR"
+                    rel="23">AVR</a>
+        
+                <a data-sort="0005" 
+                    href="/blog/archive/?tag=%E0%A6%AC%E0%A6%BE%E0%A6%82%E0%A6%B2%E0%A6%BE"
+                    title="বাংলা"
+                    rel="22">বাংলা</a>
+        
+                <a data-sort="0005" 
+                    href="/blog/archive/?tag=%E0%A6%AE%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%8D%E0%A6%B0%E0%A7%8B%E0%A6%95%E0%A6%A8%E0%A7%8D%E0%A6%9F%E0%A7%8D%E0%A6%B0%E0%A7%8B%E0%A6%B2%E0%A6%BE%E0%A6%B0"
+                    title="মাইক্রোকন্ট্রোলার"
+                    rel="22">মাইক্রোকন্ট্রোলার</a>
+        
+                <a data-sort="0005" 
+                    href="/blog/archive/?tag=Atmega8"
+                    title="Atmega8"
+                    rel="22">Atmega8</a>
+        
+                <a data-sort="0005" 
+                    href="/blog/archive/?tag=Bangla"
+                    title="Bangla"
+                    rel="22">Bangla</a>
+        
+                <a data-sort="0022" 
+                    href="/blog/archive/?tag=Library"
+                    title="Library"
+                    rel="5">Library</a>
+        
+                <a data-sort="0023" 
+                    href="/blog/archive/?tag=Arduino"
+                    title="Arduino"
+                    rel="4">Arduino</a>
+        
+                <a data-sort="0025" 
+                    href="/blog/archive/?tag=C"
+                    title="C"
+                    rel="2">C</a>
+        
+                <a data-sort="0025" 
+                    href="/blog/archive/?tag=C%2B%2B"
+                    title="C++"
+                    rel="2">C++</a>
+        
+                <a data-sort="0025" 
+                    href="/blog/archive/?tag=Debug"
+                    title="Debug"
+                    rel="2">Debug</a>
+        
+                <a data-sort="0025" 
+                    href="/blog/archive/?tag=Embedded+Systems"
+                    title="Embedded Systems"
+                    rel="2">Embedded Systems
+    </div>
+</section>
+
+
+                <!-- Short About -->
+                <section class="visible-md visible-lg">
+  <hr>
+  <h5><a href="/blog/about/">ABOUT ME</a></h5>
+  <div class="short-about">
+    
+    <img src="/blog/img/shadly_sidebar.jpg" />
+    
+    
+    <p>I am ​Shadly Salahuddin​, a software engineer from Bangladesh. Currently pursuing Master's Degree in Coumputer Simulation in Science in Bergische Universität Wuppertal, Germany.</p>
+    
+    <!-- SNS Link -->
+    
+
+
+<ul class="list-inline">
+
+
+<!--    -->
+  
+
+  
+  <li>
+    <a target="_blank" href="https://github.com/shadlyd15">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a target="_blank" href="https://www.linkedin.com/in/shadlyd15">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a target="_blank" href="https://www.facebook.com/shadlyd15">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+
+  
+  <li>
+      <a target="_blank" href="https://www.instagram.com/shadlyd15">
+          <span class="fa-stack fa-lg">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa  fa-instagram fa-stack-1x fa-inverse"></i>
+          </span>
+      </a>
+  </li>
+  
+
+</ul>
+  </div>
+</section>
+
+                <!-- Friends Blog -->
+                
+    		</div>
+        
+	</div>
+</div>
+
+
+
+        <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+<!--    -->
+  
+
+  
+  <li>
+    <a target="_blank" href="https://github.com/shadlyd15">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a target="_blank" href="https://www.linkedin.com/in/shadlyd15">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a target="_blank" href="https://www.facebook.com/shadlyd15">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+
+  
+  <li>
+      <a target="_blank" href="https://www.instagram.com/shadlyd15">
+          <span class="fa-stack fa-lg">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa  fa-instagram fa-stack-1x fa-inverse"></i>
+          </span>
+      </a>
+  </li>
+  
+
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright &copy; Verbose 2020
+                    <!-- <br> -->
+<!--                     Powered by <a href="http://huangxuan.me">Hux Blog</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true" >
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/blog/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/blog/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/blog/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script src="/blog/js/snackbar.js "></script>
+<script src="/blog/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+
+
+<!-- Multi-Lingual -->
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
