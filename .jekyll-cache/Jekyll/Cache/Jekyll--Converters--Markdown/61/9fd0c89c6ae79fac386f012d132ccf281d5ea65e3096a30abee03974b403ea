@@ -1,0 +1,3 @@
+I"S<h2 id="use-your-pc-as-an-arduino-board">Use your PC as an Arduino Board</h2>
+<p>Arduinative is an Arduino core to add PC Environment Support in Arduino IDE. This core enables you to build and run Arduino sketches in Native Environment from Arduino IDE. This core was built to compile and run unit tests for arduino in PC environment.</p>
+:ET

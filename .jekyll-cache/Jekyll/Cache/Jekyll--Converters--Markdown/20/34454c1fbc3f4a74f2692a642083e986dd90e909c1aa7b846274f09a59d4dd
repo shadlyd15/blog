@@ -1,0 +1,182 @@
+I",<h2 id="what-is-airbootgsm">What is AirBootGSM?</h2>
+
+<p>This is proof of concept AVR &amp; Arduino bootloader for upgrading firmware over the air using GSM modem. It is kind of fail-safe. If anything wrong happens and the chip does not boot after the firmware upgrade, the bootloader automatically retries to download and reinstall new firmware. AirBootGSM is based on highly optimized <a href="https://github.com/Optiboot/optiboot">Optiboot Bootloader.</a></p>
+
+<h2 id="setup-toolchain-to-compile-">Setup Toolchain to Compile :</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>binutils gcc-avr avr-libc uisp avrdude flex byacc bison
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="compile-">Compile :</h2>
+<p>Run build.sh</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>./build.sh
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>Or select your traget mcu and run the following commands.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="c"># Select Your Target MCU</span>
+<span class="nv">TARGET_SPEED</span><span class="o">=</span><span class="s2">"8MHz"</span>
+<span class="c"># TARGET_SPEED="16MHZ"</span>
+
+<span class="nv">TARGET_MCU</span><span class="o">=</span><span class="s2">"atmega16"</span>
+<span class="c"># TARGET_MCU="atmega168"</span>
+<span class="c"># TARGET_MCU="atmega328p"  #TESTED</span>
+<span class="c"># TARGET_MCU="atmega1284p"</span>
+<span class="nv">TARGET</span><span class="o">=</span><span class="nv">$TARGET_MCU</span><span class="s2">"_"</span><span class="nv">$TARGET_SPEED</span>
+
+make clean
+make <span class="nv">$TARGET</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="to-pragram-">To Pragram :</h2>
+<p>Run build.sh</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>./build.sh
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>Or select your programmer and run the following commands.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="nv">PROGRAMMER</span><span class="o">=</span><span class="s2">"usbasp"</span>
+<span class="c"># PROGRAMMER="arduino"</span>
+<span class="c"># PROGRAMMER="avrisp"</span>
+<span class="c"># PROGRAMMER="avrispmkII"</span>
+avrdude <span class="nt">-c</span> <span class="nv">$PROGRAMMER</span> <span class="nt">-p</span> <span class="nv">$TARGET_MCU</span> <span class="nt">-u</span> <span class="nt">-U</span> flash:w:<span class="s2">"AirBootGSM"</span>_<span class="nv">$TARGET</span>.hex
+</pre></td></tr></tbody></table></code></pre></div></div>
+<h2 id="how-to-use">How To Use</h2>
+<p>To use the OTA firmware upgrade capabilities from application layer, you can use the provided Arduino library. The library contains a simple example to demonstrate OTA firmware upgrade from application layer. It triggers OTA firmware upgrade if it gets input string “OTA” the from Serial.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+</pre></td><td class="rouge-code"><pre><span class="cp">#include "AirBootGSMLib.h"
+</span>
+<span class="kt">void</span> <span class="nf">start_ota</span><span class="p">(){</span>
+  <span class="n">eeprom_write_byte</span><span class="p">(</span><span class="n">OTA_INIT_SIG_ADDR</span><span class="p">,</span> <span class="mi">15</span><span class="p">);</span>
+  <span class="n">wdt_enable</span><span class="p">(</span><span class="n">WDTO_15MS</span><span class="p">);</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">stop_ota</span><span class="p">(){</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">eeprom_read_byte</span><span class="p">(</span><span class="n">OTA_INIT_SIG_ADDR</span><span class="p">)</span> <span class="o">==</span> <span class="mi">15</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">eeprom_read_byte</span><span class="p">(</span><span class="n">OTA_STAUS_ADDR</span><span class="p">)</span> <span class="o">==</span> <span class="n">OTA_COMPLETED</span><span class="p">){</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"Firmware Upgraded"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span><span class="p">{</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"Firmware Upgrade Failed"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">eeprom_write_byte</span><span class="p">(</span><span class="n">OTA_INIT_SIG_ADDR</span><span class="p">,</span> <span class="mh">0xFF</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">char</span> <span class="n">buff</span><span class="p">[</span><span class="mi">128</span><span class="p">];</span>
+
+<span class="c1">// the setup function runs once when you press reset or power the board</span>
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">LED_BUILTIN</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"</span><span class="se">\r\n</span><span class="s">-- Application Starts --"</span><span class="p">);</span>
+  <span class="n">stop_ota</span><span class="p">();</span>
+  <span class="n">memset</span><span class="p">(</span><span class="n">buff</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mi">128</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// the loop function runs over and over again forever</span>
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+ <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"Loop Starts"</span><span class="p">);</span>
+ <span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED_BUILTIN</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+ <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>                       <span class="c1">// wait for a second</span>
+ <span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED_BUILTIN</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+ <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>                       <span class="c1">// wait for a second</span>
+ <span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED_BUILTIN</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+ <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>                       <span class="c1">// wait for a second</span>
+ <span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED_BUILTIN</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+ <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>                       <span class="c1">// wait for a second</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">Serial</span><span class="p">.</span><span class="n">available</span><span class="p">()){</span>
+      <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span><span class="p">)</span><span class="n">Serial</span><span class="p">.</span><span class="n">read</span><span class="p">();</span>
+      <span class="n">buff</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span>
+      <span class="n">x</span> <span class="o">=</span> <span class="p">((</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">128</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">strstr</span><span class="p">(</span><span class="n">buff</span><span class="p">,</span> <span class="s">"OTA"</span><span class="p">)){</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"Starting OTA .....</span><span class="se">\r\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">start_ota</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="limitations-">Limitations :</h2>
+<p>Currently it only supports Neoway GSM modems that support Transparet TCP mode. To keep compiled binary as small as possible to fit with a few KBs, readability of the code is greatly hampared. Still any other modems can easily be adopted.</p>
+:ET

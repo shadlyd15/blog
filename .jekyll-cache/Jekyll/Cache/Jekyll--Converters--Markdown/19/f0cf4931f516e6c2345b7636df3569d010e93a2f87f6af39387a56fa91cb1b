@@ -1,0 +1,33 @@
+I"�
+<h2 id="use-your-pc-as-an-arduino-board">Use your PC as an Arduino Board</h2>
+<p>Arduinative is an Arduino core to add PC Environment Support in Arduino IDE. This core enables you to build and run Arduino sketches in Native Environment from Arduino IDE. This core was built to compile and run unit tests for arduino in PC environment.</p>
+
+<h2 id="features">Features</h2>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Compile &amp; Run Arduino Sketches in PC</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Supports millis()</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Supports TinyGSM library</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Use FTDI as Arduino Serial Interface</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Implement LibMPSSE-I2C to use FTDI as I2C device</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Use flow control to use DTR/RTS as GPIO</li>
+</ul>
+
+<h2 id="dependencies">Dependencies</h2>
+<p>C++ Boost library is required to use FTDI as Serial. Use the following command to install Boost library.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>libboost-all-dev
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="install-arduinative">Install Arduinative</h2>
+<p>Download the repository from <a href="https://github.com/shadlyd15/Arduinative/archive/master.zip"> here </a> or clone using the command below</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>git clone https://github.com/shadlyd15/Arduinative.git
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>Now, just simply create a folder named “hardware” in your arduino sketchbook folder. Copy the Arduino directory here.</p>
+
+<p>Now select Arduinative from <strong>Tools &gt; Board &gt; Arduinative</strong>
+Select FTDI serial port if you want to use Serial.</p>
+:ET
