@@ -2,7 +2,7 @@
 layout: post
 title: "Mosquitto in Docker"
 subtitle: 'Run MQTT Broker in Docker'
-date:       2019-01-18
+date:       2020-01-18
 author: "Shadly"
 category: Library
 categories: ['Tutorial', 'Docker']
