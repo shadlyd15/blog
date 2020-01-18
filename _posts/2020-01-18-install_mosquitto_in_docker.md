@@ -93,11 +93,11 @@ sudo docker run -p 1883:1883 mosquitto
 ```
 
 ## Useful Docker Commands :
-**docker run** – Runs a command in a new container.
-**docker start** – Starts one or more stopped containers
-**docker stop** – Stops one or more running containers
-**docker build** – Builds an image form a Docker file
-**docker rm** – Removes an image
-**docker build** – Builds an image form a Docker file
-**docker container ls** - Lists running containers
+**docker run** – Runs a command in a new container  
+**docker start** – Starts one or more stopped containers  
+**docker stop** – Stops one or more running containers  
+**docker build** – Builds an image form a Docker file  
+**docker rm** – Removes an image  
+**docker build** – Builds an image form a Docker file  
+**docker container ls** - Lists running containers  
 
