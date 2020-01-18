@@ -48,3 +48,56 @@ To learn more about MQTT, you can checkout [this](https://www.hivemq.com/mqtt-es
 > 
 > --<cite>[https://mosquitto.org/](https://mosquitto.org/)</cite>
 
+## Create docker container with mosquitto
+### Using Command Line :
+Pull official Eclipse Mosquitto image from using the following command
+ ```bash
+ docker pull eclipse-mosquitto
+ ```
+
+Create a folder named mosquitto. Inside this folder, create another folder named config. Now create a file here with name mosquitto.conf. This is the configuration file for the broker. Put the below configuration in mosquitto.conf file and save.
+```
+persistence true 
+persistence_location /mosquitto/data/ 
+log_dest file /mosquitto/log/mosquitto.log
+```
+Now run the following command to create and run the container named "mosquitto". Do not forget to replace *"Your Full Path"* with your directory.
+```bash
+docker run --name=mosquitto --restart=always  -p 1883:1883 -p 9001:9001 -v /Your Full Path/mosquitto/:/mosquitto/ -d eclipse-mosquitto
+```
+
+Now your docker container with mosquitto should be up and running !
+
+### Using Dockerfile : 
+
+Create a folder named src. Now create a file here with name mosquitto.conf. This is the configuration file for the broker. Put the below configuration in mosquitto.conf file and save.
+```
+persistence true 
+persistence_location /mosquitto/data/ 
+log_dest file /mosquitto/log/mosquitto.log
+```
+
+Create a file named *"Dockerfile"* and paste the following lines
+```
+FROM eclipse-mosquitto
+COPY src/mosquitto.conf ./mosquitto/config/
+EXPOSE 1883
+```
+Now build the image with the following command
+```bash
+sudo docker build -t mosquitto .
+```
+Now run the container with the following command
+```bash
+sudo docker run -p 1883:1883 mosquitto
+```
+
+## Useful Docker Commands :
+**docker run** – Runs a command in a new container.
+**docker start** – Starts one or more stopped containers
+**docker stop** – Stops one or more running containers
+**docker build** – Builds an image form a Docker file
+**docker rm** – Removes an image
+**docker build** – Builds an image form a Docker file
+**docker container ls** - Lists running containers
+
