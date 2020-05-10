@@ -1,4 +1,4 @@
-I"� <h2 id="what-is-docker">What is Docker?</h2>
+I"� <h2 id="what-is-docker">What is Docker?</h2>
 <blockquote>
   <p>Docker is a tool designed to make it easier to create, deploy, and run applications by using containers. Containers allow a developer to package up an application with all of the parts it needs, such as libraries and other dependencies, and ship it all out as one package. By doing so, thanks to the container, the developer can rest assured that the application will run on any other Linux machine regardless of any customized settings that machine might have that could differ from the machine used for writing and testing the code.</p>
 
@@ -91,12 +91,12 @@ EXPOSE 1883
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="useful-docker-commands-">Useful Docker Commands :</h2>
-<p><strong>docker run</strong> – Runs a command in a new container.
-<strong>docker start</strong> – Starts one or more stopped containers
-<strong>docker stop</strong> – Stops one or more running containers
-<strong>docker build</strong> – Builds an image form a Docker file
-<strong>docker rm</strong> – Removes an image
-<strong>docker build</strong> – Builds an image form a Docker file
+<p><strong>docker run</strong> – Runs a command in a new container<br />
+<strong>docker start</strong> – Starts one or more stopped containers<br />
+<strong>docker stop</strong> – Stops one or more running containers<br />
+<strong>docker build</strong> – Builds an image form a Docker file<br />
+<strong>docker rm</strong> – Removes an image<br />
+<strong>docker build</strong> – Builds an image form a Docker file<br />
 <strong>docker container ls</strong> - Lists running containers</p>
 
 :ET
