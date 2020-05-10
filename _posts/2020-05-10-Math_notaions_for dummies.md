@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Mathematical Notaions for Dummies"
-subtitle: 'Usefull mathametical notaions cheat sheet'
+subtitle: 'Useful mathametical notaions cheat sheet'
 date:       2020-05-10
 author: "Shadly"
 category: Mathematics
