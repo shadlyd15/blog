@@ -1,4 +1,4 @@
-I"q<h2 id="why-do-we-need-this">Why do we need this?</h2>
+I"�<h2 id="why-do-we-need-this">Why do we need this?</h2>
 <blockquote>
   <p>I am not sure if you actually need this list but mathematics is everywhere and it’s better to know these notaions. Spacially if you are pursuing higher education or you really want to understand the world you live in. Recently I have started doing mathematics for my Master’s degree and I was having problems remembering some basic mathematical notaions. Which is really bad! So I decided to make a list of some usefull and basic mathematical notaions. I gathered the information mostly from Wikipedia and Quora. I will keep updating the list.</p>
 </blockquote>
@@ -32,13 +32,13 @@
       <td>π is an element of the set of real numbers</td>
     </tr>
     <tr>
-      <td>ℝn</td>
+      <td>ℝ<sup>n</sup></td>
       <td>is the set of all column vectors with n components which are each real numbers</td>
       <td> </td>
       <td> </td>
     </tr>
     <tr>
-      <td>ℝm×n</td>
+      <td>ℝ<sup>m×n</sup></td>
       <td>is the set of all m×nmatrices whose elements are real numbers.</td>
       <td> </td>
       <td>is the set of all  m×n  matrices whose elements are real numbers.</td>
