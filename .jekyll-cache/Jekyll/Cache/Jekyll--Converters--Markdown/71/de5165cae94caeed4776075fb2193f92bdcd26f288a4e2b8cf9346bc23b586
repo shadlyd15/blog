@@ -1,0 +1,115 @@
+I"�<h2 id="what-is-blas">What is BLAS</h2>
+<p>The BLAS (Basic Linear Algebra Subprograms) are routines that provide standard building blocks for performing basic vector and matrix operations. The Level 1 BLAS perform scalar, vector and vector-vector operations, the Level 2 BLAS perform matrix-vector operations, and the Level 3 BLAS perform matrix-matrix operations. Because the BLAS are efficient, portable, and widely available, they are commonly used in the development of high quality linear algebra software, LAPACK for example. – <cite><a href="http://www.netlib.org/blas/#_presentation">http://www.netlib.org/blas</a></cite></p>
+
+<h2 id="what-is-cblas">What is CBLAS</h2>
+<p>CBLAS is the C interface for legacy BLAS. It is a wrapper around the highly optimized linear algebra library libblas. If you are into high performance computing, then it is a thing for you. To be able to use this interface, you need libblas installed in your system.</p>
+
+<h2 id="install-libblas-dev">Install libblas-dev</h2>
+<p>To install libblas-dev in your system run the following commands</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>libblas-dev
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="locate-libblas-location">Locate libblas location</h2>
+<p>Run the following command to locate libblas.a.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>whereis libblas
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>For my case it was “/usr/lib/x86_64-linux-gnu/libblas.a”. We will need this location later to compile CBLAS.</p>
+
+<h2 id="download-and-extract-cblas">Download and extract CBLAS</h2>
+<p>Download CBLAS from <a href="http://www.netlib.org/blas/blast-forum/cblas.tgz">this</a> link.
+Extract the tgz file with the following command.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nb">tar </span>xzvf blas.tgz
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="compile-cblas">Compile CBLAS</h2>
+<p>Go to the extracted folder and open the file “Makefile.in”. Find the line “BLLIB = “. Change the location of the libblas.a with your location. In my case the line looked like below.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>BLLIB <span class="o">=</span> /usr/lib/x86_64-linux-gnu/libblas.a
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>Save the file and run make command.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>make
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>If everything goes right, CBLAS will be compiled in a few seconds. You will find the archived library in lib folder with the name “cblas_LINUX.a”</p>
+
+<h2 id="use-static-cblas-library-in-cpp-project">Use static CBLAS library in cpp project</h2>
+<p>To use cblas_LINUX.a in your cpp project, just copy the library in your root folder and rename it “libcblas.a”. Also copy the headers cblas.h and cblas_f77.h in that folder. Here is a simple example in cpp which calculates the Euclidean norm of a sample vector. Save the code with filename “norm.cpp”</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+</pre></td><td class="rouge-code"><pre><span class="cp">#include &lt;iostream&gt;
+#include &lt;math.h&gt;
+</span>
+<span class="k">extern</span> <span class="s">"C"</span> <span class="p">{</span>
+  <span class="cp">#include "cblas.h"
+</span><span class="p">}</span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="k">const</span> <span class="o">*</span><span class="n">argv</span><span class="p">[]){</span>
+	<span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+	<span class="kt">double</span> <span class="n">euclidean_norm</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+	<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Enter the size of the vector : "</span><span class="p">;</span>
+	<span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span><span class="p">;</span>
+
+	<span class="c1">// Creating sample vector</span>
+	<span class="kt">double</span> <span class="o">*</span> <span class="n">V</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">double</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">V</span><span class="p">){</span>
+		<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">){</span>
+			<span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>		
+		<span class="p">}</span>
+	<span class="p">}</span>
+	
+	<span class="c1">// Calculating the euclidean norm with cblas function "cblas_dnrm2"</span>
+	<span class="n">euclidean_norm</span> <span class="o">=</span> <span class="n">cblas_dnrm2</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+	<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Euclidean Norm with cblas : "</span> <span class="o">&lt;&lt;</span> <span class="n">euclidean_norm</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+	<span class="k">delete</span> <span class="n">V</span><span class="p">;</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Run the following command to compile your code</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>g++ norm.cpp <span class="nt">-L</span><span class="nb">.</span> <span class="nt">-lcblas</span> <span class="nt">-lblas</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>If everything goes alright, you will have your compiled binary without any error.</p>
+:ET
