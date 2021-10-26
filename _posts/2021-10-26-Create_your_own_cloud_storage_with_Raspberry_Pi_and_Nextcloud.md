@@ -22,7 +22,7 @@ Nextcloud have a nice project called NextcloudPi for Raspberry Pi devices. At fi
 
 ## Build NextcloudPi for Raspberry Pi 3 Model B
 ``` bash
-sudo apt-get update
+sudo apt-get --allow-releaseinfo-change update
 git clone https://github.com/nextcloud/nextcloudpi.git
 cd nextcloudpi
 build/build-SD-rpi.sh
