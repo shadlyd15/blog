@@ -1,28 +1,8 @@
-I"�
-<hr />
-<p>layout: post
-title: “Build your own personal cloud storage”
-subtitle: ‘Build your own personal cloud storage with Nextcloud and Raspberry Pi’
-date:       2021-10-26
-author: “Shadly”
-category: Tutorial
-categories: [‘Tutorial’, ‘Nextcloud’, ‘Raspberry Pi’]
-header-img: “img/raspberry.jpg.jpg”
-catalog: true
-tags:</p>
-<ul>
-  <li>Nextcloud</li>
-  <li>Tutorial</li>
-  <li>
-    <h2 id="raspberry-pi">Raspberry Pi</h2>
-  </li>
-</ul>
-
-<h2 id="what-is-nextcloud">What is Nextcloud</h2>
+I"�<h2 id="what-is-nextcloud">What is Nextcloud</h2>
 <p>Nextcloud is a suite of client-server software for creating cloud file storage. It is basically a free and open source version of google drive. It offers some really nice features. After Google announced that Google Photos will no longer allow unlimited photo storage at high-quality from June 1, 2021, I decided to give Nextcloud a try. Here I will be sharing my experience on how I built my own personal cloud storage with Nextcloud and Raspberry Pi 3 Model B.</p>
 
-<h2 id="getting-the-right-img-file-for-raspberry-pi-3-model-b">Getting the right img file for Raspberry Pi 3 Model B</h2>
-<p>Nextcloud have a nice project called NextcloudPi for Raspberry Pi devices. At first I tried their official images from here https://ownyourbits.com/downloads/. But somehow they didn’t boot on my Raspberry Pi 3 Model B. So grabbed the source code from here https://github.com/nextcloud/nextcloudpi and built the img file for my device.</p>
+<h2 id="right-image-file-for-raspberry-pi-3-model-b">Right Image file for Raspberry Pi 3 Model B</h2>
+<p>Nextcloud have a nice project called NextcloudPi for Raspberry Pi devices. At first I tried their official images from <a href="https://ownyourbits.com/downloads/">here</a> . But somehow they didn’t boot on my Raspberry Pi 3 Model B. So grabbed the source code from <a href="https://github.com/nextcloud/nextcloudpi">here</a> and built the img file for my device.</p>
 
 <h2 id="build-nextcloudpi-for-raspberry-pi-3-model-b">Build NextcloudPi for Raspberry Pi 3 Model B</h2>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
@@ -52,6 +32,8 @@ After it is installed get the IP of your Raspberry Pi device and check if the IP
 </pre></td></tr></tbody></table></code></pre></div></div>
 <h2 id="access-through-untrusted-domain">Access through untrusted domain</h2>
 
+<p><img src="/blog/img/untrusted_domain.png" alt="Untrusted Domain" /></p>
+
 <p>After you reach your device form your browser you will most likely get this error. To get through this, you need to add trusted domain in your config.php file. Edit this file and add your device’s IP to the trusted domain list.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -73,5 +55,16 @@ nano config.php
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 </pre></td><td class="rouge-code"><pre><span class="nb">sudo mkdir</span> /media/USBdrive
 </pre></td></tr></tbody></table></code></pre></div></div>
-<p>Now you have to run the wizard from https://your_raspi_ip:4443/wizard/. Navigate through the options and setup your external storage.</p>
+<p>Now you have to run the wizard from</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>https://your_raspi_ip:4443/wizard/
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>Navigate through the options and setup your external storage.</p>
+
+<h2 id="enjoy-nextcloud">Enjoy Nextcloud</h2>
+
+<p>Now enjoy your free unlimited cloud storage.</p>
+
+<p><img src="/blog/img/nextcloud.png" alt="Nextcloud" /></p>
 :ET
