@@ -1,0 +1,159 @@
+I"�)<h1 id="nesuefi---a-bootable-nes-emulator-running-on-uefi">NesUEFI - A bootable NES Emulator running on UEFI</h1>
+
+<p><img src="/splash.bmp" alt="NesUEFI" title="splash" /></p>
+
+<p><strong>NesUEFI</strong> is a <strong>NES Emulator running without an operating system</strong> directly on <strong>Unified Extensible Firmware Interface (UEFI).</strong> Simply place <strong>NesUEFI</strong> and nes roms in a pendrive and play.  <strong>NesUEFI file browser</strong>  will show the available roms. The core drivers (Graphics, File System, Timer) are written in c using <strong>GNU-EFI</strong> and the emulator part is a port of <a href="https://github.com/NJU-ProjectN/LiteNES">LiteNES</a>. Adafruit GFX Graphics Library is ported for GNU-EFI ecosystem in C for high level graphics operations and text rendering.</p>
+
+<h1 id="compile-nesuefi">Compile NesUEFI</h1>
+<h2 id="requirements">Requirements</h2>
+
+<ul>
+  <li><strong>GNU-EFI</strong> Library. Download it from <a href="https://sourceforge.net/projects/gnu-efi/">here</a>.</li>
+  <li><strong>gcc-3.0 or newer</strong></li>
+  <li>A version of <strong>objcopy</strong> that supports EFI applications</li>
+  <li><strong>qemu</strong> (To run without real hardware)</li>
+  <li><strong>mtools</strong> : Utilities to access MS-DOS disks from Linux (to run on qemu)</li>
+  <li><strong>OVMF</strong> (To run on qemu)</li>
+</ul>
+
+<h2 id="compile-and-install-gnu-efi-library">Compile and install GNU-EFI Library</h2>
+<p>Go to gnu-efi source folder</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>make
+make <span class="nb">install</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p><a href="compile_guide.md">Here</a> is a guide you can follow for more details on how to compile and run gnu-efi applications.</p>
+
+<h2 id="compile-nesuefi-1">Compile NesUEFI</h2>
+<p>Change the following macros in makefile to locate GNU-EFI <strong>libraries</strong> and <strong>headers</strong> installed on the previous step.</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="nv">INCDIR</span>    <span class="o">=</span> /usr/local/include
+<span class="nv">LIBDIR</span>    <span class="o">=</span> /usr/local/lib
+<span class="nv">EFILIB</span>    <span class="o">=</span> /usr/local/lib
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h1 id="nesuefi-on-qemu-">NesUEFI on qemu :</h1>
+
+<h3 id="locate-ovmf--in-makefile">Locate OVMF  in Makefile:</h3>
+<p>To run the compiled application in qemu we need OVMF for UEFI emulation. OVMF is a port of Intel’s tianocore firmware to the qemu virtual machine.</p>
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">OVMF_DIR</span>    <span class="o">=</span> ../OVMF
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>Change <strong>OVMF_DIR</strong> directory in the makefile.</p>
+
+<h3 id="create-image">Create Image</h3>
+<p>Add your roms here in the makefile to write it to your image. For example : test_1.nes, test_2.nes</p>
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="nl">mcopy -i $(IMAGE).img splash.bmp </span><span class="o">::</span>
+<span class="c"># Add your roms here
+</span><span class="nl">mcopy -i $(IMAGE).img test_1.nes </span><span class="o">::</span>
+<span class="nl">mcopy -i $(IMAGE).img test_2.nes </span><span class="o">::</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>make img
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="run">Run</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>make run
+</pre></td></tr></tbody></table></code></pre></div></div>
+<h1 id="nesuefi-on-real-hardware">NesUEFI on real hardware</h1>
+<p><strong>Do at your own risk. Under no circumstances shall the author be liable for any damage.</strong>
+Technically NesUEFI should not mess with your system. But you should at least know what you are doing.</p>
+
+<ul>
+  <li>Format a pendrive with <strong>FAT32</strong> file system.</li>
+  <li>Create <strong>/efi/boot/</strong> folders in the pendrive</li>
+  <li>Rename <strong>main.efi</strong> to <strong>bootx64.efi</strong> for <strong>64 bit</strong> and <strong>bootia32.efi</strong> for <strong>32 bit</strong> application.</li>
+  <li>Copy <strong>bootx64.efi</strong> or <strong>bootia32.efi</strong> to boot folder.</li>
+  <li>For <strong>64 bit</strong> application the pendrive should look like this : <strong>/efi/boot/bootx64.efi</strong></li>
+  <li>For <strong>32 bit</strong> application the pendrive should look like this : <strong>/efi/boot/bootia32.efi</strong></li>
+  <li>Copy <strong>splash.bmp</strong> on the root folder of the pendrive</li>
+  <li>Copy your .nes roms in the pendrive.</li>
+</ul>
+
+<h1 id="demo-video-on-real-hardware">Demo Video on Real Hardware</h1>
+<p><a href="https://www.youtube.com/watch?v=-Juc1LT7Xls"><img src="https://img.youtube.com/vi/-Juc1LT7Xls/0.jpg" alt="IMAGE ALT TEXT HERE" /></a></p>
+
+<p>Watch on Youtube : https://www.youtube.com/watch?v=-Juc1LT7Xls</p>
+<h2 id="controls">Controls</h2>
+<p>| NesUEFI Key | Keyboard Key |<br />
+| ———– | ———– |<br />
+| Up | W |
+| Down | S |
+| Left | A |
+| Right | D |
+| Select | U |
+| Start | I |
+| A | K |
+| B | J |
+| Reload | R |</p>
+<h2 id="known-issues">Known Issues</h2>
+<ul>
+  <li>Mappers are not implemented yet.</li>
+  <li>It does not support Audio emulation yet.</li>
+  <li>Only single player is supported.</li>
+  <li>NesUEFI only supports PS/2 keyboard. Most of the laptop keyboards should support it.</li>
+</ul>
+
+<h2 id="tested-games">Tested Games</h2>
+<p>Below games are currently tested on real hardware. But NesUEFI is not only limited to these games. It should technically run all the classic roms that use mapper 0. <a href="https://nesdir.github.io/mapper0.html">Here</a> is a list of mapper 0 games.</p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Super Mario Bros</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Popeye</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Yie Ar Kung-Fu</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Battle City</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Super Arabian</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Road Fighters</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />1942</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />F1 Race</li>
+</ul>
+
+<h2 id="todo">TODO</h2>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Graphics</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Timer</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Keyboard</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />File System</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />File Browser</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Graphics Library</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />APU</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Mappers</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />USB Keyboard Driver</li>
+</ul>
+
+<h2 id="acknowledgements">Acknowledgements</h2>
+<ul>
+  <li>https://wiki.osdev.org</li>
+  <li>https://wiki.osdev.org/Tutorials</li>
+  <li>https://wiki.osdev.org/UEFI</li>
+  <li>https://wiki.osdev.org/GNU-EFI</li>
+  <li>https://wiki.osdev.org/UEFI_App_Bare_Bones</li>
+  <li>https://wiki.osdev.org/Loading_files_under_UEFI</li>
+  <li>https://uefi.org/sites/default/files/resources/UEFI_Spec_2_8_final.pdf</li>
+  <li>https://github.com/NJU-ProjectN/LiteNES</li>
+  <li>https://learn.adafruit.com/adafruit-gfx-graphics-library</li>
+  <li>https://edk2-devel.narkive.com/WhxSiG6I/edk2-directory-file-system-traversal-example</li>
+  <li>https://www.youtube.com/watch?v=mpPbKEeWIHU&amp;list=PLxN4E629pPnJxCQCLy7E0SQY_zuumOVyZ</li>
+  <li>https://blog.fpmurphy.com/2015/08/display-bmp-details-and-image-in-uefi-shell.html#ixzz7SHLiufWS</li>
+  <li>https://unsplash.com/photos/UqRnUzV5pjQ</li>
+  <li>https://www.qmtpro.com/~nes</li>
+</ul>
+
+<h2 id="screenshots">Screenshots</h2>
+
+<p><img src="/screenshots/0.png" alt="alt text" title="Menu" />
+<img src="/screenshots/1.png" alt="alt text" title="Super Mario" />
+<img src="/screenshots/2.png" alt="alt text" title="Super Arabian" />
+<img src="/screenshots/3.png" alt="alt text" title="1942" /></p>
+
+<h1 id="license">License</h1>
+<p>Licensed under the <a href="https://github.com/shadlyd15/NesUEFI/blob/master/LICENSE">MIT</a> License.</p>
+:ET

@@ -1,0 +1,36 @@
+I"
+<h1 id="chess-x86">Chess-x86</h1>
+<p>A bootable chess game running baremetal on x86_64 CPU without any OS. The chess engine part is a port of <a href="https://home.hccnet.nl/h.g.muller/max-src2.html">micro-Max Chess Engine</a> and the low level drivers are taken from amazing <a href="https://www.youtube.com/watch?v=FaILnmUYS_U">Tetris OS</a> by <a href="https://github.com/jdah">jdh</a>. The engine rating is around <a href="https://ccrl.chessdom.com/ccrl/4040/cgi/engine_details.cgi?print=Details%20%28text%29&amp;eng=Micro-Max%204.8">1891 elo</a>.</p>
+
+<p><img src="https://github.com/shadlyd15/Chess-x86/blob/main/screenshots/1.png?raw=true" alt="Chess-x86" title="Chess-x86" /></p>
+
+<h2 id="compile">Compile</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>make
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="make-image">Make Image</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>make img
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="run-in-qemu">Run in QEMU</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>make run
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="make-clean">Make Clean</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>make clean
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h1 id="screenshots">Screenshots</h1>
+
+<p><img src="https://github.com/shadlyd15/Chess-x86/blob/main/screenshots/2.png?raw=true" alt="Chess-x86" title="Chess-x86" />
+<img src="https://github.com/shadlyd15/Chess-x86/blob/main/screenshots/3.png?raw=true" alt="Chess-x86" title="Chess-x86" /></p>
+
+<h1 id="demo-video-on-qemu">Demo Video on QEMU</h1>
+<p><a href="https://www.youtube.com/watch?v=I1wtI4ju2Aw"><img src="https://img.youtube.com/vi/I1wtI4ju2Aw/0.jpg" alt="IMAGE ALT TEXT HERE" /></a></p>
+
+<p>Watch on Youtube :  <a href="https://www.youtube.com/watch?v=I1wtI4ju2Aw">https://www.youtube.com/watch?v=I1wtI4ju2Aw</a></p>
+:ET
