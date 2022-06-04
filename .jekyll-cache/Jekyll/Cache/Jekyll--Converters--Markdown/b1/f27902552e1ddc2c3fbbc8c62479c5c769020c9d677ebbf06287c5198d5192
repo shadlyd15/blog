@@ -1,0 +1,33 @@
+I"	<h1 id="gravity">Gravity</h1>
+<p>A 3D web application to simulate three body problem. 
+The goal of this project is to play with different web technologies.
+This project was initially done for Semester Project - Virtualization 2 (WS2020 / 2021)</p>
+
+<p><img src="https://github.com/shadlyd15/Gravity/blob/main/screeshots/1.png?raw=true" alt="Gravity" title="Gravity" /></p>
+
+<h2 id="technologies-used">Technologies Used</h2>
+<ul>
+  <li>Docker Swarm</li>
+  <li>Node.js for client API handling</li>
+  <li>Python3 Flask for backend</li>
+  <li>Three.js for 3D frontend</li>
+  <li>Passport.js for JWT token authentication</li>
+  <li>MongoDB</li>
+</ul>
+
+<h2 id="screenshots">Screenshots</h2>
+<p><img src="https://github.com/shadlyd15/Gravity/blob/main/screeshots/2.png?raw=true" alt="Gravity" title="Gravity" />
+<img src="https://github.com/shadlyd15/Gravity/blob/main/screeshots/3.png?raw=true" alt="Gravity" title="Gravity" />
+<img src="https://github.com/shadlyd15/Gravity/blob/main/screeshots/4.png?raw=true" alt="Gravity" title="Gravity" />
+<img src="https://github.com/shadlyd15/Gravity/blob/main/screeshots/5.png?raw=true" alt="Gravity" title="Gravity" />
+<img src="https://github.com/shadlyd15/Gravity/blob/main/screeshots/6.png?raw=true" alt="Gravity" title="Gravity" /></p>
+
+<h2 id="acknowledgements">Acknowledgements</h2>
+<ul>
+  <li>Planet Textures : https://www.solarsystemscope.com/textures/</li>
+  <li>Intro Screen : https://unsplash.com/photos/fUnfEz3VLv4</li>
+</ul>
+
+<h2 id="license">License</h2>
+<p>Licensed under the MIT License.</p>
+:ET
